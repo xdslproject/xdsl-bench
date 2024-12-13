@@ -2,7 +2,7 @@
 	uv sync
 
 xdsl/.venv:
-	cd xdsl && make venv
+	cd xdsl && VENV_EXTRAS="--extra dev" make venv
 
 .PHONY: xdsl-local
 xdsl-local: xdsl/.venv
