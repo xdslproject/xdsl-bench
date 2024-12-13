@@ -22,4 +22,4 @@ jobs:
           make .venv
           make xdsl/.venv
           .venv/bin/asv machine --yes
-          .venv/bin/asv --config asv.conf.json run --python=same || true
+          .venv/bin/asv --config asv.conf.json run -E existing:./xdsl/.venv/bin/python3 || true
