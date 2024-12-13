@@ -6,7 +6,7 @@ on:
   #   - cron: 0 4 * * *
 
 jobs:
-  lock:
+  asv:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,4 +16,6 @@ jobs:
 
       - name: Run the ASV benchmarks
         run: |
+          make .venv
+          make asv-machine
           make asv
