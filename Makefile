@@ -1,7 +1,10 @@
-.PHONY: xdsl
-xdsl:
+xdsl/.venv:
+	cd xdsl && make venv
+
+.PHONY: xdsl-local
+xdsl-local: xdsl/.venv
 	cd xdsl && .venv/bin/asv run
 
-.PHONY: xdsl-asv
-xdsl-asv:
+.PHONY: xdsl-submodule
+xdsl-submodule: xdsl/.venv
 	.venv/bin/asv run
