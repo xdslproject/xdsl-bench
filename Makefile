@@ -1,3 +1,6 @@
+.venv:
+	uv sync
+
 xdsl/.venv:
 	cd xdsl && make venv
 
@@ -6,5 +9,5 @@ xdsl-local: xdsl/.venv
 	cd xdsl && .venv/bin/asv run
 
 .PHONY: xdsl-submodule
-xdsl-submodule: xdsl/.venv
+xdsl-submodule: .venv xdsl/.venv
 	.venv/bin/asv run
