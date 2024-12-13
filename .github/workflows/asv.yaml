@@ -20,5 +20,8 @@ jobs:
       - name: Run the ASV benchmarks
         run: |
           make .venv
+          make xdsl/.venv
           make asv-machine
+          ls -alFh
+          ls -alFh xdsl/
           make asv
