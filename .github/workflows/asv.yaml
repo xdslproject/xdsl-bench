@@ -1,0 +1,19 @@
+name: asv
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: 0 4 * * *
+
+jobs:
+  lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+      - uses: astral-sh/setup-uv@v3
+
+      - name: Run the ASV benchmarks
+        run: |
+          make asv
