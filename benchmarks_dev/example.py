@@ -116,3 +116,7 @@ def time_database_example():
     module.body.block.add_op(SinkOp.build(operands=[sel]))
     # print("\n\nmodule: ")
     printer.print(module)
+
+
+if __name__ == "__main__":
+    main()

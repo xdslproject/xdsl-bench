@@ -1,3 +1,9 @@
+MAKEFLAGS += --warn-undefined-variables
+SHELL := bash
+
+.PHONY: install
+install: .venv/ xdsl/.venv
+
 .venv:
 	uv sync
 
@@ -6,4 +12,5 @@ xdsl/.venv:
 
 .PHONY: asv
 asv: .venv xdsl/.venv
-	.venv/bin/asv run || true
+	uv run asv run \
+		-E existing:./xdsl/.venv/bin/python3

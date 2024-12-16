@@ -1,3 +1,8 @@
+# Project-specific
+site/
+# !!DON'T EXCLUDE ASV!! - we want to track the results
+#.asv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -159,9 +164,6 @@ docs/ret.xdsl
 # Type stubs
 # These are generated type stubs, we do not otherwise use type stubs in the project
 *.pyi
-
-# asv
-.asv
 
 # direnv
 .direnv

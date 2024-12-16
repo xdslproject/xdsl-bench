@@ -13,13 +13,39 @@ jobs:
         with:
           submodules: 'true'
       - uses: astral-sh/setup-uv@v3
-      - name: Set up Python 3.12
-        run: uv python install 3.12
+        with:
+            enable-cache: true
+            cache-dependency-glob: "uv.lock"
+      - name: Set up Python 3.10
+        run: uv python install 3.10
+      - name: Install the project
+        run: make install
 
-
+      - name: Fingerprint the machine
+        run: uv run asv machine --yes
       - name: Run the ASV benchmarks
-        run: |
-          make .venv
-          make xdsl/.venv
-          .venv/bin/asv machine --yes
-          .venv/bin/asv --config asv.conf.json run -E existing:./xdsl/.venv/bin/python3 || true
+        run: make asv
+
+#   deploy:
+#     needs: asv
+#     runs-on: ubuntu-latest
+#     permissions:
+#       contents: read
+#       pages: write
+#       id-token: write
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
+
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
+#       - name: Setup Pages
+#         uses: actions/configure-pages@v5
+#       - name: Upload artifact
+#         uses: actions/upload-pages-artifact@v3
+#         with:
+#           path: "site"
+#       - name: Deploy to GitHub Pages
+#         id: deployment
+#         uses: actions/deploy-pages@v4
