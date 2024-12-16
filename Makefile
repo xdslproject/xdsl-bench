@@ -15,5 +15,10 @@ asv: .venv xdsl/.venv
 	uv run asv run \
 		-E existing:./xdsl/.venv/bin/python3
 
+.PHONY: site
 site:
 	uv run asv publish
+
+.PHONY: preview
+preview: site
+	uv run asv preview
