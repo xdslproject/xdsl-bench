@@ -36,6 +36,8 @@ jobs:
         run: uv run asv machine --machine github-action --yes
       - name: Run the ASV benchmarks
         run: make asv
+      - name: Generate the ASV website
+        run: uv run asv publish
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

@@ -2,9 +2,8 @@
 site/
 
 .asv
-results/
-!results/github-action/
-!results/benchmarks.json
+!.asv/results/github-action/
+!.asv/results/benchmarks.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
