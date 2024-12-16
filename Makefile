@@ -15,10 +15,14 @@ asv: .venv xdsl/.venv
 	uv run asv run \
 		-E existing:./xdsl/.venv/bin/python3
 
-.PHONY: site
-site:
+.PHONY: html
+html:
 	uv run asv publish
 
 .PHONY: preview
-preview: site
+preview: html
 	uv run asv preview
+
+.PHONY: clean
+clean:
+	rm -rf .asv/ site/
