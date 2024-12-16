@@ -1,7 +1,7 @@
 # Project-specific
 site/
-# !!DON'T EXCLUDE ASV!! - we want to track the results
-#.asv
+.asv
+# results/NOT-CI-SERVER
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

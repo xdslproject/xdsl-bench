@@ -5,6 +5,10 @@ on:
   # schedule:
   #   - cron: 0 4 * * *
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   asv:
     runs-on: ubuntu-latest
@@ -25,6 +29,12 @@ jobs:
         run: uv run asv machine --yes
       - name: Run the ASV benchmarks
         run: make asv
+
+      - name: Commit the generated benchmark results
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Add CI benchmarks runs for ${{ env.sha_short }}"
+
 
   deploy:
     needs: asv
