@@ -37,7 +37,9 @@ jobs:
       - name: Run the ASV benchmarks
         run: make asv
       - name: Generate the ASV website
-        run: uv run asv publish
+        run: |
+          make site
+          ls -alFh site
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -49,7 +51,7 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Commit the generated benchmark results
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Add CI benchmarks runs for ${{ env.sha_short }}"
+    #   - name: Commit the generated benchmark results
+    #     uses: stefanzweifel/git-auto-commit-action@v5
+    #     with:
+    #       commit_message: "Add CI benchmarks runs for ${{ env.sha_short }}"

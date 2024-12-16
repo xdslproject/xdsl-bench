@@ -14,3 +14,6 @@ xdsl/.venv:
 asv: .venv xdsl/.venv
 	uv run asv run \
 		-E existing:./xdsl/.venv/bin/python3
+
+site:
+	uv run asv publish
