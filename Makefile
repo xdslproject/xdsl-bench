@@ -2,7 +2,7 @@ MAKEFLAGS += --warn-undefined-variables
 SHELL := bash
 
 .PHONY: install
-install: .venv/ xdsl/.venv
+install: .venv xdsl/.venv
 
 .venv:
 	uv sync
