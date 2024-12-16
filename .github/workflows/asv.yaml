@@ -12,6 +12,13 @@ concurrency:
 jobs:
   asv:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,36 +33,21 @@ jobs:
         run: make install
 
       - name: Fingerprint the machine
-        run: uv run asv machine --yes
+        run: uv run asv machine --machine github-action --yes
       - name: Run the ASV benchmarks
         run: make asv
 
-      - name: Commit the generated benchmark results
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Add CI benchmarks runs for ${{ env.sha_short }}"
-
-
-  deploy:
-    needs: asv
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "site"
+          path: site/
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Commit the generated benchmark results
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Add CI benchmarks runs for ${{ env.sha_short }}"

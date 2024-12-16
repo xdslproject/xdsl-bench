@@ -1,7 +1,10 @@
 # Project-specific
 site/
+
 .asv
-# results/NOT-CI-SERVER
+results/
+!results/github-action/
+!results/benchmarks.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
