@@ -12,8 +12,8 @@ xdsl/.venv:
 
 .PHONY: asv
 asv: .venv xdsl/.venv
-	uv run asv run \
-		-E existing:./xdsl/.venv/bin/python3
+	uv run asv run
+# uv run asv run -E existing:./xdsl/.venv/bin/python3
 
 .PHONY: html
 html:
