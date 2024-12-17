@@ -1,8 +1,9 @@
 # Project-specific
 site/
 
-.asv/*
-!.asv/results/github-action/*
+.asv/html
+.asv/results/**/
+!.asv/results/github-action/
 !.asv/results/benchmarks.json
 
 # Byte-compiled / optimized / DLL files

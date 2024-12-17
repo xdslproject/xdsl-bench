@@ -22,7 +22,3 @@ html:
 .PHONY: preview
 preview: html
 	uv run asv preview
-
-.PHONY: clean
-clean:
-	rm -rf .asv/ site/
