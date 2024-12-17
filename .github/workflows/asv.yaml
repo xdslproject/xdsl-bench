@@ -33,7 +33,7 @@ jobs:
         run: make install
 
       - name: Fingerprint the machine
-        run: uv run asv machine --yes # --machine github-action
+        run: uv run asv machine --yes --machine github-action
       - name: Run the ASV benchmarks
         run: make asv
       - name: Generate the ASV website
