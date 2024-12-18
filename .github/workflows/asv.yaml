@@ -41,9 +41,9 @@ jobs:
             --num_cpu `nproc --all` \
             --ram `grep MemTotal /proc/meminfo | awk '{print $2}'`
       - name: Run the ASV benchmarks
-        run: make asv
+        run: uv run asv run main~15..main
       - name: Generate the ASV website
-        run: make html
+        run: uv run asv publish
 
       - name: Commit the generated benchmark results
         uses: stefanzweifel/git-auto-commit-action@v5

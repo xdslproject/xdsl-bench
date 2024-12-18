@@ -10,10 +10,10 @@ install: .venv xdsl/.venv
 xdsl/.venv:
 	cd xdsl && VENV_EXTRAS="--extra dev" make venv
 
+
 .PHONY: asv
 asv: .venv xdsl/.venv
 	uv run asv run
-# uv run asv run -E existing:./xdsl/.venv/bin/python3
 
 .PHONY: html
 html:
