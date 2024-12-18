@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Benchmarks that measure the time to import `xdsl_opt_main`.
+"""Benchmark the time to import `xdsl_opt_main`.
 
 These are are simple example which can be used as a template for more
 complex/helpful benchmarks. See "Writing benchmarks" in the asv docs for more

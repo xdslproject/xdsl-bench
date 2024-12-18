@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""This script benchmarks the xDSL lexer on MLIR files."""
+"""Benchmark the xDSL lexer on MLIR files."""
 
 import timeit
 from pathlib import Path

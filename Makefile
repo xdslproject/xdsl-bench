@@ -40,8 +40,8 @@ preview: html
 
 .PHONY: bench_lexer
 bench_lexer: .venv xdsl/.venv
-	uv run python benchmarks/bench_lexer.py
-	uv run snakeviz profiles/bench_lexer__apply_pdl_extra_file.prof
+	uv run python benchmarks/lexer.py
+	uv run snakeviz profiles/lexer__apply_pdl_extra_file.prof
 
 # ========= #
 # Developer #
