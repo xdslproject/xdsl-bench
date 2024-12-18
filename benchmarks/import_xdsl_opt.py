@@ -9,7 +9,6 @@ information.
 
 from pathlib import Path
 
-
 BENCHMARKS_DIR = Path(__file__).parent
 
 
