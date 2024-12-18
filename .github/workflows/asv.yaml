@@ -27,6 +27,7 @@ jobs:
           git config --global url."https://github.com/".insteadOf "git@github.com:" &&\
               git submodule update --init &&\
               cd xdsl &&\
+              git checkout main &&\
               git pull &&\
               git log -15 --pretty=format:"%h"
       - uses: astral-sh/setup-uv@v3
