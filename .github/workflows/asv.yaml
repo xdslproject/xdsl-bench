@@ -47,14 +47,16 @@ jobs:
 
       - name: Fingerprint the machine
         run: |
-          echo "OS: `uname -srm`"
+          echo "OS: `uname -sr`"
+          echo "Architecture: `uname -m`"
           echo "CPU: `lscpu | grep 'Model name' | cut -f 2 -d ":" | awk '{$1=$1}1'`"
           echo "Cores: `nproc --all`"
           echo "RAM: `grep MemTotal /proc/meminfo | awk '{print $2}'`"
 
-          uv run asv machine --yes \
+          uv run asv machine -v --yes \
             --machine github-action \
-            --os "`uname -srm`" \
+            --os "`uname -sr`" \
+            --arch "`uname -m`" \
             --cpu "`lscpu | grep 'Model name' | cut -f 2 -d ":" | awk '{$1=$1}1'`" \
             --num_cpu `nproc --all` \
             --ram `grep MemTotal /proc/meminfo | awk '{print $2}'`

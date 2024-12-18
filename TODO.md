@@ -1,2 +1,2 @@
-- Identify why submodule checkout fails to any commits other than head
+- Move committed ASV runs to their own branch so they don't interfere with other things
 - Move repo to xDSL organisation
