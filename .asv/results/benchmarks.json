@@ -1,6 +1,6 @@
 {
     "bench_lexer.time_lexer__apply_pdl_extra_file": {
-        "code": "def time_lexer__apply_pdl_extra_file() -> None:\n    \"\"\"Time lexing the `apply_pdl_extra_file.mlir` file.\"\"\"\n    return lex_file(\n        BENCHMARKS_DIR\n        / \"../xdsl/tests/filecheck/transforms/apply-pdl/apply_pdl_extra_file.mlir\"\n    )",
+        "code": "def time_lexer__apply_pdl_extra_file() -> None:\n    \"\"\"Time lexing the `apply_pdl_extra_file.mlir` file.\"\"\"\n    return lex_file(\n        BENCHMARKS_DIR.parent / MLIR_FILES[\"apply_pdl_extra_file\"]\n    )",
         "min_run_count": 2,
         "name": "bench_lexer.time_lexer__apply_pdl_extra_file",
         "number": 0,
@@ -11,11 +11,11 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "00467736312da103f8d9b0c97a12fee3e3cf1632bb5593e76a2d988308080856",
+        "version": "b6ab08384e92d7bc5dcc0f2b686f5cdd3e39f9b00aac31e8def3e012cd023136",
         "warmup_time": -1
     },
     "bench_lexer.time_lexer__rvscf_lowering_emu": {
-        "code": "def time_lexer__rvscf_lowering_emu() -> None:\n    \"\"\"Time lexing the `rvscf_lowering_emu.mlir` file.\"\"\"\n    return lex_file(\n        BENCHMARKS_DIR / \"../xdsl/tests/filecheck/with-riscemu/rvscf_lowering_emu.mlir\"\n    )",
+        "code": "def time_lexer__rvscf_lowering_emu() -> None:\n    \"\"\"Time lexing the `rvscf_lowering_emu.mlir` file.\"\"\"\n    return lex_file(\n        BENCHMARKS_DIR.parent / MLIR_FILES[\"rvscf_lowering_emu\"]\n    )",
         "min_run_count": 2,
         "name": "bench_lexer.time_lexer__rvscf_lowering_emu",
         "number": 0,
@@ -26,7 +26,7 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "535138895f8a3ec795ed4964b1c0d1ac4285df86555061b71e4022446985a4c8",
+        "version": "f3fd59284026cefdd57d4fe6fad8e1b6e8b8c13f8c19637106348249719d064e",
         "warmup_time": -1
     },
     "bench_lexer.time_lexer_all": {

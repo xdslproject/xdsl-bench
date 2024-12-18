@@ -28,9 +28,8 @@ if __name__ == "__main__":
     import cProfile
     from pathlib import Path
 
-    test_name = Path(__file__).stem
-    output_prof = f"{BENCHMARKS_DIR.parent}/profiles/{test_name}.prof"
+    TEST_NAME = Path(__file__).stem
 
+    output_prof = f"{BENCHMARKS_DIR.parent}/profiles/{TEST_NAME}.prof"
     cProfile.run("time_import_inspect()", output_prof)
-
     print(f"Profile written to '{output_prof}'!")
