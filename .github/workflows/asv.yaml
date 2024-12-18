@@ -35,7 +35,7 @@ jobs:
               git submodule update --init &&\
               cd xdsl &&\
               git checkout main &&\
-              git pull &&\
+              git pull
       - uses: astral-sh/setup-uv@v3
         with:
             enable-cache: true
