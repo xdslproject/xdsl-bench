@@ -59,7 +59,7 @@ jobs:
             --num_cpu `nproc --all` \
             --ram `grep MemTotal /proc/meminfo | awk '{print $2}'`
       - name: Run the ASV benchmarks
-        run: uv run asv run main~NUM_BENCHMARK_COMMITS..main
+        run: uv run asv run main~$NUM_BENCHMARK_COMMITS..main
       - name: Generate the ASV website
         run: uv run asv publish
 
