@@ -29,7 +29,7 @@ if __name__ == "__main__":
     from pathlib import Path
 
     test_name = Path(__file__).stem
-    output_prof = f"{BENCHMARKS_DIR}/../profiles/{test_name}.prof"
+    output_prof = f"{BENCHMARKS_DIR.parent}/profiles/{test_name}.prof"
 
     cProfile.run("time_import_inspect()", output_prof)
 

@@ -13,7 +13,6 @@ from pathlib import Path
 from xdsl.utils.lexer import Input
 from xdsl.utils.mlir_lexer import MLIRLexer, MLIRTokenKind
 
-NUM_REPITITIONS = 1000
 BENCHMARKS_DIR = Path(__file__).parent
 
 
@@ -64,4 +63,13 @@ def time_lexer_all() -> None:
 
 
 if __name__ == "__main__":
+    import cProfile
+
+    # Time lexing all .mlir files for a single number on performance
     print(f"All test .mlir files lexed in {timeit.timeit(time_lexer_all, number=1)}s")
+
+    # Profile specific .mlir files
+    test_name = Path(__file__).stem
+    output_prof = f"{BENCHMARKS_DIR.parent}/profiles/{test_name}__apply_pdl_extra_file.prof"
+    cProfile.run("time_lexer__apply_pdl_extra_file()", output_prof)
+    print(f"Profile written to '{output_prof}'!")
