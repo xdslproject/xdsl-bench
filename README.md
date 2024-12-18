@@ -28,6 +28,7 @@ This web frontend can be found at <https://edmundgoodman.co.uk/xdsl-bench/>.
 
 ## Profiling
 
+Running profiling benchmarks locally rather than via ASV requires also installing `xdsl` to the virtual environment. This can be done with `uv sync --group xdsl`.
 
 ## References
 

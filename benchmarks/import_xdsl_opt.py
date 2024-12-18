@@ -1,6 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Benchmarks that measure the time to import `xdsl_opt_main`."""
+"""Benchmarks that measure the time to import `xdsl_opt_main`.
+
+These are are simple example which can be used as a template for more
+complex/helpful benchmarks. See "Writing benchmarks" in the asv docs for more
+information.
+"""
+
+from pathlib import Path
+
+
+BENCHMARKS_DIR = Path(__file__).parent
 
 
 def time_import_inspect() -> None:
@@ -20,8 +30,8 @@ if __name__ == "__main__":
     from pathlib import Path
 
     test_name = Path(__file__).stem
-    output_prof = f"profiles/{test_name}.prof"
+    output_prof = f"{BENCHMARKS_DIR}/../profiles/{test_name}.prof"
 
-    cProfile.run("time_import_inspect()", f"../{output_prof}")
+    cProfile.run("time_import_inspect()", output_prof)
 
     print(f"Profile written to '{output_prof}'!")

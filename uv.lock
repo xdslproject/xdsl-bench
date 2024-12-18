@@ -101,6 +101,15 @@ wheels = [
 ]
 
 [[package]]
+name = "immutabledict"
+version = "4.2.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/e0/c5/4240186fbabc58fba41bbe17c5f0cd37ffd4c0b85a5029ab104f946df175/immutabledict-4.2.1.tar.gz", hash = "sha256:d91017248981c72eb66c8ff9834e99c2f53562346f23e7f51e7a5ebcf66a3bcc", size = 6228 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/59/56/25ca7b848164b7d93dbd5fc97dd7751700c93e324fe854afbeb562ee2f98/immutabledict-4.2.1-py3-none-any.whl", hash = "sha256:c56a26ced38c236f79e74af3ccce53772827cef5c3bce7cab33ff2060f756373", size = 4700 },
+]
+
+[[package]]
 name = "importlib-metadata"
 version = "8.5.0"
 source = { registry = "https://pypi.org/simple" }
@@ -162,6 +171,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/98/a4/1ab47638b92648243faf97a5aeb6ea83059cc3624972ab6b8d2316078d3f/mypy_extensions-1.0.0.tar.gz", hash = "sha256:75dbf8955dc00442a438fc4d0666508a9a97b6bd41aa2f0ffe9d2f2725af0782", size = 4433 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/2a/e2/5d3f6ada4297caebe1a2add3b126fe800c96f56dbe5d1988a2cbe0b267aa/mypy_extensions-1.0.0-py3-none-any.whl", hash = "sha256:4392f6c0eb8a5668a69e23d168ffa70f0be9ccfd32b5cc2d26a34ae5b844552d", size = 4695 },
+]
+
+[[package]]
+name = "ordered-set"
+version = "4.1.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/4c/ca/bfac8bc689799bcca4157e0e0ced07e70ce125193fc2e166d2e685b7e2fe/ordered-set-4.1.0.tar.gz", hash = "sha256:694a8e44c87657c59292ede72891eb91d34131f6531463aab3009191c77364a8", size = 12826 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/33/55/af02708f230eb77084a299d7b08175cff006dea4f2721074b92cdb0296c0/ordered_set-4.1.0-py3-none-any.whl", hash = "sha256:046e1132c71fcf3330438a539928932caf51ddbc582496833e23de611de14562", size = 7634 },
 ]
 
 [[package]]
@@ -402,7 +420,49 @@ wheels = [
 ]
 
 [[package]]
-name = "xdsl-asv"
+name = "xdsl"
+version = "0.25.0+56.gb8611e04.dirty"
+source = { directory = "xdsl" }
+dependencies = [
+    { name = "immutabledict" },
+    { name = "ordered-set" },
+    { name = "typing-extensions" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "asv", marker = "extra == 'dev'", specifier = "<0.7" },
+    { name = "coverage", marker = "extra == 'dev'", specifier = "<8.0.0" },
+    { name = "filecheck", marker = "extra == 'dev'", specifier = "==1.0.1" },
+    { name = "immutabledict", specifier = "<4.2.2" },
+    { name = "ipykernel", marker = "extra == 'dev'" },
+    { name = "jax", marker = "extra == 'jax'", specifier = "==0.4.37" },
+    { name = "lit", marker = "extra == 'dev'", specifier = "<19.0.0" },
+    { name = "marimo", marker = "extra == 'dev'", specifier = "==0.9.34" },
+    { name = "nbconvert", marker = "extra == 'dev'", specifier = ">=7.7.2,<8.0.0" },
+    { name = "nbval", marker = "extra == 'dev'", specifier = "<0.12" },
+    { name = "numpy", marker = "extra == 'jax'", specifier = "==2.2.0" },
+    { name = "numpy", marker = "extra == 'onnx'", specifier = "==2.2.0" },
+    { name = "onnx", marker = "extra == 'onnx'", specifier = "==1.17.0" },
+    { name = "ordered-set", specifier = "==4.1.0" },
+    { name = "pip", marker = "extra == 'dev'", specifier = "<25.0" },
+    { name = "pre-commit", marker = "extra == 'dev'", specifier = "==4.0.1" },
+    { name = "pyclip", marker = "extra == 'gui'", specifier = "==0.7" },
+    { name = "pyright", marker = "extra == 'dev'", specifier = "==1.1.390" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = "<8.4" },
+    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = "==0.24.0" },
+    { name = "pytest-cov", marker = "extra == 'dev'" },
+    { name = "riscemu", marker = "extra == 'riscv'", specifier = "==2.2.7" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = "==0.8.3" },
+    { name = "textual", marker = "extra == 'gui'", specifier = "==1.0.0" },
+    { name = "textual-dev", marker = "extra == 'dev'", specifier = "==1.7.0" },
+    { name = "toml", marker = "extra == 'dev'", specifier = "<0.11" },
+    { name = "typing-extensions", specifier = ">=4.7,<4.13" },
+    { name = "wgpu", marker = "extra == 'wgpu'", specifier = "==0.19.3" },
+]
+
+[[package]]
+name = "xdsl-bench"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
@@ -415,6 +475,9 @@ dependencies = [
 dev = [
     { name = "mypy" },
     { name = "ruff" },
+]
+xdsl = [
+    { name = "xdsl" },
 ]
 
 [package.metadata]
@@ -429,6 +492,7 @@ dev = [
     { name = "mypy", specifier = ">=1.13.0" },
     { name = "ruff", specifier = ">=0.8.3" },
 ]
+xdsl = [{ name = "xdsl", directory = "xdsl" }]
 
 [[package]]
 name = "zipp"

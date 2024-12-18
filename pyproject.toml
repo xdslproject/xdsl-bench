@@ -1,5 +1,5 @@
 [project]
-name = "xdsl-asv"
+name = "xdsl-bench"
 version = "0.1.0"
 description = "ASV benchmarks for xDSL"
 readme = "README.md"
@@ -14,6 +14,9 @@ dependencies = [
 dev = [
     "mypy>=1.13.0",
     "ruff>=0.8.3",
+]
+xdsl = [
+    "xdsl @ file:///${PROJECT_ROOT}/xdsl"
 ]
 
 [build-system]

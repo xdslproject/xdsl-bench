@@ -1,6 +1,51 @@
 {
+    "bench_lexer.time_lexer__apply_pdl_extra_file": {
+        "code": "def time_lexer__apply_pdl_extra_file() -> float:\n    \"\"\".\"\"\"\n    mlir_file = BENCHMARKS_DIR / \"../xdsl/tests/filecheck/transforms/apply-pdl/apply_pdl_extra_file.mlir\"\n    return lex_file_timeit(\n        mlir_file,\n        num_repititions=NUM_REPITITIONS\n    )",
+        "min_run_count": 2,
+        "name": "bench_lexer.time_lexer__apply_pdl_extra_file",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "6f78a52773a847ac7c8196da88f65e703f78a7b3f674659b19664aa38274df66",
+        "warmup_time": -1
+    },
+    "bench_lexer.time_lexer__rvscf_lowering_emu": {
+        "code": "def time_lexer__rvscf_lowering_emu() -> float:\n    \"\"\".\"\"\"\n    mlir_file = BENCHMARKS_DIR / \"../xdsl/tests/filecheck/with-riscemu/rvscf_lowering_emu.mlir\"\n    return lex_file_timeit(\n        mlir_file,\n        num_repititions=NUM_REPITITIONS\n    )",
+        "min_run_count": 2,
+        "name": "bench_lexer.time_lexer__rvscf_lowering_emu",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "b8daefe15abe55eaae599f25d2ff18c37d0bba25a805e3344a97d716df9c71f3",
+        "warmup_time": -1
+    },
+    "bench_lexer.time_lexer_all": {
+        "code": "def time_lexer_all() -> None:\n    \"\"\".\"\"\"\n    mlir_files = glob.iglob(\n         str(BENCHMARKS_DIR.parent) + \"/xdsl/tests/**/*.mlir\",\n         recursive=True\n    )\n    for mlir_file in mlir_files:\n        lex_file(Path(mlir_file))",
+        "min_run_count": 2,
+        "name": "bench_lexer.time_lexer_all",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "ea2e67024ef8d1001f2b46791a0716fb81d84f064c7882873ea409f4bcb7e445",
+        "warmup_time": -1
+    },
     "import_xdsl_opt.time_import_inspect": {
-        "code": "def time_import_inspect():\n    \"\"\"Import benchmark using the default asv mechanism.\"\"\"\n    from xdsl.xdsl_opt_main import xDSLOptMain",
+        "code": "def time_import_inspect() -> None:\n    \"\"\"Import benchmark using the default asv mechanism.\"\"\"\n    from xdsl.xdsl_opt_main import xDSLOptMain  # noqa: F401",
         "min_run_count": 2,
         "name": "import_xdsl_opt.time_import_inspect",
         "number": 0,
@@ -11,11 +56,11 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "60f2b836838b28ae54ceffcf889ca2d9ef55cde22b75cf2df0255ae23eb950f4",
+        "version": "f15c52accd047bf4c48a49bc3923b404f8541042abc47d1eff25b5efef0aedc1",
         "warmup_time": -1
     },
     "import_xdsl_opt.timeraw_import_inspect": {
-        "code": "def timeraw_import_inspect():\n    \"\"\"Import benchmark using the `raw` asv mechanism.\"\"\"\n    return \"\"\"\n    from xdsl.xdsl_opt_main import xDSLOptMain\n    \"\"\"",
+        "code": "def timeraw_import_inspect() -> str:\n    \"\"\"Import benchmark using the `raw` asv mechanism.\"\"\"\n    return \"\"\"\n    from xdsl.xdsl_opt_main import xDSLOptMain\n    \"\"\"",
         "min_run_count": 2,
         "name": "import_xdsl_opt.timeraw_import_inspect",
         "number": 1,
@@ -26,7 +71,7 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "e9ea7414c24e116b271d813ba2e7f341e7bfc7b41bd657dcd64742d3371a533a",
+        "version": "4ded7e1d893b3dd498b0c130a527acc808ac07729e4e619222cbfd79cd756084",
         "warmup_time": -1
     },
     "version": 2

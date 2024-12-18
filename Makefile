@@ -1,5 +1,9 @@
+# Best practices for makefiles
 MAKEFLAGS += --warn-undefined-variables
 SHELL := bash
+
+# Allow overriding which extras are installed (defaults to none)
+VENV_EXTRAS ?=
 
 # ============ #
 # Installation #
@@ -9,10 +13,10 @@ SHELL := bash
 install: .venv xdsl/.venv
 
 .venv:
-	uv sync
+	uv sync ${VENV_EXTRAS}
 
 xdsl/.venv:
-	cd xdsl && VENV_EXTRAS="--extra dev" make venv
+	cd xdsl && VENV_EXTRAS="" make venv
 
 # ===== #
 #  ASV  #
@@ -20,7 +24,7 @@ xdsl/.venv:
 
 .PHONY: asv
 asv: .venv xdsl/.venv
-	uv run asv run
+	uv run asv run --show-stderr
 
 .PHONY: html
 html:
@@ -36,7 +40,8 @@ preview: html
 
 .PHONY: bench
 bench: .venv xdsl/.venv
-	cd xdsl && uv run python3 ../benchmarks/import_xdsl_opt.py
+	uv run python benchmarks/bench_lexer.py
+# uv run python3 benchmarks/import_xdsl_opt.py
 
 # ========= #
 # Developer #
