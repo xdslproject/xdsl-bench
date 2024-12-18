@@ -21,9 +21,9 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: 'true'
-      - run: cd xdsl && git pull && git log -15 --pretty=format:"%h"
+        # with:
+        #   submodules: 'true'
+      - run: git submodule update --init && cd xdsl && git pull && git log -15 --pretty=format:"%h"
       - uses: astral-sh/setup-uv@v3
         with:
             enable-cache: true
