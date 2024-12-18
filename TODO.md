@@ -1,2 +1,2 @@
-- Fix committing results so graph can have multiple points
+- Identify why submodule checkout fails to any commits other than head
 - Move repo to xDSL organisation

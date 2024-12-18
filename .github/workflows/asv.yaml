@@ -23,6 +23,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: 'true'
+      - run: cd xdsl && git pull && git log -15 --pretty=format:"%h"
       - uses: astral-sh/setup-uv@v3
         with:
             enable-cache: true
@@ -41,7 +42,7 @@ jobs:
             --num_cpu `nproc --all` \
             --ram `grep MemTotal /proc/meminfo | awk '{print $2}'`
       - name: Run the ASV benchmarks
-        run: uv run asv run main
+        run: uv run asv run main~15..main
       - name: Generate the ASV website
         run: uv run asv publish
 
