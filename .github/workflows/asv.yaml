@@ -36,8 +36,8 @@ jobs:
         run: |
           uv run asv machine --yes \
             --machine github-action \
-            --os `uname -srm` \
-            --cpu `lscpu | grep 'Model name' | cut -f 2 -d ":" | awk '{$1=$1}1'` \
+            --os "`uname -srm`" \
+            --cpu "`lscpu | grep 'Model name' | cut -f 2 -d ":" | awk '{$1=$1}1'`" \
             --num_cpu `nproc --all` \
             --ram `grep MemTotal /proc/meminfo | awk '{print $2}'`
       - name: Run the ASV benchmarks
