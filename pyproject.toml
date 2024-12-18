@@ -6,9 +6,74 @@ readme = "README.md"
 requires-python = ">=3.10.0"
 dependencies = [
     "asv>=0.6.4",
+    "snakeviz>=2.2.2",
     "versioneer>=0.29",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.13.0",
+    "ruff>=0.8.3",
 ]
 
 [build-system]
 requires = ["setuptools>=42", "wheel", "versioneer[toml]"]
 build-backend = "setuptools.build_meta"
+
+
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+ignore_missing_imports = true
+implicit_reexport = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+# https://blog.wolt.com/engineering/2021/09/30/professional-grade-mypy-configuration/
+disallow_untyped_defs = true
+disallow_any_unimported = true
+no_implicit_optional = true
+check_untyped_defs = true
+warn_return_any = true
+show_error_codes = true
+# Manually loosen rough edges of `mypy`, particularly for pytest fixtures
+disallow_untyped_decorators = false
+# # Explicitly allow missing imports for untyped modules where required
+# [[tool.mypy.overrides]]
+# module = "pytest.*"
+# ignore_missing_imports = true
+
+[tool.ruff]
+# Support Python 3.10+.
+target-version = "py310"
+src = ["src/", "tests/"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    ### From https://github.com/jerry-git/pytest-split/blob/master/pyproject.toml
+    "ANN",    # Type hints related, let mypy handle these.
+    "COM812", # "Trailing comma missing". If black is happy, I'm happy.
+    "E501",   # "Line too long". If black is happy, I'm happy.
+    "EM101",  # "Exception must not use a string literal, assign to variable first"
+    "EM102",  # "Exception must not use an f-string literal, assign to variable first"
+    # "RET504",   # "Unnecessary variable assignment before `return` statement"
+    "S101",   # "Use of `assert` detected"
+    "SIM108", # "Use ternary operator ...". Ternary is harmful for readability in some cases.
+    "TRY003", # "Avoid specifying long messages outside the exception class"
+    # "D",      # Docstrings related. We want to keep this to replace `pydocstyle`
+    "D203", # Disable incompatible docstring rules to avoid warnings
+    "D212", #  "
+    "ISC001", # May cause conflicts with auto-formatter
+    ### Edmund's preferences
+    "UP009",  # "UTF-8 encoding declaration is unnecessary". Adding UTF-8 pragmas is best practice
+    "T201",   # Allow print statements!
+    "ERA001", # Don't remove commented out code
+    "TD",     # Allow TODOs in code (controversial, I know...)
+    "FBT001", "FBT002", # Get off my back about boolean positional arguments
+    "FIX002", # "
+    "INP001", # "Add an `__init__.py`". The `test` directory should be a namespace package (https://stackoverflow.com/a/8450858)!
+    # "I",      # Ignore import sorting, as we using `isort` instead, as it has more functionality
+]
+# Use Google-style docstrings.
+pydocstyle.convention = "google"
