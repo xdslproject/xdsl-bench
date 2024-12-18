@@ -9,6 +9,9 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+env:
+  NUM_BENCHMARK_COMMITS: 10
+
 jobs:
   asv:
     runs-on: ubuntu-latest
@@ -21,15 +24,18 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        # NOTE: This only grabs the HEAD commit of the main branch, so we can't
+        #       use it for retrospective benchmarking. Instead, we manually
+        #       pull the submodule in the next step
         # with:
         #   submodules: 'true'
-      - run: |
+      - name: Manually pull submodules
+        run: |
           git config --global url."https://github.com/".insteadOf "git@github.com:" &&\
               git submodule update --init &&\
               cd xdsl &&\
               git checkout main &&\
               git pull &&\
-              git log -15 --pretty=format:"%h"
       - uses: astral-sh/setup-uv@v3
         with:
             enable-cache: true
@@ -41,6 +47,11 @@ jobs:
 
       - name: Fingerprint the machine
         run: |
+          echo "OS: `uname -srm`"
+          echo "CPU: `lscpu | grep 'Model name' | cut -f 2 -d ":" | awk '{$1=$1}1'`"
+          echo "Cores: `nproc --all`"
+          echo "RAM: `grep MemTotal /proc/meminfo | awk '{print $2}'`"
+
           uv run asv machine --yes \
             --machine github-action \
             --os "`uname -srm`" \
@@ -48,7 +59,7 @@ jobs:
             --num_cpu `nproc --all` \
             --ram `grep MemTotal /proc/meminfo | awk '{print $2}'`
       - name: Run the ASV benchmarks
-        run: uv run asv run main~15..main
+        run: uv run asv run main~NUM_BENCHMARK_COMMITS..main
       - name: Generate the ASV website
         run: uv run asv publish
 
