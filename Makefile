@@ -38,8 +38,12 @@ preview: html
 # cProfile #
 # ======== #
 
+profiles:
+	uv sync --group xdsl
+	mkdir -p profiles
+
 .PHONY: bench_lexer
-bench_lexer: .venv xdsl/.venv
+bench_lexer: .venv xdsl/.venv profiles
 	uv run python benchmarks/lexer.py
 	uv run snakeviz profiles/lexer__apply_pdl_extra_file.prof
 
