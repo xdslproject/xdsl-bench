@@ -33,7 +33,13 @@ jobs:
         run: make install
 
       - name: Fingerprint the machine
-        run: uv run asv machine --yes --machine github-action
+        run: |
+          uv run asv machine --yes \
+            --machine github-action \
+            --os `uname -srm` \
+            --cpu `lscpu | grep 'Model name' | cut -f 2 -d ":" | awk '{$1=$1}1'` \
+            --num_cpu `nproc --all` \
+            --ram `grep MemTotal /proc/meminfo | awk '{print $2}'`
       - name: Run the ASV benchmarks
         run: make asv
       - name: Generate the ASV website
