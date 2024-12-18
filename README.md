@@ -32,11 +32,49 @@ Running profiling benchmarks locally rather than via ASV requires also
 installing `xdsl` to the virtual environment. This can be done with
 `uv sync --group xdsl`, which points to the submodule directory.
 
+### `cProfile`
+
 The general approach is using the same benchmarks defined for ASV to avoid
 duplication, but setting up `cProfile` tracing in the
 `if __name__ == "__main__":` construct. As such, ASV can run the benchmarks as
 usual, but directly running the files with Python can be used to perform custom
 profiling.
+
+### `perf`
+
+- <https://docs.python.org/3/howto/perf_profiling.html>
+- <https://realpython.com/python312-perf-profiler/>
+- <https://discuss.python.org/t/the-performance-of-python-with-perf-support-is-not-great-and-is-going-to-get-a-lot-worse/25280>
+- <https://www.petermcconnell.com/posts/perf_eng_with_py12/>
+
+### `scalene`
+
+- <https://github.com/plasma-umass/scalene>
+
+### Memory profilers
+
+
+## TODO
+
+- [x] Implement/debug ASV flow
+  - [x] Fix ASV virtual environment issues due to versioneer with submodules
+  - [x] Get ASV running locally
+  - [x] Get ASV running on GitHub actions 
+  - [x] Add ASV machine description
+  - [x] Deploy ASV website to GitHub pages
+  - [x] Fix committing results so graph can have multiple points
+  - [x] Identify why submodule checkout fails to any commits other than head
+  - [ ] Move committed ASV runs to their own branch so they don't interfere with
+        other things
+- [ ] Add more benchmarks
+  - [ ] ASV / cProfile
+    - [x] Importing xdsl opt
+    - [x] Lexing
+    - [ ] Parsing
+    - [ ] End-to-end compilation
+    - [ ] Re-writing optimisations
+  - [ ] Other profilers
+- [ ] Move repo to xDSL organisation
 
 ## References
 
