@@ -45,8 +45,8 @@ The generated profiles files can then be viewed using
 [`snakeviz`](https://jiffyclub.github.io/snakeviz/), drawing an interactive
 call graph of the execution.
 
-For example, the following commands profile lexing the `apply_pdl_extra_file.mlir`
-file. 
+For example, the commands to profile lexing the `apply_pdl_extra_file.mlir`
+file using the lexer benchmark.
 
 ```bash
 uv run python benchmarks/lexer.py
@@ -58,7 +58,17 @@ uv run snakeviz profiles/lexer__apply_pdl_extra_file.prof
 An alternative to profiling with `cProfile` and visualising with `snakeviz`
 is the end-to-end profiler [`viztracer`](https://github.com/gaogaotiantian/viztracer).
 
+For example, the commands to profile an end-to-end test of running xDSL-opt on
+an empty MLIR program with `viztracer` are shown below:
 
+```bash
+uv run viztracer \
+    -o profiles/empty_program.json \
+    xdsl/xdsl/tools/xdsl_opt.py \
+    xdsl/tests/xdsl_opt/empty_program.mlir
+    --output-file profiles/empty_program.json
+uv run vizviewer profiles/empty_program.json
+```
 
 - <https://cerfacs.fr/coop/python-profiling#viztracer>
 

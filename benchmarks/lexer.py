@@ -29,7 +29,7 @@ def lex_input(lexer_input: Input) -> None:
 def lex_file(mlir_file: Path) -> None:
     """Lex a mlir file."""
     contents = mlir_file.read_text()
-    lexer_input = Input(contents, mlir_file)
+    lexer_input = Input(contents, str(mlir_file))
     lex_input(lexer_input)
 
 
@@ -52,27 +52,35 @@ def time_lexer_all() -> None:
 
 if __name__ == "__main__":
     import cProfile
+    from viztracer import VizTracer
 
     TEST_NAME = Path(__file__).stem
+    MLIR_NAME = "apply_pdl_extra_file"
+    MLIR_FILE = BENCHMARKS_DIR.parent / MLIR_FILES[MLIR_NAME]
 
-    # Time lexing all .mlir files for a single number on performance
+    # Time lexing .mlir files for a single number on performance.
     print(
         "File 'apply_pdl_extra_file.mlir' lexed in "
         f"{timeit.timeit(time_lexer__apply_pdl_extra_file, number=1)}s"
     )
     print(f"All test .mlir files lexed in {timeit.timeit(time_lexer_all, number=1)}s")
 
-    # Profile lexing specific .mlir files
-    MLIR_NAME = "apply_pdl_extra_file"
-    ## End-to-end
+    # Profile end-to-end lexing specific .mlir files with cProfile.
     output_prof = f"{BENCHMARKS_DIR.parent}/profiles/{TEST_NAME}__{MLIR_NAME}.prof"
     cProfile.run(f"time_lexer__{MLIR_NAME}()", output_prof)
     print(f"Profile written to '{output_prof}'!")
-    ## Lexing only
-    mlir_file = BENCHMARKS_DIR.parent / MLIR_FILES[MLIR_NAME]
-    lexer_input = Input(mlir_file.read_text(), mlir_file)
+
+    # Profile lexing only for specific .mlir files with cProfile.
+    lexer_input = Input(MLIR_FILE.read_text(), str(MLIR_FILE))
     output_prof = (
         f"{BENCHMARKS_DIR.parent}/profiles/{TEST_NAME}__{MLIR_NAME}__lex_only.prof"
     )
     cProfile.run("lex_input(lexer_input)", output_prof)
-    print(f"Profile written to '{output_prof}'!")
+    print(f"cProfile lex only profile written to '{output_prof}'!")
+
+    # Profile lexing only for specific .mlir files with viztracer.
+    lexer_input = Input(MLIR_FILE.read_text(), str(MLIR_FILE))
+    output_prof = f"{BENCHMARKS_DIR.parent}/profiles/{TEST_NAME}__{MLIR_NAME}__lex_only.json"
+    with VizTracer(output_file=output_prof):
+        lex_input(lexer_input)
+    print(f"VizTracer lex only profile written to '{output_prof}'!")

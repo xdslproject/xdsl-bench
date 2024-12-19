@@ -47,9 +47,9 @@ show_error_codes = true
 # Manually loosen rough edges of `mypy`, particularly for pytest fixtures
 disallow_untyped_decorators = false
 # # Explicitly allow missing imports for untyped modules where required
-# [[tool.mypy.overrides]]
-# module = "pytest.*"
-# ignore_missing_imports = true
+[[tool.mypy.overrides]]
+module = "viztracer.*"
+ignore_missing_imports = true
 
 [tool.ruff]
 # Support Python 3.10+.

@@ -41,13 +41,22 @@ preview: html
 profiles:
 	mkdir -p profiles
 
-.PHONY: snakeviz
-snakeviz: .venv xdsl/.venv profiles
+profiles/lexer__apply_pdl_extra_file__lex_only.prof: profiles
 	uv run python benchmarks/lexer.py
+
+profiles/lexer__apply_pdl_extra_file__lex_only.json: profiles
+	uv run python benchmarks/lexer.py
+
+.PHONY: viztracer_lexer
+viztracer_lexer: profiles/lexer__apply_pdl_extra_file__lex_only.json
+	uv run vizviewer profiles/lexer__apply_pdl_extra_file__lex_only.json
+
+.PHONY: snakeviz_lexer
+snakeviz_lexer: profiles/lexer__apply_pdl_extra_file__lex_only.prof
 	uv run snakeviz profiles/lexer__apply_pdl_extra_file.prof
 
 .PHONY: viztracer
-viztracer: .venv xdsl/.venv profiles
+viztracer_end_to_end: .venv xdsl/.venv profiles
 	uv run viztracer \
 		-o profiles/empty_program.json \
 		xdsl/xdsl/tools/xdsl_opt.py \
