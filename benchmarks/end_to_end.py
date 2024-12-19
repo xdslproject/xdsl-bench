@@ -20,7 +20,7 @@ MLIR_FILES: dict[str, Path] = {
 def time_end_to_end_opt__empty_program() -> None:
     """Time running the empty program."""
     runner = xDSLOptMain(args=[
-        str(MLIR_FILES["empty_program"]),
+        str(BENCHMARKS_DIR.parent / MLIR_FILES["empty_program"]),
         "-p", "constant-fold-interp"
     ])
     runner.run()
@@ -29,7 +29,7 @@ def time_end_to_end_opt__empty_program() -> None:
 def time_end_to_end_opt__constant_folding() -> None:
     """Time running a constant folding example."""
     runner = xDSLOptMain(args=[
-        str(MLIR_FILES["constant_folding"]),
+        str(BENCHMARKS_DIR.parent / MLIR_FILES["constant_folding"]),
         "-p", "constant-fold-interp"
     ])
     runner.run()

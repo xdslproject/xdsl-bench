@@ -1,4 +1,34 @@
 {
+    "end_to_end.time_end_to_end_opt__constant_folding": {
+        "code": "def time_end_to_end_opt__constant_folding() -> None:\n    \"\"\"Time running a constant folding example.\"\"\"\n    runner = xDSLOptMain(args=[\n        str(BENCHMARKS_DIR.parent / MLIR_FILES[\"constant_folding\"]),\n        \"-p\", \"constant-fold-interp\"\n    ])\n    runner.run()",
+        "min_run_count": 2,
+        "name": "end_to_end.time_end_to_end_opt__constant_folding",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "457a4e87912a503f87a5c00585a010376ecaa4597ae6d3daa60fb33618972ece",
+        "warmup_time": -1
+    },
+    "end_to_end.time_end_to_end_opt__empty_program": {
+        "code": "def time_end_to_end_opt__empty_program() -> None:\n    \"\"\"Time running the empty program.\"\"\"\n    runner = xDSLOptMain(args=[\n        str(BENCHMARKS_DIR.parent / MLIR_FILES[\"empty_program\"]),\n        \"-p\", \"constant-fold-interp\"\n    ])\n    runner.run()",
+        "min_run_count": 2,
+        "name": "end_to_end.time_end_to_end_opt__empty_program",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "cf67b8825774b1d3587cfbcfa73424048e3fce81767fb9f136d5129d942a7045",
+        "warmup_time": -1
+    },
     "import_xdsl_opt.time_import_inspect": {
         "code": "def time_import_inspect() -> None:\n    \"\"\"Import benchmark using the default asv mechanism.\"\"\"\n    from xdsl.xdsl_opt_main import xDSLOptMain  # noqa: F401",
         "min_run_count": 2,
@@ -30,7 +60,7 @@
         "warmup_time": -1
     },
     "lexer.time_lexer__apply_pdl_extra_file": {
-        "code": "def time_lexer__apply_pdl_extra_file() -> None:\n    \"\"\"Time lexing the `apply_pdl_extra_file.mlir` file.\"\"\"\n    return lex_file(BENCHMARKS_DIR.parent / MLIR_FILES[\"apply_pdl_extra_file\"])",
+        "code": "def time_lexer__apply_pdl_extra_file() -> None:\n    \"\"\"Time lexing the `apply_pdl_extra_file.mlir` file.\"\"\"\n    lex_file(BENCHMARKS_DIR.parent / MLIR_FILES[\"apply_pdl_extra_file\"])",
         "min_run_count": 2,
         "name": "lexer.time_lexer__apply_pdl_extra_file",
         "number": 0,
@@ -41,11 +71,11 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "14fe21805fd65b8d8b4c719435fc1df79a470ea5288ed69bff73736ea055959f",
+        "version": "ab1c3aa227cff8eaac74fa4f41868778575443a914e4640749fdd1e965bf799d",
         "warmup_time": -1
     },
     "lexer.time_lexer__rvscf_lowering_emu": {
-        "code": "def time_lexer__rvscf_lowering_emu() -> None:\n    \"\"\"Time lexing the `rvscf_lowering_emu.mlir` file.\"\"\"\n    return lex_file(BENCHMARKS_DIR.parent / MLIR_FILES[\"rvscf_lowering_emu\"])",
+        "code": "def time_lexer__rvscf_lowering_emu() -> None:\n    \"\"\"Time lexing the `rvscf_lowering_emu.mlir` file.\"\"\"\n    lex_file(BENCHMARKS_DIR.parent / MLIR_FILES[\"rvscf_lowering_emu\"])",
         "min_run_count": 2,
         "name": "lexer.time_lexer__rvscf_lowering_emu",
         "number": 0,
@@ -56,7 +86,7 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "74de0207c10fdccb8e77f1af87b0faea1c5af027889a4a2fe88bc63c8fed259e",
+        "version": "ad0c8c4b1227a5e3603c4b5b9523476568fd207867b274031482f6bdcd1d2eed",
         "warmup_time": -1
     },
     "lexer.time_lexer_all": {
