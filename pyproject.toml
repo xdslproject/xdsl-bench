@@ -1,13 +1,14 @@
 [project]
 name = "xdsl-bench"
 version = "0.1.0"
-description = "ASV benchmarks for xDSL"
+description = "Benchmarks for xDSL"
 readme = "README.md"
 requires-python = ">=3.10.0"
 dependencies = [
     "asv>=0.6.4",
     "snakeviz>=2.2.2",
     "versioneer>=0.29",
+    "viztracer>=1.0.0",
 ]
 
 [dependency-groups]

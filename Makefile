@@ -3,7 +3,7 @@ MAKEFLAGS += --warn-undefined-variables
 SHELL := bash
 
 # Allow overriding which extras are installed (defaults to none)
-VENV_EXTRAS ?=
+VENV_ARGS ?=
 
 # ============ #
 # Installation #
@@ -13,7 +13,7 @@ VENV_EXTRAS ?=
 install: .venv xdsl/.venv
 
 .venv:
-	uv sync ${VENV_EXTRAS}
+	uv sync ${VENV_ARGS}
 
 xdsl/.venv:
 	cd xdsl && VENV_EXTRAS="" make venv
@@ -42,10 +42,19 @@ profiles:
 	uv sync --group xdsl
 	mkdir -p profiles
 
-.PHONY: bench_lexer
-bench_lexer: .venv xdsl/.venv profiles
+.PHONY: snakeviz
+snakeviz: .venv xdsl/.venv profiles
 	uv run python benchmarks/lexer.py
 	uv run snakeviz profiles/lexer__apply_pdl_extra_file.prof
+
+.PHONY: viztracer
+viztracer: .venv xdsl/.venv profiles
+	uv run viztracer \
+		-o profiles/empty_program.json \
+		xdsl/xdsl/tools/xdsl_opt.py \
+		xdsl/tests/xdsl_opt/empty_program.mlir
+		--output-file profiles/empty_program.json
+	uv run vizviewer profiles/empty_program.json
 
 # ========= #
 # Developer #

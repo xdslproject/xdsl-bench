@@ -32,7 +32,7 @@ Running profiling benchmarks locally rather than via ASV requires also
 installing `xdsl` to the virtual environment. This can be done with
 `uv sync --group xdsl`, which points to the submodule directory.
 
-### `cProfile`
+### `cProfile` + `snakeviz`
 
 The general approach is using the same benchmarks defined for ASV to avoid
 duplication, but setting up `cProfile` tracing in the
@@ -40,18 +40,27 @@ duplication, but setting up `cProfile` tracing in the
 usual, but directly running the files with Python can be used to perform custom
 profiling.
 
-### `perf`
+The generated profiles files can then be viewed using
+[`snakeviz`](https://jiffyclub.github.io/snakeviz/), drawing an interactive
+call graph of the execution.
 
-- <https://docs.python.org/3/howto/perf_profiling.html>
-- <https://realpython.com/python312-perf-profiler/>
-- <https://discuss.python.org/t/the-performance-of-python-with-perf-support-is-not-great-and-is-going-to-get-a-lot-worse/25280>
-- <https://www.petermcconnell.com/posts/perf_eng_with_py12/>
+For example, the following commands profile lexing the `apply_pdl_extra_file.mlir`
+file. 
 
-### `scalene`
+```bash
+uv run python benchmarks/lexer.py
+uv run snakeviz profiles/lexer__apply_pdl_extra_file.prof
+```
 
-- <https://github.com/plasma-umass/scalene>
+### `viztracer`
 
-### Memory profilers
+An alternative to profiling with `cProfile` and visualising with `snakeviz`
+is the end-to-end profiler [`viztracer`](https://github.com/gaogaotiantian/viztracer).
+
+
+
+- <https://cerfacs.fr/coop/python-profiling#viztracer>
+
 
 
 ## TODO
@@ -77,6 +86,29 @@ profiling.
 - [ ] Move repo to xDSL organisation
 
 ## References
+
+- Perf
+  - <https://docs.python.org/3/howto/perf_profiling.html>
+  - <https://realpython.com/python312-perf-profiler/>
+  - <https://discuss.python.org/t/the-performance-of-python-with-perf-support-is-not-great-and-is-going-to-get-a-lot-worse/25280>
+  - <https://www.petermcconnell.com/posts/perf_eng_with_py12/>
+  - <https://opeonikute.dev/posts/how-to-use-perf-on-macos>
+  - <https://help.apple.com/instruments/mac/current/#>
+- Also consider memory profiles
+- Other links
+  - <https://arctraining.github.io/swd6_hpp/01_profiling.html>
+  - <https://rse.shef.ac.uk/pando-python/key-points.html>
+  - <https://danmackinlay.name/notebook/python_debug>
+  - <https://github.com/gaogaotiantian/viztracer>
+  - <https://github.com/plasma-umass/scalene>
+  - <https://www.brendangregg.com/>
+  - <https://www.brendangregg.com/HeatMaps/latency.html>
+  - <https://perfetto.dev/docs/>
+  - <https://superfastpython.com/benchmark-python-function/>
+  - <https://pypi.org/project/pytest-benchmark/>
+  - <https://github-pages.arc.ucl.ac.uk/python-tooling/pages/benchmarking-profiling.html>
+  - <https://discuss.python.org/t/python-benchmarking-in-unstable-environments/22334>
+  - <https://switowski.com/blog/how-to-benchmark-python-code/>
 
 [^1]: <https://speakerdeck.com/anissa111/benchmarking-your-scientific-python-packages-using-asv-and-github-actions>
 [^2]: <https://github.com/airspeed-velocity/asv_samples/blob/main/.github/workflows/build_test.yml>
