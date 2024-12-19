@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """Benchmark the xDSL lexer on MLIR files."""
 
 import timeit
@@ -52,6 +51,7 @@ def time_lexer_all() -> None:
 
 if __name__ == "__main__":
     import cProfile
+
     from viztracer import VizTracer
 
     TEST_NAME = Path(__file__).stem
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     # Profile end-to-end lexing specific .mlir files with cProfile.
     output_prof = f"{BENCHMARKS_DIR.parent}/profiles/{TEST_NAME}__{MLIR_NAME}.prof"
     cProfile.run(f"time_lexer__{MLIR_NAME}()", output_prof)
-    print(f"Profile written to '{output_prof}'!")
+    print(f"cProfile end-to-end profile written to '{output_prof}'!")
 
     # Profile lexing only for specific .mlir files with cProfile.
     lexer_input = Input(MLIR_FILE.read_text(), str(MLIR_FILE))
@@ -80,7 +80,9 @@ if __name__ == "__main__":
 
     # Profile lexing only for specific .mlir files with viztracer.
     lexer_input = Input(MLIR_FILE.read_text(), str(MLIR_FILE))
-    output_prof = f"{BENCHMARKS_DIR.parent}/profiles/{TEST_NAME}__{MLIR_NAME}__lex_only.json"
+    output_prof = (
+        f"{BENCHMARKS_DIR.parent}/profiles/{TEST_NAME}__{MLIR_NAME}__lex_only.json"
+    )
     with VizTracer(output_file=output_prof):
         lex_input(lexer_input)
     print(f"VizTracer lex only profile written to '{output_prof}'!")

@@ -74,7 +74,6 @@ ignore = [
     "D212", #  "
     "ISC001", # May cause conflicts with auto-formatter
     ### Edmund's preferences
-    "UP009",  # "UTF-8 encoding declaration is unnecessary". Adding UTF-8 pragmas is best practice
     "T201",   # Allow print statements!
     "ERA001", # Don't remove commented out code
     "TD",     # Allow TODOs in code (controversial, I know...)

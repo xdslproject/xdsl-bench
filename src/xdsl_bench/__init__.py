@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """A meta-repo for benchmarking xDSL.
 
 This file exists to indicate to the `setup_tools` build
