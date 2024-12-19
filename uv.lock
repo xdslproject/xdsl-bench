@@ -533,8 +533,6 @@ dev = [
 profile = [
     { name = "snakeviz" },
     { name = "viztracer" },
-]
-xdsl = [
     { name = "xdsl" },
 ]
 
@@ -552,8 +550,8 @@ dev = [
 profile = [
     { name = "snakeviz", specifier = ">=2.2.2" },
     { name = "viztracer", specifier = ">=1.0.0" },
+    { name = "xdsl", directory = "xdsl" },
 ]
-xdsl = [{ name = "xdsl", directory = "xdsl" }]
 
 [[package]]
 name = "zipp"
