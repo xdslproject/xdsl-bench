@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "Benchmarks for xDSL"
 readme = "README.md"
 requires-python = ">=3.10.0"
-dependencies = []
 
 [dependency-groups]
 asv = [
@@ -23,6 +22,10 @@ profile = [
 
 [tool.uv]
 default-groups = ["asv", "dev", "profile"]
+
+## TODO: Can we use this instead of `@` syntax?
+# [tool.uv.sources]
+# xdsl = { path = "xdsl" }
 
 [build-system]
 requires = ["setuptools>=42", "wheel", "versioneer[toml]"]

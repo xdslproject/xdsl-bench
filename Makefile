@@ -57,11 +57,8 @@ snakeviz_lexer: profiles/lexer__apply_pdl_extra_file__lex_only.prof
 
 .PHONY: viztracer
 viztracer_end_to_end: .venv xdsl/.venv profiles
-	uv run viztracer \
-		-o profiles/empty_program.json \
-		xdsl/xdsl/tools/xdsl_opt.py \
-		xdsl/tests/xdsl_opt/empty_program.mlir
-		--output-file profiles/empty_program.json
+	uv run viztracer -o profiles/empty_program.json \
+		xdsl-opt xdsl/tests/xdsl_opt/empty_program.mlir
 	uv run vizviewer profiles/empty_program.json
 
 # ========= #

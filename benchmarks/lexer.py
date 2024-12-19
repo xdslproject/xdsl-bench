@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Benchmark the xDSL lexer on MLIR files."""
 
-import timeit
 from pathlib import Path
 
 from xdsl.utils.lexer import Input
@@ -34,12 +33,12 @@ def lex_file(mlir_file: Path) -> None:
 
 def time_lexer__apply_pdl_extra_file() -> None:
     """Time lexing the `apply_pdl_extra_file.mlir` file."""
-    return lex_file(BENCHMARKS_DIR.parent / MLIR_FILES["apply_pdl_extra_file"])
+    lex_file(BENCHMARKS_DIR.parent / MLIR_FILES["apply_pdl_extra_file"])
 
 
 def time_lexer__rvscf_lowering_emu() -> None:
     """Time lexing the `rvscf_lowering_emu.mlir` file."""
-    return lex_file(BENCHMARKS_DIR.parent / MLIR_FILES["rvscf_lowering_emu"])
+    lex_file(BENCHMARKS_DIR.parent / MLIR_FILES["rvscf_lowering_emu"])
 
 
 def time_lexer_all() -> None:
@@ -51,6 +50,7 @@ def time_lexer_all() -> None:
 
 if __name__ == "__main__":
     import cProfile
+    import timeit
 
     from viztracer import VizTracer
 
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     # Profile end-to-end lexing specific .mlir files with cProfile.
     output_prof = f"{BENCHMARKS_DIR.parent}/profiles/{TEST_NAME}__{MLIR_NAME}.prof"
     cProfile.run(f"time_lexer__{MLIR_NAME}()", output_prof)
-    print(f"cProfile end-to-end profile written to '{output_prof}'!")
+    print(f"cProfile written to '{output_prof}'!")
 
     # Profile lexing only for specific .mlir files with cProfile.
     lexer_input = Input(MLIR_FILE.read_text(), str(MLIR_FILE))
