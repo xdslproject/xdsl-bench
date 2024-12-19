@@ -53,6 +53,16 @@ uv run python benchmarks/lexer.py
 uv run snakeviz profiles/lexer__apply_pdl_extra_file.prof
 ```
 
+You can also use [`flameprof`](https://github.com/baverman/flameprof/) to
+visualise the profile data as follows, but the generated SVG files are not
+interactive and less readable:
+
+```bash
+uv run python benchmarks/lexer.py
+uv run flameprof profiles/lexer__apply_pdl_extra_file__lex_only.prof \
+    > profiles/lexer__apply_pdl_extra_file__lex_only.svg
+```
+
 ### `viztracer`
 
 An alternative to profiling with `cProfile` and visualising with `snakeviz`

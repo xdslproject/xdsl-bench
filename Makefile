@@ -38,15 +38,23 @@ preview: html
 # cProfile #
 # ======== #
 
+## Generate profile data from benchmarks
 profiles:
 	mkdir -p profiles
 
-profiles/lexer__apply_pdl_extra_file__lex_only.prof: profiles
+profiles/lexer__apply_pdl_extra_file__lex_only.prof: .venv xdsl/.venv profiles
 	uv run python benchmarks/lexer.py
 
-profiles/lexer__apply_pdl_extra_file__lex_only.json: profiles
+profiles/lexer__apply_pdl_extra_file__lex_only.json: .venv xdsl/.venv profiles
 	uv run python benchmarks/lexer.py
 
+profiles/end_to_end__constant_folding.prof: .venv xdsl/.venv profiles
+	uv run python benchmarks/end_to_end.py
+
+profiles/end_to_end__constant_folding.json: .venv xdsl/.venv profiles
+	uv run python benchmarks/end_to_end.py
+
+## Visualise profile data from benchmarks
 .PHONY: viztracer_lexer
 viztracer_lexer: profiles/lexer__apply_pdl_extra_file__lex_only.json
 	uv run vizviewer profiles/lexer__apply_pdl_extra_file__lex_only.json
@@ -55,8 +63,22 @@ viztracer_lexer: profiles/lexer__apply_pdl_extra_file__lex_only.json
 snakeviz_lexer: profiles/lexer__apply_pdl_extra_file__lex_only.prof
 	uv run snakeviz profiles/lexer__apply_pdl_extra_file.prof
 
+.PHONY: flameprof_lexer
+flameprof_lexer: profiles/lexer__apply_pdl_extra_file__lex_only.prof
+	uv run flameprof profiles/lexer__apply_pdl_extra_file__lex_only.prof \
+		> profiles/lexer__apply_pdl_extra_file__lex_only.svg
+
+.PHONY: viztracer_end_to_end
+viztracer_end_to_end: profiles/end_to_end__constant_folding.json
+	uv run vizviewer profiles/end_to_end__constant_folding.json
+
+.PHONY: snakeviz_end_to_end
+snakeviz_end_to_end: profiles/end_to_end__constant_folding.prof
+	uv run snakeviz profiles/end_to_end__constant_folding.prof
+
+## Profile command line directly
 .PHONY: viztracer
-viztracer_end_to_end: .venv xdsl/.venv profiles
+viztracer_xdsl_opt: .venv xdsl/.venv profiles
 	uv run viztracer -o profiles/empty_program.json \
 		xdsl-opt xdsl/tests/xdsl_opt/empty_program.mlir
 	uv run vizviewer profiles/empty_program.json

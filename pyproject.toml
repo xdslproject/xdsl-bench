@@ -17,7 +17,8 @@ dev = [
 profile = [
     "viztracer>=1.0.0",
     "snakeviz>=2.2.2",
-    "xdsl @ file:///${PROJECT_ROOT}/xdsl"
+    "xdsl @ file:///${PROJECT_ROOT}/xdsl",
+    "flameprof>=0.4",
 ]
 
 [tool.uv]
