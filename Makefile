@@ -39,7 +39,6 @@ preview: html
 # ======== #
 
 profiles:
-	uv sync --group xdsl
 	mkdir -p profiles
 
 .PHONY: snakeviz

@@ -43,7 +43,7 @@ jobs:
       - name: Set up Python 3.12
         run: uv python install 3.12
       - name: Install the project
-        run: make install
+        run: VENV_ARGS="--only-group asv" make install
 
       - name: Fingerprint the machine
         run: |

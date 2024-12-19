@@ -4,21 +4,25 @@ version = "0.1.0"
 description = "Benchmarks for xDSL"
 readme = "README.md"
 requires-python = ">=3.10.0"
-dependencies = [
-    "asv>=0.6.4",
-    "snakeviz>=2.2.2",
-    "versioneer>=0.29",
-    "viztracer>=1.0.0",
-]
+dependencies = []
 
 [dependency-groups]
+asv = [
+    "asv>=0.6.4",
+    "versioneer>=0.29",
+]
 dev = [
     "mypy>=1.13.0",
     "ruff>=0.8.3",
 ]
-xdsl = [
+profile = [
+    "viztracer>=1.0.0",
+    "snakeviz>=2.2.2",
     "xdsl @ file:///${PROJECT_ROOT}/xdsl"
 ]
+
+[tool.uv]
+default-groups = ["asv", "dev", "profile"]
 
 [build-system]
 requires = ["setuptools>=42", "wheel", "versioneer[toml]"]

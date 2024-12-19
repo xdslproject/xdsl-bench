@@ -520,34 +520,38 @@ requires-dist = [
 name = "xdsl-bench"
 version = "0.1.0"
 source = { editable = "." }
-dependencies = [
-    { name = "asv" },
-    { name = "snakeviz" },
-    { name = "versioneer" },
-    { name = "viztracer" },
-]
 
 [package.dev-dependencies]
+asv = [
+    { name = "asv" },
+    { name = "versioneer" },
+]
 dev = [
     { name = "mypy" },
     { name = "ruff" },
+]
+profile = [
+    { name = "snakeviz" },
+    { name = "viztracer" },
 ]
 xdsl = [
     { name = "xdsl" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "asv", specifier = ">=0.6.4" },
-    { name = "snakeviz", specifier = ">=2.2.2" },
-    { name = "versioneer", specifier = ">=0.29" },
-    { name = "viztracer", specifier = ">=1.0.0" },
-]
 
 [package.metadata.requires-dev]
+asv = [
+    { name = "asv", specifier = ">=0.6.4" },
+    { name = "versioneer", specifier = ">=0.29" },
+]
 dev = [
     { name = "mypy", specifier = ">=1.13.0" },
     { name = "ruff", specifier = ">=0.8.3" },
+]
+profile = [
+    { name = "snakeviz", specifier = ">=2.2.2" },
+    { name = "viztracer", specifier = ">=1.0.0" },
 ]
 xdsl = [{ name = "xdsl", directory = "xdsl" }]
 
