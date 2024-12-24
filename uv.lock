@@ -482,7 +482,7 @@ wheels = [
 
 [[package]]
 name = "xdsl"
-version = "0.25.0+67.g42681e6a"
+version = "0.25.0+69.gfb41de52"
 source = { directory = "xdsl" }
 dependencies = [
     { name = "immutabledict" },
@@ -511,7 +511,7 @@ requires-dist = [
     { name = "pyclip", marker = "extra == 'gui'", specifier = "==0.7" },
     { name = "pyright", marker = "extra == 'dev'", specifier = "==1.1.390" },
     { name = "pytest", marker = "extra == 'dev'", specifier = "<8.4" },
-    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = "==0.24.0" },
+    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = "==0.25.0" },
     { name = "pytest-cov", marker = "extra == 'dev'" },
     { name = "riscemu", marker = "extra == 'riscv'", specifier = "==2.2.7" },
     { name = "ruff", marker = "extra == 'dev'", specifier = "==0.8.3" },
