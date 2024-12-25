@@ -482,7 +482,7 @@ wheels = [
 
 [[package]]
 name = "xdsl"
-version = "0.25.0+69.gfb41de52"
+version = "0.25.0+75.g9094df54"
 source = { directory = "xdsl" }
 dependencies = [
     { name = "immutabledict" },
@@ -502,8 +502,8 @@ requires-dist = [
     { name = "marimo", marker = "extra == 'dev'", specifier = "==0.9.34" },
     { name = "nbconvert", marker = "extra == 'dev'", specifier = ">=7.7.2,<8.0.0" },
     { name = "nbval", marker = "extra == 'dev'", specifier = "<0.12" },
-    { name = "numpy", marker = "extra == 'jax'", specifier = "==2.2.0" },
-    { name = "numpy", marker = "extra == 'onnx'", specifier = "==2.2.0" },
+    { name = "numpy", marker = "extra == 'jax'", specifier = "==2.2.1" },
+    { name = "numpy", marker = "extra == 'onnx'", specifier = "==2.2.1" },
     { name = "onnx", marker = "extra == 'onnx'", specifier = "==1.17.0" },
     { name = "ordered-set", specifier = "==4.1.0" },
     { name = "pip", marker = "extra == 'dev'", specifier = "<25.0" },
