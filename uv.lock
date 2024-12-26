@@ -482,7 +482,7 @@ wheels = [
 
 [[package]]
 name = "xdsl"
-version = "0.25.0+75.g9094df54"
+version = "0.25.0+79.g9e1f9767"
 source = { directory = "xdsl" }
 dependencies = [
     { name = "immutabledict" },
@@ -497,7 +497,7 @@ requires-dist = [
     { name = "filecheck", marker = "extra == 'dev'", specifier = "==1.0.1" },
     { name = "immutabledict", specifier = "<4.2.2" },
     { name = "ipykernel", marker = "extra == 'dev'" },
-    { name = "jax", marker = "extra == 'jax'", specifier = "==0.4.37" },
+    { name = "jax", marker = "extra == 'jax'", specifier = "==0.4.38" },
     { name = "lit", marker = "extra == 'dev'", specifier = "<19.0.0" },
     { name = "marimo", marker = "extra == 'dev'", specifier = "==0.9.34" },
     { name = "nbconvert", marker = "extra == 'dev'", specifier = ">=7.7.2,<8.0.0" },
@@ -509,12 +509,12 @@ requires-dist = [
     { name = "pip", marker = "extra == 'dev'", specifier = "<25.0" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = "==4.0.1" },
     { name = "pyclip", marker = "extra == 'gui'", specifier = "==0.7" },
-    { name = "pyright", marker = "extra == 'dev'", specifier = "==1.1.390" },
+    { name = "pyright", marker = "extra == 'dev'", specifier = "==1.1.391" },
     { name = "pytest", marker = "extra == 'dev'", specifier = "<8.4" },
     { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = "==0.25.0" },
     { name = "pytest-cov", marker = "extra == 'dev'" },
     { name = "riscemu", marker = "extra == 'riscv'", specifier = "==2.2.7" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = "==0.8.3" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = "==0.8.4" },
     { name = "textual", marker = "extra == 'gui'", specifier = "==1.0.0" },
     { name = "textual-dev", marker = "extra == 'dev'", specifier = "==1.7.0" },
     { name = "toml", marker = "extra == 'dev'", specifier = "<0.11" },
