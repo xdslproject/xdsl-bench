@@ -1,0 +1,72 @@
+name: asv-dev
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - dev
+
+env:
+  NUM_BENCHMARK_COMMITS: 3
+
+jobs:
+  asv-dev:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        # NOTE: This only grabs the HEAD commit of the main branch, so we can't
+        #       use it for retrospective benchmarking. Instead, we manually
+        #       pull the submodule in the next step
+        # with:
+        #   submodules: 'true'
+      - name: Manually pull submodules
+        run: |
+          git config --global url."https://github.com/".insteadOf "git@github.com:" &&\
+              git submodule update --init &&\
+              cd xdsl &&\
+              git checkout main &&\
+              git pull
+      - uses: astral-sh/setup-uv@v3
+        with:
+            enable-cache: true
+            cache-dependency-glob: "uv.lock"
+      - name: Set up Python 3.12
+        run: |
+          uv python install 3.12
+          uv python list
+          python3.12 --version
+      - name: Set up Python 3.13
+        run: |
+          uv python install 3.13
+          uv python list
+          python3.13 --version
+
+      - name: Install the project
+        run: VENV_ARGS="--only-group asv" make install
+
+      - name: Fingerprint the machine
+        run: |
+          echo "OS: `uname -sr`"
+          echo "Architecture: `uname -m`"
+          echo "CPU: `lscpu | grep 'Model name' | cut -f 2 -d ":" | awk '{$1=$1}1'`"
+          echo "Cores: `nproc --all`"
+          echo "RAM: `grep MemTotal /proc/meminfo | awk '{print $2}'`"
+
+          uv run asv machine -v --yes \
+            --machine github-action \
+            --os "`uname -sr`" \
+            --arch "`uname -m`" \
+            --cpu "`lscpu | grep 'Model name' | cut -f 2 -d ":" | awk '{$1=$1}1'`" \
+            --num_cpu `nproc --all` \
+            --ram `grep MemTotal /proc/meminfo | awk '{print $2}'`
+      - name: Run the ASV benchmarks
+        run: uv run asv run main~$NUM_BENCHMARK_COMMITS..main
+      - name: Generate the ASV website
+        run: uv run asv publish
