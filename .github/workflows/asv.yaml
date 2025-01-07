@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  NUM_BENCHMARK_COMMITS: 3
+  NUM_BENCHMARK_COMMITS: 20
 
 jobs:
   asv:
@@ -36,6 +36,7 @@ jobs:
               cd xdsl &&\
               git checkout main &&\
               git pull
+
       - uses: astral-sh/setup-uv@v3
         with:
             enable-cache: true
@@ -44,14 +45,14 @@ jobs:
       # ensure that it is correctly in the $PATH for `asv`
       - uses: actions/setup-python@v5
         with:
-          python-version: |
-              3.13
-              3.12
-      - name: Check Python installations
+          python-version: 3.12
+      - name: Check Python installation
         run: |
           which python3.12 && python3.12 --version
-          which python3.13 && python3.13 --version
           uv python list
+
+      - name: Install the project
+        run: VENV_ARGS="--only-group asv" make install
 
       - name: Fingerprint the machine
         run: |
