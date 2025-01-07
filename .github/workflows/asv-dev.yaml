@@ -12,13 +12,6 @@ env:
 jobs:
   asv-dev:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         # NOTE: This only grabs the HEAD commit of the main branch, so we can't
