@@ -11,7 +11,7 @@ BENCHMARKS_DIR = Path(__file__).parent
 GENERIC_TEST_MLIR_DIR = BENCHMARKS_DIR / "resources" / "generic_test_mlir"
 MLIR_FILES: dict[str, Path] = {
     "apply_pdl_extra_file": GENERIC_TEST_MLIR_DIR / "apply_pdl_extra_file.mlir",
-    "rvscf_lowering_emu": GENERIC_TEST_MLIR_DIR / "rvscf_lowering_emu.mlir"
+    "add": GENERIC_TEST_MLIR_DIR / "add.mlir"
 }
 
 CTX = MLContext(allow_unregistered=True)
@@ -34,9 +34,9 @@ def time_parser__apply_pdl_extra_file() -> None:
     parse_file(MLIR_FILES["apply_pdl_extra_file"])
 
 
-def time_parser__rvscf_lowering_emu() -> None:
-    """Time parsing the `rvscf_lowering_emu.mlir` file."""
-    parse_file(MLIR_FILES["rvscf_lowering_emu"])
+def time_parser__add() -> None:
+    """Time parsing the `add.mlir` file."""
+    parse_file(MLIR_FILES["add"])
 
 
 def time_parser__all() -> None:

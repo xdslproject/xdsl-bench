@@ -59,8 +59,23 @@
         "version": "4ded7e1d893b3dd498b0c130a527acc808ac07729e4e619222cbfd79cd756084",
         "warmup_time": -1
     },
+    "lexer.time_lexer__all": {
+        "code": "def time_lexer__all() -> None:\n    \"\"\"Time lexing all `.mlir` files in xDSL's `tests/` directory .\"\"\"\n    mlir_files = RAW_TEST_MLIR_DIR.iterdir()\n    for mlir_file in mlir_files:\n        lex_file(Path(mlir_file))",
+        "min_run_count": 2,
+        "name": "lexer.time_lexer__all",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "c8ce72f20dd4b75fed7f9bcc591a06aacfc7a9f2ae6f4218735b0e6d0b13add1",
+        "warmup_time": -1
+    },
     "lexer.time_lexer__apply_pdl_extra_file": {
-        "code": "def time_lexer__apply_pdl_extra_file() -> None:\n    \"\"\"Time lexing the `apply_pdl_extra_file.mlir` file.\"\"\"\n    lex_file(BENCHMARKS_DIR.parent / MLIR_FILES[\"apply_pdl_extra_file\"])",
+        "code": "def time_lexer__apply_pdl_extra_file() -> None:\n    \"\"\"Time lexing the `apply_pdl_extra_file.mlir` file.\"\"\"\n    lex_file(MLIR_FILES[\"apply_pdl_extra_file\"])",
         "min_run_count": 2,
         "name": "lexer.time_lexer__apply_pdl_extra_file",
         "number": 0,
@@ -71,11 +86,11 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "ab1c3aa227cff8eaac74fa4f41868778575443a914e4640749fdd1e965bf799d",
+        "version": "e07ccf9f325b678ee6a8278851988be2118a82540cda75097fd94dd254d0d777",
         "warmup_time": -1
     },
     "lexer.time_lexer__rvscf_lowering_emu": {
-        "code": "def time_lexer__rvscf_lowering_emu() -> None:\n    \"\"\"Time lexing the `rvscf_lowering_emu.mlir` file.\"\"\"\n    lex_file(BENCHMARKS_DIR.parent / MLIR_FILES[\"rvscf_lowering_emu\"])",
+        "code": "def time_lexer__rvscf_lowering_emu() -> None:\n    \"\"\"Time lexing the `rvscf_lowering_emu.mlir` file.\"\"\"\n    lex_file(MLIR_FILES[\"rvscf_lowering_emu\"])",
         "min_run_count": 2,
         "name": "lexer.time_lexer__rvscf_lowering_emu",
         "number": 0,
@@ -86,13 +101,13 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "ad0c8c4b1227a5e3603c4b5b9523476568fd207867b274031482f6bdcd1d2eed",
+        "version": "fba01c887042da86aedc2c89b30ab47fd422c32509fa0daa282bbaa776a8c1c0",
         "warmup_time": -1
     },
-    "lexer.time_lexer_all": {
-        "code": "def time_lexer_all() -> None:\n    \"\"\"Time lexing all `.mlir` files in xDSL's `tests/` directory .\"\"\"\n    mlir_files = (BENCHMARKS_DIR.parent / \"xdsl/tests\").rglob(\"*.mlir\")\n    for mlir_file in mlir_files:\n        lex_file(Path(mlir_file))",
+    "parser.time_parser__add": {
+        "code": "def time_parser__add() -> None:\n    \"\"\"Time parsing the `add.mlir` file.\"\"\"\n    parse_file(MLIR_FILES[\"add\"])",
         "min_run_count": 2,
-        "name": "lexer.time_lexer_all",
+        "name": "parser.time_parser__add",
         "number": 0,
         "param_names": [],
         "params": [],
@@ -101,7 +116,37 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "e31a3b6ff05b823b51688888f049a137ac56ec0c25fa59c55b653fb6feab012b",
+        "version": "80b9c9fab70d361c15a5547ab978baef45dd5023c2021743b4572cf8f312933b",
+        "warmup_time": -1
+    },
+    "parser.time_parser__all": {
+        "code": "def time_parser__all() -> None:\n    \"\"\"Time parsing all `.mlir` files in xDSL's `tests/` directory .\"\"\"\n    mlir_files = GENERIC_TEST_MLIR_DIR.iterdir()\n    for mlir_file in mlir_files:\n        parse_file(Path(mlir_file))",
+        "min_run_count": 2,
+        "name": "parser.time_parser__all",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "a7b7661899c51e0cd6ff451a92366987c5a8be8517be483c20733bce403f4e24",
+        "warmup_time": -1
+    },
+    "parser.time_parser__apply_pdl_extra_file": {
+        "code": "def time_parser__apply_pdl_extra_file() -> None:\n    \"\"\"Time parsing the `apply_pdl_extra_file.mlir` file.\"\"\"\n    parse_file(MLIR_FILES[\"apply_pdl_extra_file\"])",
+        "min_run_count": 2,
+        "name": "parser.time_parser__apply_pdl_extra_file",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "6aff66b5df7d3b48425bfc21743b588505a457754d1fb13175cd6b2d6d966bee",
         "warmup_time": -1
     },
     "version": 2

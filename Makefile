@@ -26,6 +26,10 @@ xdsl/.venv:
 asv: .venv xdsl/.venv
 	uv run asv run --show-stderr
 
+.PHONY: history
+history: .venv xdsl/.venv
+	uv run asv run main~10..main
+
 .PHONY: html
 html:
 	uv run asv publish
@@ -33,6 +37,10 @@ html:
 .PHONY: preview
 preview: html
 	uv run asv preview
+
+.PHONY: clean
+clean: .asv
+	rm -rf .asv/html .asv/results/$(shell hostname)
 
 # ======== #
 # cProfile #
