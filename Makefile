@@ -24,7 +24,7 @@ xdsl/.venv:
 
 .PHONY: asv
 asv: .venv xdsl/.venv
-	uv run asv run --show-stderr
+	uv run asv run # --show-stderr
 
 .PHONY: history
 history: .venv xdsl/.venv

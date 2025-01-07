@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  NUM_BENCHMARK_COMMITS: 3
+  NUM_BENCHMARK_COMMITS: 10
 
 jobs:
   asv:
@@ -36,6 +36,7 @@ jobs:
               cd xdsl &&\
               git checkout main &&\
               git pull
+
       - uses: astral-sh/setup-uv@v3
         with:
             enable-cache: true
@@ -46,9 +47,11 @@ jobs:
         with:
           python-version: |
               3.13
+              3.11
               3.12
       - name: Check Python installations
         run: |
+          which python3.11 && python3.11 --version
           which python3.12 && python3.12 --version
           which python3.13 && python3.13 --version
           uv python list
