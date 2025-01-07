@@ -45,12 +45,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: |
-              3.12
               3.13
+              3.12
       - name: Check Python installations
         run: |
           which python3.12 && python3.12 --version
           which python3.13 && python3.13 --version
+          uv python list
 
       - name: Fingerprint the machine
         run: |
