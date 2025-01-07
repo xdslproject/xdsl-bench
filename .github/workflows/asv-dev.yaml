@@ -30,14 +30,20 @@ jobs:
         with:
             enable-cache: true
             cache-dependency-glob: "uv.lock"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
       - name: Set up Python 3.12
         run: |
-          uv python install 3.12
+          # uv python install 3.12
           uv python list
           python3.12 --version
       - name: Set up Python 3.13
         run: |
-          uv python install 3.13
+          # uv python install 3.13
           uv python list
           python3.13 --version
 
