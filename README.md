@@ -24,7 +24,7 @@ repository. Then, the interactive web frontend is built from these results and
 all previously committed results from previous workflow runs, then finally
 deployed to GitHub pages [^1] [^2] [^3] [^4] [^5] [^6].
 
-This web frontend can be found at <https://edmundgoodman.co.uk/xdsl-bench/>.
+This web frontend can be found at <https://xdsl.dev/xdsl-bench/>.
 
 ## Profiling
 
