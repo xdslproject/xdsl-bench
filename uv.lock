@@ -482,7 +482,7 @@ wheels = [
 
 [[package]]
 name = "xdsl"
-version = "0.26+11.gf8eadaef"
+version = "0.26+21.g061f484c"
 source = { directory = "xdsl" }
 dependencies = [
     { name = "immutabledict" },
@@ -514,7 +514,7 @@ requires-dist = [
     { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = "==0.25.1" },
     { name = "pytest-cov", marker = "extra == 'dev'" },
     { name = "riscemu", marker = "extra == 'riscv'", specifier = "==2.2.7" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = "==0.8.5" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = "==0.8.6" },
     { name = "textual", marker = "extra == 'gui'", specifier = "==1.0.0" },
     { name = "textual-dev", marker = "extra == 'dev'", specifier = "==1.7.0" },
     { name = "toml", marker = "extra == 'dev'", specifier = "<0.11" },
