@@ -3,9 +3,7 @@
 This repository contains infrastructure for the benchmarking and performance
 profiling of the xDSL compiler framework.
 
-## Benchmark design goals
-
-## Automated ASV regression benchmarking
+## Automated regression benchmarking with ASV
 
 > airspeed velocity (asv) is a tool for benchmarking Python packages over their
 > lifetime. Runtime, memory consumption and even custom-computed values may be
@@ -80,56 +78,60 @@ uv run viztracer \
 uv run vizviewer profiles/empty_program.json
 ```
 
-- <https://cerfacs.fr/coop/python-profiling#viztracer>
+## Roadmap
 
+### ASV flow
 
+- [x] Fix ASV virtual environment issues due to versioneer with submodules
+- [x] Get ASV running locally
+- [x] Get ASV running on GitHub actions 
+- [x] Add ASV machine description
+- [x] Deploy ASV website to GitHub pages
+- [x] Fix committing results so graph can have multiple points
+- [x] Identify why submodule checkout fails to any commits other than head
+- [x] Move repo to xDSL organisation
+- [x] Support multiple python versions
+- [ ] ? Consider moving committed ASV runs to their own branch so they don't
+    interfere with other things
+- [ ] ? Consider inverting submodules to move benchmarks back into main repo and
+      instead keep artifacts in submodule
 
-## TODO
+### Benchmarks
 
-- [x] Implement/debug ASV flow
-  - [x] Fix ASV virtual environment issues due to versioneer with submodules
-  - [x] Get ASV running locally
-  - [x] Get ASV running on GitHub actions 
-  - [x] Add ASV machine description
-  - [x] Deploy ASV website to GitHub pages
-  - [x] Fix committing results so graph can have multiple points
-  - [x] Identify why submodule checkout fails to any commits other than head
-  - [ ] Move committed ASV runs to their own branch so they don't interfere with
-        other things
-- [ ] Add more benchmarks
-  - [ ] ASV / cProfile
-    - [x] Importing xdsl opt
-    - [x] Lexing
-    - [ ] Parsing
-    - [ ] End-to-end compilation
-    - [ ] Re-writing optimisations
-  - [ ] Other profilers
-- [ ] Move repo to xDSL organisation
+- [x] Importing `xDSLOptMain`
+- [x] Lexing
+- [x] End-to-end optimisation 
+- [x] Parsing
+- [ ] Printing
+- [ ] Loading dialects
+  - [ ] `builtin.py`
+  - [ ] `arith.py`
+- [ ] Re-writing optimisations
+  - [ ] `Builder`
+  - [ ] `Rewriter`
+  - [ ] `PatternRewriter`
+- [ ] Package installation time
+
+### Profiling
+
+- [x] `cProfile` + `snakeviz`
+- [x] `viztracer`
+- [ ] `scalene`
+- [ ] Memory profilers 
+
+### Additional resources
+
+- <https://cerfacs.fr/coop/python-profiling>
+- <https://www.petermcconnell.com/posts/perf_eng_with_py12/>
+- <https://danmackinlay.name/notebook/python_debug>
+- <https://www.brendangregg.com/blog/index.html>
+- <https://superfastpython.com/benchmark-python-function/>
+- <https://github-pages.arc.ucl.ac.uk/python-tooling/pages/benchmarking-profiling.html>
+- <https://discuss.python.org/t/python-benchmarking-in-unstable-environments/22334>
+- <https://switowski.com/blog/how-to-benchmark-python-code/>
+
 
 ## References
-
-- Perf
-  - <https://docs.python.org/3/howto/perf_profiling.html>
-  - <https://realpython.com/python312-perf-profiler/>
-  - <https://discuss.python.org/t/the-performance-of-python-with-perf-support-is-not-great-and-is-going-to-get-a-lot-worse/25280>
-  - <https://www.petermcconnell.com/posts/perf_eng_with_py12/>
-  - <https://opeonikute.dev/posts/how-to-use-perf-on-macos>
-  - <https://help.apple.com/instruments/mac/current/#>
-- Also consider memory profiles
-- Other links
-  - <https://arctraining.github.io/swd6_hpp/01_profiling.html>
-  - <https://rse.shef.ac.uk/pando-python/key-points.html>
-  - <https://danmackinlay.name/notebook/python_debug>
-  - <https://github.com/gaogaotiantian/viztracer>
-  - <https://github.com/plasma-umass/scalene>
-  - <https://www.brendangregg.com/>
-  - <https://www.brendangregg.com/HeatMaps/latency.html>
-  - <https://perfetto.dev/docs/>
-  - <https://superfastpython.com/benchmark-python-function/>
-  - <https://pypi.org/project/pytest-benchmark/>
-  - <https://github-pages.arc.ucl.ac.uk/python-tooling/pages/benchmarking-profiling.html>
-  - <https://discuss.python.org/t/python-benchmarking-in-unstable-environments/22334>
-  - <https://switowski.com/blog/how-to-benchmark-python-code/>
 
 [^1]: <https://speakerdeck.com/anissa111/benchmarking-your-scientific-python-packages-using-asv-and-github-actions>
 [^2]: <https://github.com/airspeed-velocity/asv_samples/blob/main/.github/workflows/build_test.yml>
