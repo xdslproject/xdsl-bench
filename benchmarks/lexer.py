@@ -7,13 +7,10 @@ from xdsl.utils.lexer import Input
 from xdsl.utils.mlir_lexer import MLIRLexer, MLIRTokenKind
 
 BENCHMARKS_DIR = Path(__file__).parent
+RAW_TEST_MLIR_DIR = BENCHMARKS_DIR / "resources" / "raw_test_mlir"
 MLIR_FILES: dict[str, Path] = {
-    "apply_pdl_extra_file": Path(
-        "xdsl/tests/filecheck/transforms/apply-pdl/apply_pdl_extra_file.mlir"
-    ),
-    "rvscf_lowering_emu": Path(
-        "xdsl/tests/filecheck/with-riscemu/rvscf_lowering_emu.mlir"
-    ),
+    "apply_pdl_extra_file": RAW_TEST_MLIR_DIR / "apply_pdl_extra_file.mlir",
+    "rvscf_lowering_emu": RAW_TEST_MLIR_DIR / "rvscf_lowering_emu.mlir"
 }
 
 
@@ -33,17 +30,17 @@ def lex_file(mlir_file: Path) -> None:
 
 def time_lexer__apply_pdl_extra_file() -> None:
     """Time lexing the `apply_pdl_extra_file.mlir` file."""
-    lex_file(BENCHMARKS_DIR.parent / MLIR_FILES["apply_pdl_extra_file"])
+    lex_file(MLIR_FILES["apply_pdl_extra_file"])
 
 
 def time_lexer__rvscf_lowering_emu() -> None:
     """Time lexing the `rvscf_lowering_emu.mlir` file."""
-    lex_file(BENCHMARKS_DIR.parent / MLIR_FILES["rvscf_lowering_emu"])
+    lex_file(MLIR_FILES["rvscf_lowering_emu"])
 
 
-def time_lexer_all() -> None:
+def time_lexer__all() -> None:
     """Time lexing all `.mlir` files in xDSL's `tests/` directory ."""
-    mlir_files = (BENCHMARKS_DIR.parent / "xdsl/tests").rglob("*.mlir")
+    mlir_files = RAW_TEST_MLIR_DIR.iterdir()
     for mlir_file in mlir_files:
         lex_file(Path(mlir_file))
 
@@ -56,14 +53,14 @@ if __name__ == "__main__":
 
     TEST_NAME = Path(__file__).stem
     MLIR_NAME = "apply_pdl_extra_file"
-    MLIR_FILE = BENCHMARKS_DIR.parent / MLIR_FILES[MLIR_NAME]
+    MLIR_FILE = MLIR_FILES[MLIR_NAME]
 
     # Time lexing .mlir files for a single number on performance.
     print(
         "File 'apply_pdl_extra_file.mlir' lexed in "
         f"{timeit.timeit(time_lexer__apply_pdl_extra_file, number=1)}s"
     )
-    print(f"All test .mlir files lexed in {timeit.timeit(time_lexer_all, number=1)}s")
+    print(f"All test .mlir files lexed in {timeit.timeit(time_lexer__all, number=1)}s")
 
     # Profile end-to-end lexing specific .mlir files with cProfile.
     output_prof = f"{BENCHMARKS_DIR.parent}/profiles/{TEST_NAME}__{MLIR_NAME}.prof"
