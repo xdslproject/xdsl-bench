@@ -119,7 +119,7 @@ uv run vizviewer profiles/empty_program.json
 - [ ] `scalene`
 - [ ] Memory profilers 
 
-### Additional resources
+## Additional resources
 
 - <https://cerfacs.fr/coop/python-profiling>
 - <https://www.petermcconnell.com/posts/perf_eng_with_py12/>

@@ -28,7 +28,7 @@ asv: .venv xdsl/.venv
 
 .PHONY: history
 history: .venv xdsl/.venv
-	uv run asv run main~10..main
+	uv run asv run main~5..main
 
 .PHONY: html
 html:
