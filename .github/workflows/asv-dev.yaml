@@ -40,7 +40,7 @@ jobs:
       - name: Check Python installations
         run: |
           which python3.12 && python3.12 --version
-          which python3.13 && python3.12 --version
+          which python3.13 && python3.13 --version
 
       - name: Install the project
         run: VENV_ARGS="--only-group asv" make install
