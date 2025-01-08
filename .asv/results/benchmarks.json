@@ -1,6 +1,6 @@
 {
     "end_to_end.time_end_to_end_opt__constant_folding": {
-        "code": "def time_end_to_end_opt__constant_folding() -> None:\n    \"\"\"Time running a constant folding example.\"\"\"\n    runner = xDSLOptMain(args=[\n        str(MLIR_FILES[\"constant_folding\"]),\n        \"-p\", \"constant-fold-interp\"\n    ])\n    runner.run()",
+        "code": "def time_end_to_end_opt__constant_folding() -> None:\n    \"\"\"Time running a constant folding example.\"\"\"\n    runner = xDSLOptMain(args=[\n        str(MLIR_FILES[\"constant_folding\"]),\n        \"-p\", \"canonicalize\"\n    ])\n    runner.run()",
         "min_run_count": 2,
         "name": "end_to_end.time_end_to_end_opt__constant_folding",
         "number": 0,
@@ -11,7 +11,7 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "100ba8c340a23522faec5fd2c3895255441e920631b839918e326f39148db681",
+        "version": "f07675d06b684fd793c9144acc95d121a835426904dc1f7a1bd8ccff644e76ec",
         "warmup_time": -1
     },
     "end_to_end.time_end_to_end_opt__empty_program": {
