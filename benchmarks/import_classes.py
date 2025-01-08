@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Benchmark the time to import `xdsl_opt_main`.
+"""Benchmark the time to import xDSL classes.
 
 These are are simple example which can be used as a template for more
 complex/helpful benchmarks. See "Writing benchmarks" in the asv docs for more
@@ -11,12 +11,12 @@ from pathlib import Path
 BENCHMARKS_DIR = Path(__file__).parent
 
 
-def time_import_inspect() -> None:
+def time_import_xdsl_opt() -> None:
     """Import benchmark using the default asv mechanism."""
     from xdsl.xdsl_opt_main import xDSLOptMain  # noqa: F401
 
 
-def timeraw_import_inspect() -> str:
+def timeraw_import_xdsl_opt() -> str:
     """Import benchmark using the `raw` asv mechanism."""
     return """
     from xdsl.xdsl_opt_main import xDSLOptMain
@@ -37,5 +37,5 @@ if __name__ == "__main__":
 
     output_prof = f"{BENCHMARKS_DIR.parent}/profiles/{TEST_NAME}.json"
     with VizTracer(output_file=output_prof):
-        time_import_inspect()
+        time_import_xdsl_opt()
     print(f"VizTracer profile written to '{output_prof}'!")

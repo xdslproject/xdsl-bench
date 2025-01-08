@@ -29,10 +29,10 @@
         "version": "cf67b8825774b1d3587cfbcfa73424048e3fce81767fb9f136d5129d942a7045",
         "warmup_time": -1
     },
-    "import_xdsl_opt.time_import_inspect": {
-        "code": "def time_import_inspect() -> None:\n    \"\"\"Import benchmark using the default asv mechanism.\"\"\"\n    from xdsl.xdsl_opt_main import xDSLOptMain  # noqa: F401",
+    "import_classes.time_import_xdsl_opt": {
+        "code": "def time_import_xdsl_opt() -> None:\n    \"\"\"Import benchmark using the default asv mechanism.\"\"\"\n    from xdsl.xdsl_opt_main import xDSLOptMain  # noqa: F401",
         "min_run_count": 2,
-        "name": "import_xdsl_opt.time_import_inspect",
+        "name": "import_classes.time_import_xdsl_opt",
         "number": 0,
         "param_names": [],
         "params": [],
@@ -41,13 +41,13 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "f15c52accd047bf4c48a49bc3923b404f8541042abc47d1eff25b5efef0aedc1",
+        "version": "e948dee75d0486bf89e4849a54e857174be79def1d686db071d3ae2869ff9474",
         "warmup_time": -1
     },
-    "import_xdsl_opt.timeraw_import_inspect": {
-        "code": "def timeraw_import_inspect() -> str:\n    \"\"\"Import benchmark using the `raw` asv mechanism.\"\"\"\n    return \"\"\"\n    from xdsl.xdsl_opt_main import xDSLOptMain\n    \"\"\"",
+    "import_classes.timeraw_import_xdsl_opt": {
+        "code": "def timeraw_import_xdsl_opt() -> str:\n    \"\"\"Import benchmark using the `raw` asv mechanism.\"\"\"\n    return \"\"\"\n    from xdsl.xdsl_opt_main import xDSLOptMain\n    \"\"\"",
         "min_run_count": 2,
-        "name": "import_xdsl_opt.timeraw_import_inspect",
+        "name": "import_classes.timeraw_import_xdsl_opt",
         "number": 1,
         "param_names": [],
         "params": [],
@@ -56,7 +56,7 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "4ded7e1d893b3dd498b0c130a527acc808ac07729e4e619222cbfd79cd756084",
+        "version": "c74213327293254fbfe478e3d38f19ac81bf08f04240970515da4909323ed35f",
         "warmup_time": -1
     },
     "lexer.time_lexer__all": {
