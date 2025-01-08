@@ -10,7 +10,11 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  NUM_BENCHMARK_COMMITS: 20
+  # NOTE: For the first clean run, this should be a high-ish (~20) number to
+  #       populate the history. For all subsequent runs where data is cached in
+  #       `.asv/results/github-actions/`, it can be a lower number for better
+  #       runtimes in CI
+  NUM_BENCHMARK_COMMITS: 5
 
 jobs:
   asv:
