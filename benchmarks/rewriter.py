@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Benchmark running xDSL opt end-to-end on MLIR files."""
+"""Benchmark rewriting in xDSL."""
 
 # TODO: Define the benchmarks
 
