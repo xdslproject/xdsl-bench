@@ -2,25 +2,21 @@
 """Benchmark running xDSL opt end-to-end on MLIR files."""
 
 from pathlib import Path
-from argparse import Namespace
 
 from xdsl.xdsl_opt_main import xDSLOptMain
 
 BENCHMARKS_DIR = Path(__file__).parent
+RAW_TEST_MLIR_DIR = BENCHMARKS_DIR / "resources" / "raw_test_mlir"
 MLIR_FILES: dict[str, Path] = {
-    "empty_program": Path(
-        "xdsl/tests/xdsl_opt/empty_program.mlir"
-    ),
-    "constant_folding": Path(
-        "xdsl/tests/filecheck/dialects/arith/arith_constant_fold_interp.mlir"
-    ),
+    "empty_program": RAW_TEST_MLIR_DIR / "xdsl_opt__empty_program.mlir",
+    "constant_folding": RAW_TEST_MLIR_DIR / "filecheck__with-riscemu__rvscf_lowering_emu.mlir"
 }
 
 
 def time_end_to_end_opt__empty_program() -> None:
     """Time running the empty program."""
     runner = xDSLOptMain(args=[
-        str(BENCHMARKS_DIR.parent / MLIR_FILES["empty_program"]),
+        str(MLIR_FILES["empty_program"]),
         "-p", "constant-fold-interp"
     ])
     runner.run()
@@ -29,7 +25,7 @@ def time_end_to_end_opt__empty_program() -> None:
 def time_end_to_end_opt__constant_folding() -> None:
     """Time running a constant folding example."""
     runner = xDSLOptMain(args=[
-        str(BENCHMARKS_DIR.parent / MLIR_FILES["constant_folding"]),
+        str(MLIR_FILES["constant_folding"]),
         "-p", "constant-fold-interp"
     ])
     runner.run()

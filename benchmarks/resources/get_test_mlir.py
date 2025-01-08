@@ -14,8 +14,11 @@ from pathlib import Path
 from subprocess import run
 from shutil import rmtree, copy
 
+from tqdm import tqdm
+
 
 RESOURCES_DIR = Path(__file__).parent
+TEST_DIR = RESOURCES_DIR.parent.parent / "xdsl/tests"
 GENERIC_DIR = RESOURCES_DIR / "generic_test_mlir/"
 RAW_DIR = RESOURCES_DIR / "raw_test_mlir/"
 
@@ -31,7 +34,7 @@ def split_mlir_file(contents: str) -> list[str] | str:
     return contents
 
 
-def mlir_opt_contents(contents: str, mlir_path: str = "mlir-opt") -> str | None:
+def mlir_opt_contents(contents: str, mlir_path: str) -> str | None:
     """Run `mlir-opt` on the (optionally split) contents of a MLIR file."""
     result = run(
         [
@@ -50,27 +53,36 @@ def mlir_opt_contents(contents: str, mlir_path: str = "mlir-opt") -> str | None:
     return result.stdout
 
 
-def main() -> None:
+def main(mlir_path: str = "mlir-opt") -> None:
     """The script to copy across and generate the raw and generic files."""
     rmtree(RAW_DIR)
     rmtree(GENERIC_DIR)
     RAW_DIR.mkdir()
     GENERIC_DIR.mkdir()
 
-    for file in (RESOURCES_DIR.parent.parent / "xdsl/tests").rglob("*.mlir"):
-        copy(file, RAW_DIR / file.name)
+    print("Copying all test MLIR files.")
+    num_files: int = 0
+    for file in tqdm(TEST_DIR.rglob("*.mlir")):
+        destination = RAW_DIR / "__".join(str(file.relative_to(TEST_DIR)).split("/"))
+        if destination.exists():
+            print(f"WARNING: overwriting {destination}")
+        else:
+            num_files += 1
+        copy(file, destination)
 
-    for file in RAW_DIR.iterdir():
+
+    print("\nApplying `mlir-opt` to all test MLIR files.")
+    for file in tqdm(RAW_DIR.iterdir(), total=num_files):
         contents = file.read_text()
         if isinstance((split := split_mlir_file(contents)), list):
             for i, split_contents in enumerate(split):
                 output_file = GENERIC_DIR / f"{file.stem}__split_{i}.{file.suffix}"
-                mlir_opt = mlir_opt_contents(split_contents)
+                mlir_opt = mlir_opt_contents(split_contents, mlir_path)
                 if mlir_opt is not None:
                     output_file.write_text(mlir_opt)
         else:
             output_file = GENERIC_DIR / file.name
-            mlir_opt = mlir_opt_contents(split)
+            mlir_opt = mlir_opt_contents(split, mlir_path)
             if mlir_opt is not None:
                 output_file.write_text(mlir_opt)
 

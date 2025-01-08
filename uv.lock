@@ -8,7 +8,7 @@ source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asv-runner" },
     { name = "build" },
-    { name = "colorama", marker = "sys_platform == 'win32'" },
+    { name = "colorama", marker = "platform_system == 'Windows'" },
     { name = "json5" },
     { name = "pympler", marker = "platform_python_implementation != 'PyPy'" },
     { name = "pyyaml", marker = "platform_python_implementation != 'PyPy'" },
@@ -220,7 +220,7 @@ name = "pympler"
 version = "1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pywin32", marker = "sys_platform == 'win32'" },
+    { name = "pywin32", marker = "platform_system == 'Windows'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/dd/37/c384631908029676d8e7213dd956bb686af303a80db7afbc9be36bc49495/pympler-1.1.tar.gz", hash = "sha256:1eaa867cb8992c218430f1708fdaccda53df064144d1c5656b1e6f1ee6000424", size = 179954 }
 wheels = [
@@ -403,6 +403,18 @@ wheels = [
 ]
 
 [[package]]
+name = "tqdm"
+version = "4.67.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama", marker = "platform_system == 'Windows'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/a8/4b/29b4ef32e036bb34e4ab51796dd745cdba7ed47ad142a9f4a1eb8e0c744d/tqdm-4.67.1.tar.gz", hash = "sha256:f8aef9c52c08c13a65f30ea34f4e5aac3fd1a34959879d7e59e63027286627f2", size = 169737 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl", hash = "sha256:26445eca388f82e72884e0d580d5464cd801a3ea01e63e5601bdff9ba6a48de2", size = 78540 },
+]
+
+[[package]]
 name = "typing-extensions"
 version = "4.12.2"
 source = { registry = "https://pypi.org/simple" }
@@ -482,7 +494,7 @@ wheels = [
 
 [[package]]
 name = "xdsl"
-version = "0.26+33.g73834d33"
+version = "0.26+28.ga0d424df"
 source = { directory = "xdsl" }
 dependencies = [
     { name = "immutabledict" },
@@ -535,6 +547,7 @@ asv = [
 dev = [
     { name = "mypy" },
     { name = "ruff" },
+    { name = "tqdm" },
 ]
 profile = [
     { name = "flameprof" },
@@ -553,6 +566,7 @@ asv = [
 dev = [
     { name = "mypy", specifier = ">=1.13.0" },
     { name = "ruff", specifier = ">=0.8.3" },
+    { name = "tqdm", specifier = ">=4.67.1" },
 ]
 profile = [
     { name = "flameprof", specifier = ">=0.4" },

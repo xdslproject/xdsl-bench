@@ -13,6 +13,7 @@ asv = [
 dev = [
     "mypy>=1.13.0",
     "ruff>=0.8.3",
+    "tqdm>=4.67.1",
 ]
 profile = [
     "viztracer>=1.0.0",

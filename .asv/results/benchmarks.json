@@ -1,6 +1,6 @@
 {
     "end_to_end.time_end_to_end_opt__constant_folding": {
-        "code": "def time_end_to_end_opt__constant_folding() -> None:\n    \"\"\"Time running a constant folding example.\"\"\"\n    runner = xDSLOptMain(args=[\n        str(BENCHMARKS_DIR.parent / MLIR_FILES[\"constant_folding\"]),\n        \"-p\", \"constant-fold-interp\"\n    ])\n    runner.run()",
+        "code": "def time_end_to_end_opt__constant_folding() -> None:\n    \"\"\"Time running a constant folding example.\"\"\"\n    runner = xDSLOptMain(args=[\n        str(MLIR_FILES[\"constant_folding\"]),\n        \"-p\", \"constant-fold-interp\"\n    ])\n    runner.run()",
         "min_run_count": 2,
         "name": "end_to_end.time_end_to_end_opt__constant_folding",
         "number": 0,
@@ -11,11 +11,11 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "457a4e87912a503f87a5c00585a010376ecaa4597ae6d3daa60fb33618972ece",
+        "version": "100ba8c340a23522faec5fd2c3895255441e920631b839918e326f39148db681",
         "warmup_time": -1
     },
     "end_to_end.time_end_to_end_opt__empty_program": {
-        "code": "def time_end_to_end_opt__empty_program() -> None:\n    \"\"\"Time running the empty program.\"\"\"\n    runner = xDSLOptMain(args=[\n        str(BENCHMARKS_DIR.parent / MLIR_FILES[\"empty_program\"]),\n        \"-p\", \"constant-fold-interp\"\n    ])\n    runner.run()",
+        "code": "def time_end_to_end_opt__empty_program() -> None:\n    \"\"\"Time running the empty program.\"\"\"\n    runner = xDSLOptMain(args=[\n        str(MLIR_FILES[\"empty_program\"]),\n        \"-p\", \"constant-fold-interp\"\n    ])\n    runner.run()",
         "min_run_count": 2,
         "name": "end_to_end.time_end_to_end_opt__empty_program",
         "number": 0,
@@ -26,7 +26,7 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "cf67b8825774b1d3587cfbcfa73424048e3fce81767fb9f136d5129d942a7045",
+        "version": "a49c8752983327cee55d861b295e551613e2789b61261506f9b1ba75ecd8dacf",
         "warmup_time": -1
     },
     "import_classes.time_import_xdsl_opt": {
