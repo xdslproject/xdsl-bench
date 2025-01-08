@@ -42,6 +42,10 @@ preview: html
 clean: .asv
 	rm -rf .asv/html .asv/results/$(shell hostname)
 
+.PHONY: clean-site
+clean-site: clean
+	rm -rf .asv/results/github-action
+
 # ======== #
 # cProfile #
 # ======== #
