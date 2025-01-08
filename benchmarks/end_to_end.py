@@ -7,11 +7,12 @@ from xdsl.xdsl_opt_main import xDSLOptMain
 
 BENCHMARKS_DIR = Path(__file__).parent
 RAW_TEST_MLIR_DIR = BENCHMARKS_DIR / "resources" / "raw_test_mlir"
+EXTRA_MLIR_DIR = BENCHMARKS_DIR / "resources" / "extra_mlir"
 MLIR_FILES: dict[str, Path] = {
     "empty_program": RAW_TEST_MLIR_DIR / "xdsl_opt__empty_program.mlir",
-    "constant_folding": RAW_TEST_MLIR_DIR / "filecheck__with-riscemu__rvscf_lowering_emu.mlir"
+    "constant_folding": EXTRA_MLIR_DIR / "program_20.mlir"
+    # "constant_folding": RAW_TEST_MLIR_DIR / "xdsl_opt__not_module_with_module.mlir"
 }
-
 
 def time_end_to_end_opt__empty_program() -> None:
     """Time running the empty program."""
@@ -26,7 +27,7 @@ def time_end_to_end_opt__constant_folding() -> None:
     """Time running a constant folding example."""
     runner = xDSLOptMain(args=[
         str(MLIR_FILES["constant_folding"]),
-        "-p", "constant-fold-interp"
+        "-p", "canonicalize"
     ])
     runner.run()
 
@@ -59,4 +60,4 @@ if __name__ == "__main__":
     output_prof = f"{BENCHMARKS_DIR.parent}/profiles/{TEST_NAME}__{MLIR_NAME}.json"
     with VizTracer(output_file=output_prof):
         time_end_to_end_opt__constant_folding()
-    print(f"VizTracer lex only profile written to '{output_prof}'!")
+    print(f"VizTracer profile written to '{output_prof}'!")

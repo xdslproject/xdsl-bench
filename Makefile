@@ -38,12 +38,12 @@ html:
 preview: html
 	uv run asv preview
 
-.PHONY: clean
-clean: .asv
+.PHONY: clean-local-asv
+clean-local-asv: .asv
 	rm -rf .asv/html .asv/results/$(shell hostname)
 
-.PHONY: clean-site
-clean-site: clean
+.PHONY: clean-asv
+clean-asv: clean-local-asv
 	rm -rf .asv/results/github-action
 
 # ======== #
@@ -53,6 +53,10 @@ clean-site: clean
 ## Generate profile data from benchmarks
 profiles:
 	mkdir -p profiles
+
+.PHONY: clean-profiles
+clean-profiles:
+	rm -rf profiles
 
 profiles/lexer__apply_pdl_extra_file__lex_only.prof: .venv xdsl/.venv profiles
 	uv run python benchmarks/lexer.py
