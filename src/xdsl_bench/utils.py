@@ -6,14 +6,15 @@ from argparse import ArgumentParser, Namespace
 import timeit
 
 import cProfile
-from typing import Callable, Iterable, cast
+from collections.abc import Callable
+from typing import Any, Iterable, cast
 import subprocess
 from viztracer import VizTracer
 
 DEFAULT_OUTPUT_DIRECTORY = Path(__file__).parent.parent.parent / "profiles"
 
 
-def parse_arguments() -> Namespace:
+def parse_arguments() -> ArgumentParser:
     """Parse the arguments for the profiler tool."""
     parser = ArgumentParser()
 
@@ -50,23 +51,23 @@ def parse_arguments() -> Namespace:
         "flameprof", help="use the flameprof profiler"
     )
 
-    return parser.parse_args()
+    return parser
 
 
-def get_benchmarks(args: Namespace, benchmarks: dict[str, Callable[[], None]]) -> Iterable[tuple[str, Callable[[], None]]]:
+def get_benchmarks(args: Namespace, benchmarks: dict[str, Callable[[], Any]]) -> Iterable[tuple[str, Callable[[], None]]]:
     """Get the filtered set of benchmarks items to profile."""
     if args.test is not None and args.test in benchmarks:
         benchmarks = {args.test: benchmarks[args.test]}
     return benchmarks.items()
 
 
-def timeit_benchmark(args: Namespace, benchmarks: dict[str, Callable[[], None]], number: int = 1) -> None:
+def timeit_benchmark(args: Namespace, benchmarks: dict[str, Callable[[], Any]], number: int = 1) -> None:
     """Use timeit to run a benchmark."""
     for name, test in get_benchmarks(args, benchmarks):
         print(f"Test {name} ran in: {timeit.timeit(test, number=number):.5f}s")
 
 
-def cprofile_benchmark(args: Namespace, benchmarks: dict[str, Callable[[], None]]) -> list[Path]:
+def cprofile_benchmark(args: Namespace, benchmarks: dict[str, Callable[[], Any]]) -> list[Path]:
     """Use cProfile to profile a benchmark."""
     output_profs: list[Path] = []
     for name, _ in get_benchmarks(args, benchmarks):
@@ -75,7 +76,7 @@ def cprofile_benchmark(args: Namespace, benchmarks: dict[str, Callable[[], None]
     return output_profs
 
 
-def viztracer_benchmark(args: Namespace, benchmarks: dict[str, Callable[[], None]]) -> list[Path]:
+def viztracer_benchmark(args: Namespace, benchmarks: dict[str, Callable[[], Any]]) -> list[Path]:
     """Use VizTracer to profile a benchmark."""
     output_profs: list[Path] = []
     for name, test in get_benchmarks(args, benchmarks):
@@ -97,9 +98,10 @@ def show(args: Namespace, output_profs: list[Path], tool: str, options: tuple[st
     subprocess.run(command, check=True)  # noqa: S603
 
 
-def profile(benchmarks: dict[str, Callable[[], None]]) -> None:
-    """Run the selected."""
-    args = parse_arguments()
+def profile(benchmarks: dict[str, Callable[[], Any]], argv: list[str] | None = None) -> None:
+    """Run the selected profiler."""
+    args = parse_arguments().parse_args(args=argv)
+
     match args.command:
         case "timeit":
             timeit_benchmark(args, benchmarks)
