@@ -24,18 +24,9 @@ def timeraw_import_xdsl_opt() -> str:
 
 
 if __name__ == "__main__":
-    import cProfile
-    from pathlib import Path
+    from xdsl_bench.utils import profile
 
-    from viztracer import VizTracer
-
-    TEST_NAME = Path(__file__).stem
-
-    output_prof = f"{BENCHMARKS_DIR.parent}/profiles/{TEST_NAME}.prof"
-    cProfile.run("time_import_inspect()", output_prof)
-    print(f"cProfile profile written to '{output_prof}'!")
-
-    output_prof = f"{BENCHMARKS_DIR.parent}/profiles/{TEST_NAME}.json"
-    with VizTracer(output_file=output_prof):
-        time_import_xdsl_opt()
-    print(f"VizTracer profile written to '{output_prof}'!")
+    BENCHMARKS = {
+        "time_import_xdsl_opt": time_import_xdsl_opt,
+    }
+    profile(BENCHMARKS)

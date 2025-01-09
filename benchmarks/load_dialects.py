@@ -4,5 +4,7 @@
 # TODO: Define the benchmarks
 
 if __name__ == "__main__":
-    # TODO: Profile the benchmarks
-    pass
+    from xdsl_bench.utils import profile
+
+    BENCHMARKS = {}
+    profile(BENCHMARKS)
