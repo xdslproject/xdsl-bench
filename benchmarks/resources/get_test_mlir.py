@@ -10,12 +10,11 @@ they are updated as needed, but also helps pin the test data to make fair
 comparisons.
 """
 
+import subprocess
 from pathlib import Path
-from subprocess import run
-from shutil import rmtree, copy
+from shutil import copy, rmtree
 
 from tqdm import tqdm
-
 
 RESOURCES_DIR = Path(__file__).parent
 TEST_DIR = RESOURCES_DIR.parent.parent / "xdsl/tests"
@@ -36,7 +35,7 @@ def split_mlir_file(contents: str) -> list[str] | str:
 
 def mlir_opt_contents(contents: str, mlir_path: str) -> str | None:
     """Run `mlir-opt` on the (optionally split) contents of a MLIR file."""
-    result = run(
+    result = subprocess.run(  # noqa: S603
         [
             mlir_path,
             "--allow-unregistered-dialect",
@@ -47,6 +46,7 @@ def mlir_opt_contents(contents: str, mlir_path: str) -> str | None:
         text=True,
         capture_output=True,
         timeout=60,
+        check=False,
     )
     if result.returncode != 0:
         return None
@@ -69,7 +69,6 @@ def main(mlir_path: str = "mlir-opt") -> None:
         else:
             num_files += 1
         copy(file, destination)
-
 
     print("\nApplying `mlir-opt` to all test MLIR files.")
     for file in tqdm(RAW_DIR.iterdir(), total=num_files):

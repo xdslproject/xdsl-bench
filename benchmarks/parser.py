@@ -6,12 +6,13 @@ from pathlib import Path
 from xdsl.context import MLContext
 from xdsl.parser import Parser
 
-
 BENCHMARKS_DIR = Path(__file__).parent
 GENERIC_TEST_MLIR_DIR = BENCHMARKS_DIR / "resources" / "generic_test_mlir"
 MLIR_FILES: dict[str, Path] = {
-    "apply_pdl_extra_file": GENERIC_TEST_MLIR_DIR / "filecheck__transforms__apply-pdl__apply_pdl_extra_file.mlir",
-    "add": GENERIC_TEST_MLIR_DIR / "filecheck__transforms__arith-add-immediate-zero.mlir"
+    "apply_pdl_extra_file": GENERIC_TEST_MLIR_DIR
+    / "filecheck__transforms__apply-pdl__apply_pdl_extra_file.mlir",
+    "add": GENERIC_TEST_MLIR_DIR
+    / "filecheck__transforms__arith-add-immediate-zero.mlir",
 }
 
 CTX = MLContext(allow_unregistered=True)

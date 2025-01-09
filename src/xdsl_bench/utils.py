@@ -6,7 +6,7 @@ from argparse import ArgumentParser, Namespace
 import timeit
 
 import cProfile
-from typing import Callable, Iterable
+from typing import Callable, Iterable, cast
 import subprocess
 from viztracer import VizTracer
 
@@ -91,10 +91,10 @@ def show(args: Namespace, output_profs: list[Path], tool: str, options: tuple[st
         raise ValueError("Cannot show UI for more than one benchmark")
     assert len(output_profs) == 1
     if options is None:
-        options = tuple([])
+        options = cast(tuple[str], ())
     command = ["uv", "run", tool, str(output_profs[0]), *options]
     print(command)
-    subprocess.run(command, check=True)
+    subprocess.run(command, check=True)  # noqa: S603
 
 
 def profile(benchmarks: dict[str, Callable[[], None]]) -> None:

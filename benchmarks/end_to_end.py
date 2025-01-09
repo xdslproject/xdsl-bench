@@ -10,26 +10,25 @@ RAW_TEST_MLIR_DIR = BENCHMARKS_DIR / "resources" / "raw_test_mlir"
 EXTRA_MLIR_DIR = BENCHMARKS_DIR / "resources" / "extra_mlir"
 MLIR_FILES: dict[str, Path] = {
     "empty_program": RAW_TEST_MLIR_DIR / "xdsl_opt__empty_program.mlir",
-    "constant_folding": EXTRA_MLIR_DIR / "program_20.mlir"
+    "constant_folding": EXTRA_MLIR_DIR / "program_20.mlir",
     # "constant_folding": RAW_TEST_MLIR_DIR / "xdsl_opt__not_module_with_module.mlir"
 }
 
+
 def time_end_to_end_opt__empty_program() -> None:
     """Time running the empty program."""
-    runner = xDSLOptMain(args=[
-        str(MLIR_FILES["empty_program"]),
-        "-p", "constant-fold-interp"
-    ])
-    runner.run()
+    runner = xDSLOptMain(
+        args=[str(MLIR_FILES["empty_program"]), "-p", "constant-fold-interp"]
+    )
+    runner.run()  # type: ignore[no-untyped-call]
 
 
 def time_end_to_end_opt__constant_folding() -> None:
     """Time running a constant folding example."""
-    runner = xDSLOptMain(args=[
-        str(MLIR_FILES["constant_folding"]),
-        "-p", "canonicalize"
-    ])
-    runner.run()
+    runner = xDSLOptMain(
+        args=[str(MLIR_FILES["constant_folding"]), "-p", "canonicalize"]
+    )
+    runner.run()  # type: ignore[no-untyped-call]
 
 
 if __name__ == "__main__":

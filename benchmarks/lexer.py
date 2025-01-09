@@ -9,8 +9,10 @@ from xdsl.utils.mlir_lexer import MLIRLexer, MLIRTokenKind
 BENCHMARKS_DIR = Path(__file__).parent
 RAW_TEST_MLIR_DIR = BENCHMARKS_DIR / "resources" / "raw_test_mlir"
 MLIR_FILES: dict[str, Path] = {
-    "apply_pdl_extra_file": RAW_TEST_MLIR_DIR / "filecheck__transforms__apply-pdl__apply_pdl_extra_file.mlir",
-    "rvscf_lowering_emu": RAW_TEST_MLIR_DIR / "filecheck__with-riscemu__rvscf_lowering_emu.mlir"
+    "apply_pdl_extra_file": RAW_TEST_MLIR_DIR
+    / "filecheck__transforms__apply-pdl__apply_pdl_extra_file.mlir",
+    "rvscf_lowering_emu": RAW_TEST_MLIR_DIR
+    / "filecheck__with-riscemu__rvscf_lowering_emu.mlir",
 }
 
 

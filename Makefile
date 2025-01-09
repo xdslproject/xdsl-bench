@@ -93,9 +93,10 @@ lint: .venv
 format:
 	uv run ruff format benchmarks/
 
-.PHONY: type
+.PHONY: types
 types:
+	uv run mypy src
 	uv run mypy benchmarks --scripts-are-modules
 
 .PHONY: check
-check: lint format type
+check: lint format types
