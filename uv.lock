@@ -494,7 +494,7 @@ wheels = [
 
 [[package]]
 name = "xdsl"
-version = "0.26+51.g9c53363c"
+version = "0.26.0"
 source = { directory = "xdsl" }
 dependencies = [
     { name = "immutabledict" },
@@ -511,12 +511,10 @@ requires-dist = [
     { name = "ipykernel", marker = "extra == 'dev'" },
     { name = "jax", marker = "extra == 'jax'", specifier = "==0.4.38" },
     { name = "lit", marker = "extra == 'dev'", specifier = "<19.0.0" },
-    { name = "marimo", marker = "extra == 'dev'", specifier = "==0.10.10" },
+    { name = "marimo", marker = "extra == 'dev'", specifier = "==0.10.12" },
     { name = "nbconvert", marker = "extra == 'dev'", specifier = ">=7.7.2,<8.0.0" },
     { name = "nbval", marker = "extra == 'dev'", specifier = "<0.12" },
     { name = "numpy", marker = "extra == 'jax'", specifier = "==2.2.1" },
-    { name = "numpy", marker = "extra == 'onnx'", specifier = "==2.2.1" },
-    { name = "onnx", marker = "extra == 'onnx'", specifier = "==1.17.0" },
     { name = "ordered-set", specifier = "==4.1.0" },
     { name = "pip", marker = "extra == 'dev'", specifier = "<25.0" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = "==4.0.1" },
@@ -526,12 +524,11 @@ requires-dist = [
     { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = "==0.25.2" },
     { name = "pytest-cov", marker = "extra == 'dev'" },
     { name = "riscemu", marker = "extra == 'riscv'", specifier = "==2.2.7" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = "==0.9.0" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = "==0.9.1" },
     { name = "textual", marker = "extra == 'gui'", specifier = "==1.0.0" },
     { name = "textual-dev", marker = "extra == 'dev'", specifier = "==1.7.0" },
     { name = "toml", marker = "extra == 'dev'", specifier = "<0.11" },
     { name = "typing-extensions", specifier = ">=4.7,<4.13" },
-    { name = "wgpu", marker = "extra == 'wgpu'", specifier = "==0.19.3" },
 ]
 
 [[package]]
