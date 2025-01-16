@@ -49,10 +49,15 @@ jobs:
       # ensure that it is correctly in the $PATH for `asv`
       - uses: actions/setup-python@v5
         with:
-          python-version: 3.12
-      - name: Check Python installation
+          python-version: |
+              3.11
+              pypy3.11
+              3.13
+      - name: Check Python installations
         run: |
-          which python3.12 && python3.12 --version
+          which python3.11 && python3.11 --version
+          which pypy.11 && pypy3.11 --version
+          which python3.13 && python3.13 --version
           uv python list
 
       - name: Install the project

@@ -47,41 +47,6 @@ clean-asv: clean-local-asv
 	rm -rf .asv/results/github-action
 
 # ========= #
-# Profiling #
-# ========= #
-
-## Generate profile data from benchmarks
-profiles:
-	mkdir -p profiles
-
-.PHONY: clean-profiles
-clean-profiles:
-	rm -rf profiles
-
-.PHONY: timeit_end_to_end
-timeit_end_to_end:
-	uv run python3 benchmarks/end_to_end.py timeit
-
-.PHONY: snakeviz_end_to_end
-snakeviz_end_to_end:
-	uv run python3 benchmarks/end_to_end.py -t time_end_to_end_opt__constant_folding snakeviz
-
-.PHONY: flameprof_end_to_end
-flameprof_end_to_end:
-	uv run python3 benchmarks/end_to_end.py -t time_end_to_end_opt__constant_folding flameprof
-
-.PHONY: viztracer_end_to_end
-viztracer_end_to_end:
-	uv run python3 benchmarks/end_to_end.py -t time_end_to_end_opt__constant_folding viztracer
-
-## Profile command line directly
-.PHONY: viztracer
-viztracer_xdsl_opt: .venv xdsl/.venv profiles
-	uv run viztracer -o profiles/empty_program.json \
-		xdsl-opt xdsl/tests/xdsl_opt/empty_program.mlir
-	uv run vizviewer profiles/empty_program.json
-
-# ========= #
 # Developer #
 # ========= #
 
