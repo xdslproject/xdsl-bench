@@ -494,7 +494,6 @@ wheels = [
 
 [[package]]
 name = "xdsl"
-version = "0.26.0+1.gdee76d4a"
 source = { directory = "xdsl" }
 dependencies = [
     { name = "immutabledict" },
@@ -511,7 +510,7 @@ requires-dist = [
     { name = "ipykernel", marker = "extra == 'dev'" },
     { name = "jax", marker = "extra == 'jax'", specifier = "==0.4.38" },
     { name = "lit", marker = "extra == 'dev'", specifier = "<19.0.0" },
-    { name = "marimo", marker = "extra == 'dev'", specifier = "==0.10.12" },
+    { name = "marimo", marker = "extra == 'dev'", specifier = "==0.10.13" },
     { name = "nbconvert", marker = "extra == 'dev'", specifier = ">=7.7.2,<8.0.0" },
     { name = "nbval", marker = "extra == 'dev'", specifier = "<0.12" },
     { name = "numpy", marker = "extra == 'jax'", specifier = "==2.2.1" },
