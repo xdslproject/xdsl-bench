@@ -520,7 +520,7 @@ requires-dist = [
     { name = "numpy", marker = "extra == 'jax'", specifier = "==2.2.2" },
     { name = "ordered-set", specifier = "==4.1.0" },
     { name = "pip", marker = "extra == 'dev'", specifier = "<25.0" },
-    { name = "pre-commit", marker = "extra == 'dev'", specifier = "==4.0.1" },
+    { name = "pre-commit", marker = "extra == 'dev'", specifier = "==4.1.0" },
     { name = "pyclip", marker = "extra == 'gui'", specifier = "==0.7" },
     { name = "pyright", marker = "extra == 'dev'", specifier = "==1.1.392.post0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = "<8.4" },
