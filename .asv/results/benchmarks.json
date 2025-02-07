@@ -149,5 +149,35 @@
         "version": "6aff66b5df7d3b48425bfc21743b588505a457754d1fb13175cd6b2d6d966bee",
         "warmup_time": -1
     },
+    "parser.time_parser__dense_attr": {
+        "code": "def time_parser__dense_attr() -> None:\n    \"\"\"Time parsing a 1024x1024xi8 dense attribute\"\"\"\n    parse_file(EXTRA_TEST_MLIR_DIR / \"large_dense_attr.mlir\")",
+        "min_run_count": 2,
+        "name": "parser.time_parser__dense_attr",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "f73ec1c9f7bcff02472da04954b0a17102a068b89f6ea8e55a62b65853d9ba91",
+        "warmup_time": -1
+    },
+    "parser.time_parser__dense_attr_hex": {
+        "code": "def time_parser__dense_attr_hex() -> None:\n    \"\"\"Time parsing a 1024x1024xi8 dense attribute given as a hex string\"\"\"\n    parse_file(EXTRA_TEST_MLIR_DIR / \"large_dense_attr_hex.mlir\")",
+        "min_run_count": 2,
+        "name": "parser.time_parser__dense_attr_hex",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "0532a39adf6c815e8cd3527bc9c072a1609d1e96e8d336884bfc53af8f12f02a",
+        "warmup_time": -1
+    },
     "version": 2
 }
