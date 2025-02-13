@@ -526,6 +526,7 @@ requires-dist = [
     { name = "pytest-cov", marker = "extra == 'dev'" },
     { name = "riscemu", marker = "extra == 'riscv'", specifier = "==2.2.7" },
     { name = "ruff", marker = "extra == 'dev'", specifier = "==0.9.6" },
+    { name = "sympy", marker = "extra == 'dev'", specifier = "==1.13.3" },
     { name = "textual", marker = "extra == 'gui'", specifier = "==1.0.0" },
     { name = "textual-dev", marker = "extra == 'dev'", specifier = "==1.7.0" },
     { name = "toml", marker = "extra == 'dev'", specifier = "<0.11" },
