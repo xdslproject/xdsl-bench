@@ -1,4 +1,5 @@
 version = 1
+revision = 1
 requires-python = ">=3.10.0"
 
 [[package]]
@@ -509,14 +510,14 @@ requires-dist = [
     { name = "ipykernel", marker = "extra == 'dev'" },
     { name = "jax", marker = "extra == 'jax'", specifier = "==0.5.0" },
     { name = "lit", marker = "extra == 'dev'", specifier = "<19.0.0" },
-    { name = "marimo", marker = "extra == 'dev'", specifier = "==0.11.2" },
+    { name = "marimo", marker = "extra == 'dev'", specifier = "==0.11.4" },
     { name = "mkdocs", marker = "extra == 'docs'", specifier = ">=1.6.1" },
     { name = "mkdocs-gen-files", marker = "extra == 'docs'", specifier = ">=0.5.0" },
     { name = "mkdocs-material", marker = "extra == 'docs'", specifier = ">=9.5.49" },
     { name = "mkdocstrings", extras = ["python"], marker = "extra == 'docs'", specifier = ">=0.27.0" },
     { name = "nbconvert", marker = "extra == 'dev'", specifier = ">=7.7.2,<8.0.0" },
     { name = "nbval", marker = "extra == 'dev'", specifier = "<0.12" },
-    { name = "numpy", marker = "extra == 'jax'", specifier = "==2.2.2" },
+    { name = "numpy", marker = "extra == 'jax'", specifier = "==2.2.3" },
     { name = "ordered-set", specifier = "==4.1.0" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = "==4.1.0" },
     { name = "pyclip", marker = "extra == 'gui'", specifier = "==0.7" },
@@ -532,6 +533,7 @@ requires-dist = [
     { name = "toml", marker = "extra == 'dev'", specifier = "<0.11" },
     { name = "typing-extensions", specifier = ">=4.7,<4.13" },
 ]
+provides-extras = ["dev", "docs", "gui", "jax", "riscv"]
 
 [[package]]
 name = "xdsl-bench"
