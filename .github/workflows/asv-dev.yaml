@@ -47,11 +47,12 @@ jobs:
           which pypy.11 && pypy3.11 --version
           uv python list
 
-      - name: Install the project
-        run: make xdsl/.venv
-
       - name: Include existing artefacts
         run: rm -rf xdsl/.asv && mv .asv xdsl/.asv
+
+      - name: Install the project
+        working-directory: ./xdsl
+        run: uv sync --extra bench
 
       - name: Fingerprint the machine
         working-directory: ./xdsl
