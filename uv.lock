@@ -8,7 +8,7 @@ source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asv-runner" },
     { name = "build" },
-    { name = "colorama", marker = "platform_system == 'Windows'" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
     { name = "json5" },
     { name = "pympler", marker = "platform_python_implementation != 'PyPy'" },
     { name = "pyyaml", marker = "platform_python_implementation != 'PyPy'" },
@@ -220,7 +220,7 @@ name = "pympler"
 version = "1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pywin32", marker = "platform_system == 'Windows'" },
+    { name = "pywin32", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/dd/37/c384631908029676d8e7213dd956bb686af303a80db7afbc9be36bc49495/pympler-1.1.tar.gz", hash = "sha256:1eaa867cb8992c218430f1708fdaccda53df064144d1c5656b1e6f1ee6000424", size = 179954 }
 wheels = [
@@ -403,6 +403,18 @@ wheels = [
 ]
 
 [[package]]
+name = "tqdm"
+version = "4.67.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama", marker = "sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/a8/4b/29b4ef32e036bb34e4ab51796dd745cdba7ed47ad142a9f4a1eb8e0c744d/tqdm-4.67.1.tar.gz", hash = "sha256:f8aef9c52c08c13a65f30ea34f4e5aac3fd1a34959879d7e59e63027286627f2", size = 169737 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl", hash = "sha256:26445eca388f82e72884e0d580d5464cd801a3ea01e63e5601bdff9ba6a48de2", size = 78540 },
+]
+
+[[package]]
 name = "typing-extensions"
 version = "4.12.2"
 source = { registry = "https://pypi.org/simple" }
@@ -482,7 +494,6 @@ wheels = [
 
 [[package]]
 name = "xdsl"
-version = "0.26+28.ga0d424df"
 source = { directory = "xdsl" }
 dependencies = [
     { name = "immutabledict" },
@@ -492,34 +503,33 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "asv", marker = "extra == 'dev'", specifier = "<0.7" },
     { name = "coverage", marker = "extra == 'dev'", specifier = "<8.0.0" },
     { name = "filecheck", marker = "extra == 'dev'", specifier = "==1.0.1" },
     { name = "immutabledict", specifier = "<4.2.2" },
     { name = "ipykernel", marker = "extra == 'dev'" },
-    { name = "jax", marker = "extra == 'jax'", specifier = "==0.4.38" },
+    { name = "jax", marker = "extra == 'jax'", specifier = "==0.5.0" },
     { name = "lit", marker = "extra == 'dev'", specifier = "<19.0.0" },
-    { name = "marimo", marker = "extra == 'dev'", specifier = "==0.10.9" },
+    { name = "marimo", marker = "extra == 'dev'", specifier = "==0.11.0" },
+    { name = "mkdocs", marker = "extra == 'docs'", specifier = ">=1.6.1" },
+    { name = "mkdocs-gen-files", marker = "extra == 'docs'", specifier = ">=0.5.0" },
+    { name = "mkdocs-material", marker = "extra == 'docs'", specifier = ">=9.5.49" },
+    { name = "mkdocstrings", extras = ["python"], marker = "extra == 'docs'", specifier = ">=0.27.0" },
     { name = "nbconvert", marker = "extra == 'dev'", specifier = ">=7.7.2,<8.0.0" },
     { name = "nbval", marker = "extra == 'dev'", specifier = "<0.12" },
-    { name = "numpy", marker = "extra == 'jax'", specifier = "==2.2.1" },
-    { name = "numpy", marker = "extra == 'onnx'", specifier = "==2.2.1" },
-    { name = "onnx", marker = "extra == 'onnx'", specifier = "==1.17.0" },
+    { name = "numpy", marker = "extra == 'jax'", specifier = "==2.2.2" },
     { name = "ordered-set", specifier = "==4.1.0" },
-    { name = "pip", marker = "extra == 'dev'", specifier = "<25.0" },
-    { name = "pre-commit", marker = "extra == 'dev'", specifier = "==4.0.1" },
+    { name = "pre-commit", marker = "extra == 'dev'", specifier = "==4.1.0" },
     { name = "pyclip", marker = "extra == 'gui'", specifier = "==0.7" },
-    { name = "pyright", marker = "extra == 'dev'", specifier = "==1.1.391" },
+    { name = "pyright", marker = "extra == 'dev'", specifier = "==1.1.393" },
     { name = "pytest", marker = "extra == 'dev'", specifier = "<8.4" },
-    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = "==0.25.1" },
+    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = "==0.25.3" },
     { name = "pytest-cov", marker = "extra == 'dev'" },
     { name = "riscemu", marker = "extra == 'riscv'", specifier = "==2.2.7" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = "==0.8.6" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = "==0.9.5" },
     { name = "textual", marker = "extra == 'gui'", specifier = "==1.0.0" },
     { name = "textual-dev", marker = "extra == 'dev'", specifier = "==1.7.0" },
     { name = "toml", marker = "extra == 'dev'", specifier = "<0.11" },
     { name = "typing-extensions", specifier = ">=4.7,<4.13" },
-    { name = "wgpu", marker = "extra == 'wgpu'", specifier = "==0.19.3" },
 ]
 
 [[package]]
@@ -538,6 +548,7 @@ asv = [
 dev = [
     { name = "mypy" },
     { name = "ruff" },
+    { name = "tqdm" },
 ]
 profile = [
     { name = "flameprof" },
@@ -556,6 +567,7 @@ asv = [{ name = "asv", specifier = ">=0.6.4" }]
 dev = [
     { name = "mypy", specifier = ">=1.13.0" },
     { name = "ruff", specifier = ">=0.8.3" },
+    { name = "tqdm", specifier = ">=4.67.1" },
 ]
 profile = [
     { name = "flameprof", specifier = ">=0.4" },

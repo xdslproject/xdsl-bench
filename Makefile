@@ -38,51 +38,41 @@ html:
 preview: html
 	uv run asv preview
 
-.PHONY: clean
-clean: .asv
+.PHONY: clean-local-asv
+clean-local-asv: .asv
 	rm -rf .asv/html .asv/results/$(shell hostname)
 
-# ======== #
-# cProfile #
-# ======== #
+.PHONY: clean-asv
+clean-asv: clean-local-asv
+	rm -rf .asv/results/github-action
+
+# ========= #
+# Profiling #
+# ========= #
 
 ## Generate profile data from benchmarks
 profiles:
 	mkdir -p profiles
 
-profiles/lexer__apply_pdl_extra_file__lex_only.prof: .venv xdsl/.venv profiles
-	uv run python benchmarks/lexer.py
+.PHONY: clean-profiles
+clean-profiles:
+	rm -rf profiles
 
-profiles/lexer__apply_pdl_extra_file__lex_only.json: .venv xdsl/.venv profiles
-	uv run python benchmarks/lexer.py
-
-profiles/end_to_end__constant_folding.prof: .venv xdsl/.venv profiles
-	uv run python benchmarks/end_to_end.py
-
-profiles/end_to_end__constant_folding.json: .venv xdsl/.venv profiles
-	uv run python benchmarks/end_to_end.py
-
-## Visualise profile data from benchmarks
-.PHONY: viztracer_lexer
-viztracer_lexer: profiles/lexer__apply_pdl_extra_file__lex_only.json
-	uv run vizviewer profiles/lexer__apply_pdl_extra_file__lex_only.json
-
-.PHONY: snakeviz_lexer
-snakeviz_lexer: profiles/lexer__apply_pdl_extra_file__lex_only.prof
-	uv run snakeviz profiles/lexer__apply_pdl_extra_file.prof
-
-.PHONY: flameprof_lexer
-flameprof_lexer: profiles/lexer__apply_pdl_extra_file__lex_only.prof
-	uv run flameprof profiles/lexer__apply_pdl_extra_file__lex_only.prof \
-		> profiles/lexer__apply_pdl_extra_file__lex_only.svg
-
-.PHONY: viztracer_end_to_end
-viztracer_end_to_end: profiles/end_to_end__constant_folding.json
-	uv run vizviewer profiles/end_to_end__constant_folding.json
+.PHONY: timeit_end_to_end
+timeit_end_to_end:
+	uv run python3 benchmarks/end_to_end.py timeit
 
 .PHONY: snakeviz_end_to_end
-snakeviz_end_to_end: profiles/end_to_end__constant_folding.prof
-	uv run snakeviz profiles/end_to_end__constant_folding.prof
+snakeviz_end_to_end:
+	uv run python3 benchmarks/end_to_end.py -t time_end_to_end_opt__constant_folding snakeviz
+
+.PHONY: flameprof_end_to_end
+flameprof_end_to_end:
+	uv run python3 benchmarks/end_to_end.py -t time_end_to_end_opt__constant_folding flameprof
+
+.PHONY: viztracer_end_to_end
+viztracer_end_to_end:
+	uv run python3 benchmarks/end_to_end.py -t time_end_to_end_opt__constant_folding viztracer
 
 ## Profile command line directly
 .PHONY: viztracer
@@ -103,9 +93,10 @@ lint: .venv
 format:
 	uv run ruff format benchmarks/
 
-.PHONY: type
+.PHONY: types
 types:
+	uv run mypy src
 	uv run mypy benchmarks --scripts-are-modules
 
 .PHONY: check
-check: lint format type
+check: lint format types

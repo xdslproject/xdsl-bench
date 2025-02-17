@@ -3,6 +3,8 @@
 This repository contains infrastructure for the benchmarking and performance
 profiling of the xDSL compiler framework.
 
+***This repository is currently under development, so is not stable. Benchmarking infrastructure may fail and not immediately be fixed.***
+
 ## Automated regression benchmarking with ASV
 
 > airspeed velocity (asv) is a tool for benchmarking Python packages over their
