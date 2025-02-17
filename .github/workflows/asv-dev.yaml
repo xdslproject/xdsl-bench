@@ -38,13 +38,13 @@ jobs:
         with:
           python-version: |
               3.11
-              3.13
               pypy3.11
+              3.13
       - name: Check Python installations
         run: |
           which python3.11 && python3.11 --version
-          which python3.13 && python3.13 --version
           which pypy.11 && pypy3.11 --version
+          which python3.13 && python3.13 --version
           uv python list
 
       - name: Include existing artefacts
