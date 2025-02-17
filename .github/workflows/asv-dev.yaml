@@ -8,6 +8,7 @@ on:
 
 env:
   NUM_BENCHMARK_COMMITS: 1
+  BRANCH: edmundgoodman/benchmark-dev
 
 jobs:
   asv-dev:
@@ -24,7 +25,7 @@ jobs:
           git config --global url."https://github.com/".insteadOf "git@github.com:" &&\
               git submodule update --init &&\
               cd xdsl &&\
-              git checkout main &&\
+              git checkout $BRANCH &&\
               git pull
 
       - uses: astral-sh/setup-uv@v3
@@ -36,20 +37,24 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: |
-              3.13
               3.11
-              3.12
+              3.13
+              pypy@3.11
       - name: Check Python installations
         run: |
           which python3.11 && python3.11 --version
-          which python3.12 && python3.12 --version
           which python3.13 && python3.13 --version
+          which pypy.11 && pypy3.11 --version
           uv python list
 
       - name: Install the project
-        run: VENV_ARGS="--only-group asv" make install
+        run: make xdsl/.venv
+
+      - name: Include existing artefacts
+        run: rm -rf xdsl/.asv && mv .asv xdsl/.asv
 
       - name: Fingerprint the machine
+        working-directory: ./xdsl
         run: |
           echo "OS: `uname -sr`"
           echo "Architecture: `uname -m`"
@@ -64,7 +69,14 @@ jobs:
             --cpu "`lscpu | grep 'Model name' | cut -f 2 -d ":" | awk '{$1=$1}1'`" \
             --num_cpu `nproc --all` \
             --ram `grep MemTotal /proc/meminfo | awk '{print $2}'`
+
       - name: Run the ASV benchmarks
-        run: uv run asv run main~$NUM_BENCHMARK_COMMITS..main
+        working-directory: ./xdsl
+        run: uv run asv run $BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH
+
       - name: Generate the ASV website
-        run: uv run asv publish
+        working-directory: ./xdsl
+        run: uv run asv show
+
+      - name: Copy back generated artefacts
+        run: mv xdsl/.asv .asv
