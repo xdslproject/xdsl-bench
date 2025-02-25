@@ -77,22 +77,24 @@ implementation, and are desiged to align with
 ### List of benchmarks
 
 - End-to-end (`end_to_end.py`)
-  - [x] Constant folding (with and without verifier)
+  - [x] Constant folding
   - [x] Empty program
-  - [x] Loop unrolling
-  - [ ] CIRCT workload
-  - [ ] ASL workload
+  - [ ] Fused multiply-add
+  - [ ] Dead code elimination
   - [ ] ...
 - Component (`components.py`)
   - [x] Lexer
   - [x] Parser
   - [x] Pattern rewriter
-  - [ ] Printer
-  - [ ] Verifier
+  - [x] Printer
+  - [x] Verifier
 - Microbenchmarks (`microbenchmarks.py`)
   - [x] IR traversal (direct block iteration and walking)
   - [x] Dialect loading
-  - [x] Import machinery
   - [x] Extensibility through interface/trait lookups
   - [x] Operation creation
+  - [ ] ...
+- Import machinery (`importing.py`)
+  - [x] Dialects
+  - [x] Interpreters
   - [ ] ...
