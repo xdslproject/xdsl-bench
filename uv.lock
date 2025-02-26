@@ -496,13 +496,14 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "asv", marker = "extra == 'bench'", specifier = ">=0.6.4" },
     { name = "coverage", marker = "extra == 'dev'", specifier = "<8.0.0" },
     { name = "filecheck", marker = "extra == 'dev'", specifier = "==1.0.1" },
     { name = "immutabledict", specifier = "<4.2.2" },
     { name = "ipykernel", marker = "extra == 'dev'" },
-    { name = "jax", marker = "extra == 'jax'", specifier = "==0.5.0" },
+    { name = "jax", marker = "extra == 'jax'", specifier = "==0.5.1" },
     { name = "lit", marker = "extra == 'dev'", specifier = "<19.0.0" },
-    { name = "marimo", marker = "extra == 'dev'", specifier = "==0.11.8" },
+    { name = "marimo", marker = "extra == 'dev'", specifier = "==0.11.9" },
     { name = "mkdocs", marker = "extra == 'docs'", specifier = ">=1.6.1" },
     { name = "mkdocs-gen-files", marker = "extra == 'docs'", specifier = ">=0.5.0" },
     { name = "mkdocs-material", marker = "extra == 'docs'", specifier = ">=9.5.49" },
@@ -525,7 +526,7 @@ requires-dist = [
     { name = "toml", marker = "extra == 'dev'", specifier = "<0.11" },
     { name = "typing-extensions", specifier = ">=4.7,<4.13" },
 ]
-provides-extras = ["dev", "docs", "gui", "jax", "riscv"]
+provides-extras = ["dev", "docs", "gui", "jax", "riscv", "bench"]
 
 [[package]]
 name = "xdsl-bench"
