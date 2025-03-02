@@ -512,6 +512,7 @@ requires-dist = [
     { name = "nbval", marker = "extra == 'dev'", specifier = "<0.12" },
     { name = "numpy", marker = "extra == 'jax'", specifier = "==2.2.3" },
     { name = "ordered-set", specifier = "==4.1.0" },
+    { name = "orjson", marker = "extra == 'bench'", specifier = ">=3.10.15" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = "==4.1.0" },
     { name = "pyclip", marker = "extra == 'gui'", specifier = "==0.7" },
     { name = "pyright", marker = "extra == 'dev'", specifier = "==1.1.395" },
@@ -525,6 +526,7 @@ requires-dist = [
     { name = "textual-dev", marker = "extra == 'dev'", specifier = "==1.7.0" },
     { name = "toml", marker = "extra == 'dev'", specifier = "<0.11" },
     { name = "typing-extensions", specifier = ">=4.7,<4.13" },
+    { name = "viztracer", marker = "extra == 'bench'", specifier = ">=1.0.2" },
 ]
 provides-extras = ["dev", "docs", "gui", "jax", "riscv", "bench"]
 
