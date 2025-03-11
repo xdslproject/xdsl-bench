@@ -520,7 +520,7 @@ requires-dist = [
     { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = "==0.25.3" },
     { name = "pytest-cov", marker = "extra == 'dev'" },
     { name = "riscemu", marker = "extra == 'riscv'", specifier = "==2.2.7" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = "==0.9.9" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = "==0.9.10" },
     { name = "sympy", marker = "extra == 'dev'", specifier = "==1.13.3" },
     { name = "textual", marker = "extra == 'gui'", specifier = "==2.1.2" },
     { name = "textual-dev", marker = "extra == 'dev'", specifier = "==1.7.0" },
