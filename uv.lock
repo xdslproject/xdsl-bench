@@ -499,6 +499,7 @@ requires-dist = [
     { name = "asv", marker = "extra == 'bench'", specifier = ">=0.6.4" },
     { name = "coverage", marker = "extra == 'dev'", specifier = "<8.0.0" },
     { name = "filecheck", marker = "extra == 'dev'", specifier = "==1.0.1" },
+    { name = "flameprof", marker = "extra == 'bench'", specifier = ">=0.4" },
     { name = "immutabledict", specifier = "<4.2.2" },
     { name = "ipykernel", marker = "extra == 'dev'" },
     { name = "jax", marker = "extra == 'jax'", specifier = "==0.5.2" },
@@ -521,12 +522,13 @@ requires-dist = [
     { name = "pytest-cov", marker = "extra == 'dev'" },
     { name = "riscemu", marker = "extra == 'riscv'", specifier = "==2.2.7" },
     { name = "ruff", marker = "extra == 'dev'", specifier = "==0.9.10" },
+    { name = "snakeviz", marker = "extra == 'bench'", specifier = ">=2.2.2" },
     { name = "sympy", marker = "extra == 'dev'", specifier = "==1.13.3" },
     { name = "textual", marker = "extra == 'gui'", specifier = "==2.1.2" },
     { name = "textual-dev", marker = "extra == 'dev'", specifier = "==1.7.0" },
     { name = "toml", marker = "extra == 'dev'", specifier = "<0.11" },
     { name = "typing-extensions", specifier = ">=4.7,<4.13" },
-    { name = "viztracer", marker = "extra == 'bench'", specifier = ">=1.0.2" },
+    { name = "viztracer", marker = "extra == 'bench'", specifier = ">=1.0.1" },
 ]
 provides-extras = ["dev", "docs", "gui", "jax", "riscv", "bench"]
 
