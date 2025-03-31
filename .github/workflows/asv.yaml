@@ -41,7 +41,7 @@ jobs:
               git checkout main &&\
               git pull
 
-      - uses: astral-sh/setup-uv@v3
+      - uses: astral-sh/setup-uv@v5
         with:
             enable-cache: true
             cache-dependency-glob: "uv.lock"
