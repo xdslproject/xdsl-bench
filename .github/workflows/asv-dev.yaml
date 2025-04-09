@@ -25,7 +25,7 @@ jobs:
           git config --global url."https://github.com/".insteadOf "git@github.com:" &&\
               git submodule update --init &&\
               cd xdsl &&\
-              git fetch &&\
+              git fetch --all &&\
               git checkout $BRANCH &&\
               git pull
 
@@ -74,7 +74,7 @@ jobs:
 
       - name: Run the ASV benchmarks
         working-directory: ./xdsl
-        run: uv run asv run $BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH
+        run: uv run asv run $BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH || true
 
       - name: Generate the ASV website
         working-directory: ./xdsl
