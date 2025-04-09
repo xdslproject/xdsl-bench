@@ -15,6 +15,7 @@ env:
   #       `.asv/results/github-actions/`, it can be a lower number for better
   #       runtimes in CI
   NUM_BENCHMARK_COMMITS: 5
+  BRANCH: main
 
 jobs:
   asv:
@@ -38,7 +39,9 @@ jobs:
           git config --global url."https://github.com/".insteadOf "git@github.com:" &&\
               git submodule update --init &&\
               cd xdsl &&\
-              git checkout main &&\
+              git fetch --all &&\
+              git branch &&\
+              git checkout $BRANCH &&\
               git pull
 
       - uses: astral-sh/setup-uv@v3
@@ -49,17 +52,24 @@ jobs:
       # ensure that it is correctly in the $PATH for `asv`
       - uses: actions/setup-python@v5
         with:
-          python-version: 3.12
+          python-version: |
+              3.11
+              3.12
       - name: Check Python installation
         run: |
           which python3.11 && python3.11 --version
           which python3.12 && python3.12 --version
           uv python list
 
+      - name: Include existing artefacts
+        run: rm -rf xdsl/.asv && mv .asv xdsl/.asv
+
       - name: Install the project
-        run: VENV_ARGS="--only-group asv" make install
+        working-directory: ./xdsl
+        run: uv sync --extra bench
 
       - name: Fingerprint the machine
+        working-directory: ./xdsl
         run: |
           echo "OS: `uname -sr`"
           echo "Architecture: `uname -m`"
@@ -74,8 +84,11 @@ jobs:
             --cpu "`lscpu | grep 'Model name' | cut -f 2 -d ":" | awk '{$1=$1}1'`" \
             --num_cpu `nproc --all` \
             --ram `grep MemTotal /proc/meminfo | awk '{print $2}'`
+
       - name: Run the ASV benchmarks
-        run: uv run asv run main~$NUM_BENCHMARK_COMMITS..main
+        working-directory: ./xdsl
+        run: uv run asv run $BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH || true
+
       - name: Generate the ASV website
         run: uv run asv publish
 
@@ -86,10 +99,12 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: .asv/html/
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
