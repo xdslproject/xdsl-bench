@@ -8,7 +8,7 @@ on:
 
 env:
   NUM_BENCHMARK_COMMITS: 2
-  BRANCH: edmundgoodman/benchmarks/asv-fix
+  BRANCH: main
 
 jobs:
   asv-dev:
@@ -26,6 +26,7 @@ jobs:
               git submodule update --init &&\
               cd xdsl &&\
               git fetch --all &&\
+              git branch &&\
               git checkout $BRANCH &&\
               git pull
 
