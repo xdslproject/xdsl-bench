@@ -25,6 +25,7 @@ jobs:
           git config --global url."https://github.com/".insteadOf "git@github.com:" &&\
               git submodule update --init &&\
               cd xdsl &&\
+              git fetch &&\
               git checkout $BRANCH &&\
               git pull
 
