@@ -1,0 +1,7 @@
+# Project-specific
+.asv/html
+.asv/github-action-bak
+.asv/results/**/
+!.asv/results/github-action/
+!.asv/results/benchmarks.json
+
