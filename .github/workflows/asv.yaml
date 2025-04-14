@@ -87,7 +87,7 @@ jobs:
 
       - name: Run the ASV benchmarks
         working-directory: ./xdsl
-        run: uv run asv run $BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH || true
+        run: uv run asv run $BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH 
 
       - name: Generate the ASV website
         run: uv run asv publish
