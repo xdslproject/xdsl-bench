@@ -1,32 +1,15 @@
-name: asv
+name: asv-dev
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: 0 4 * * *
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 
 env:
-  # NOTE: For the first clean run, this should be a high-ish (~20) number to
-  #       populate the history. For all subsequent runs where data is cached in
-  #       `.asv/results/github-actions/`, it can be a lower number for better
-  #       runtimes in CI
-  NUM_BENCHMARK_COMMITS: 5
+  NUM_BENCHMARK_COMMITS: 2
   BRANCH: main
 
 jobs:
-  asv:
+  asv-dev:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         # NOTE: This only grabs the HEAD commit of the main branch, so we can't
@@ -44,10 +27,10 @@ jobs:
               git checkout $BRANCH &&\
               git pull
 
-      - uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@v3
         with:
             enable-cache: true
-            cache-dependency-glob: "uv.lock"
+            cache-dependency-glob: "xdsl/uv.lock"
       # Use `actions/setup-python@v5` rather than `uv python install 3.x` to
       # ensure that it is correctly in the $PATH for `asv`
       - uses: actions/setup-python@v5
@@ -92,24 +75,8 @@ jobs:
         run: uv run asv run $BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH
 
       - name: Generate the ASV website
-        run: uv run asv publish
+        working-directory: ./xdsl
+        run: uv run asv show
 
       - name: Copy back generated artefacts
         run: mv xdsl/.asv .asv
-
-      - name: Commit the generated benchmark results
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Add CI benchmark runs"
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .asv/html/
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
