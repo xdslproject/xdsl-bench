@@ -54,11 +54,13 @@ jobs:
         with:
           python-version: |
               3.11
-              3.12
-      - name: Check Python installation
+              pypy3.11
+              3.13
+      - name: Check Python installations
         run: |
           which python3.11 && python3.11 --version
-          which python3.12 && python3.12 --version
+          which pypy.11 && pypy3.11 --version
+          which python3.13 && python3.13 --version
           uv python list
 
       - name: Include existing artefacts
@@ -87,10 +89,13 @@ jobs:
 
       - name: Run the ASV benchmarks
         working-directory: ./xdsl
-        run: uv run asv run $BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH 
+        run: uv run asv run $BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH
 
       - name: Generate the ASV website
         run: uv run asv publish
+
+      - name: Copy back generated artefacts
+        run: mv xdsl/.asv .asv
 
       - name: Commit the generated benchmark results
         uses: stefanzweifel/git-auto-commit-action@v5

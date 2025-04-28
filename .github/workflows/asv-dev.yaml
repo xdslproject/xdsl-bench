@@ -2,9 +2,6 @@ name: asv-dev
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - dev
 
 env:
   NUM_BENCHMARK_COMMITS: 2
@@ -75,7 +72,7 @@ jobs:
 
       - name: Run the ASV benchmarks
         working-directory: ./xdsl
-        run: uv run asv run $BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH 
+        run: uv run asv run $BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH
 
       - name: Generate the ASV website
         working-directory: ./xdsl
