@@ -92,6 +92,7 @@ jobs:
         run: uv run asv run $BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH
 
       - name: Generate the ASV website
+        working-directory: ./xdsl
         run: uv run asv publish
 
       - name: Copy back generated artefacts
