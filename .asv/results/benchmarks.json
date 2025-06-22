@@ -150,7 +150,7 @@
         "warmup_time": -1
     },
     "microbenchmarks.Extensibility.time_trait_check_optimised": {
-        "code": "class Extensibility:\n    def time_trait_check_optimised(self) -> None:\n        \"\"\"Time checking the trait of an operation using optimised code.\"\"\"\n        has_trait = False\n        for t in Extensibility.OP_WITH_REGION.traits._traits:  # pyright: ignore[reportUnknownVariableType, reportGeneralTypeIssues, reportPrivateUsage]\n            if isinstance(t, Extensibility.TRAIT_4):\n                has_trait = True\n                break\n        assert has_trait",
+        "code": "class Extensibility:\n    def time_trait_check_optimised(self) -> None:\n        \"\"\"Time checking the trait of an operation using optimised code.\"\"\"\n        OP = Extensibility.OP_WITH_REGION\n        TRAIT = Extensibility.TRAIT_4\n    \n        has_trait = False\n        for t in OP.traits._traits:  # pyright: ignore[reportUnknownVariableType, reportGeneralTypeIssues, reportPrivateUsage]\n            if isinstance(t, TRAIT):\n                has_trait = True\n                break\n        assert has_trait",
         "min_run_count": 2,
         "name": "microbenchmarks.Extensibility.time_trait_check_optimised",
         "number": 0,
@@ -161,7 +161,7 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "9f16b883ddc24206aa5b57dc27866d307ceaf8eea1ed5e9b317be6a2f862b526",
+        "version": "374ac8a16f4fcb416b10927602cfffacd21ed7a943fa42044ecfa94dc2fa2b60",
         "warmup_time": -1
     },
     "microbenchmarks.Extensibility.time_trait_check_single": {
@@ -225,7 +225,7 @@
         "warmup_time": -1
     },
     "microbenchmarks.OpCreation.time_operation_build": {
-        "code": "class OpCreation:\n    def time_operation_build(self) -> None:\n        \"\"\"Time building an empty operation.\n    \n        For comparison with the \"How Slow is MLIR\" testbench\n        `CreateOps/llvm_withInsertRegistered`, implemented as:\n    \n        ```\n        auto module = std::make_unique<llvm::Module>(\"MyModule\", ctx);\n        auto *fTy = llvm::FunctionType::get(llvm::Type::getVoidTy(ctx), false);\n        auto *func = llvm::Function::Create(fTy, llvm::Function::ExternalLinkage,\n                                            \"\", module.get());\n        auto *block = llvm::BasicBlock::Create(ctx, \"\", func);\n        llvm::IRBuilder<> builder(block);\n        for (auto _ : state) {\n            for (int j = 0; j < state.range(0); ++j)\n                builder.CreateUnreachable();\n        }\n        ```\n        \"\"\"\n        EmptyOp.build()",
+        "code": "class OpCreation:\n    def time_operation_build(self) -> None:\n        \"\"\"Time building an empty operation.\n    \n        For comparison with the \"How Slow is MLIR\" testbench\n        `CreateOps/simpleRegistered`, implemented as:\n    \n        ```\n        ctx->loadDialect<TestBenchDialect>();\n        OpBuilder b(ctx.get());\n        for (auto _ : state) {\n            for (int j = 0; j < state.range(0); ++j) {\n            b.create<EmptyOp>(unknownLoc);\n            }\n        }\n        state.SetComplexityN(state.range(0));\n        ```\n        \"\"\"\n        EmptyOp.build()",
         "min_run_count": 2,
         "name": "microbenchmarks.OpCreation.time_operation_build",
         "number": 0,
@@ -236,11 +236,11 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "b812c9dea67d18eb3e5cf3e6a9c518c133c829a7ec58997e7f476b33c53cf86e",
+        "version": "f5a77960d8e5df75e4eb93b0637d7c07b8b903a4231dc0435416ca8f179da3cf",
         "warmup_time": -1
     },
     "microbenchmarks.OpCreation.time_operation_clone": {
-        "code": "class OpCreation:\n    def time_operation_clone(self) -> None:\n        \"\"\"Time cloning an empty operation.\n    \n        For comparison with the \"How Slow is MLIR\" testbench `Cloning/cloneOps`,\n        implemented as:\n    \n        ```\n        ctx->loadDialect<TestBenchDialect>();\n        OpBuilder b = OpBuilder::atBlockBegin(moduleOp->getBody());\n        // Create a bunch of ops that have operands.\n        Value operand = moduleOp->getBody()->addArgument(b.getI32Type(), unknownLoc);\n        for (int i = 0; i < state.range(0); ++i) {\n            operand = b.create<PassthroughOp>(unknownLoc, b.getI32Type(), operand);\n        }\n        for (auto _ : state) {\n            OwningOpRef<ModuleOp> moduleClone = moduleOp->clone();\n            benchmark::DoNotOptimize(moduleClone.get());\n        }\n        ```\n        \"\"\"\n        OpCreation.CONSTANT_OPERATION.clone()",
+        "code": "class OpCreation:\n    def time_operation_clone(self) -> None:\n        \"\"\"Time cloning an module of 100 empty operations.\n    \n        For comparison with the \"How Slow is MLIR\" testbench `Cloning/cloneOps`,\n        implemented as:\n    \n        ```\n        ctx->loadDialect<TestBenchDialect>();\n        OpBuilder b = OpBuilder::atBlockBegin(moduleOp->getBody());\n        // Create a bunch of ops that have operands.\n        Value operand = moduleOp->getBody()->addArgument(b.getI32Type(), unknownLoc);\n        for (int i = 0; i < state.range(0); ++i) {\n            operand = b.create<PassthroughOp>(unknownLoc, b.getI32Type(), operand);\n        }\n        for (auto _ : state) {\n            OwningOpRef<ModuleOp> moduleClone = moduleOp->clone();\n            benchmark::DoNotOptimize(moduleClone.get());\n        }\n        ```\n        \"\"\"\n        OpCreation.CLONE_OPERATION.clone()",
         "min_run_count": 2,
         "name": "microbenchmarks.OpCreation.time_operation_clone",
         "number": 0,
@@ -251,11 +251,56 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "7e36d6599ba9e6f3c7cb19a6249729b042916e55b5b56608447b0c3a28837428",
+        "version": "f3888589495113c1599285eb90874857b0f6018f66d380524407a3ae0d0424e0",
+        "warmup_time": -1
+    },
+    "microbenchmarks.OpCreation.time_operation_clone_single": {
+        "code": "class OpCreation:\n    def time_operation_clone_single(self) -> None:\n        \"\"\"Time cloning an empty operation.\"\"\"\n        OpCreation.EMPTY_OP.clone()",
+        "min_run_count": 2,
+        "name": "microbenchmarks.OpCreation.time_operation_clone_single",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "e224d8ce4635b898c63adb811d09b6bf92468f2e1f76e8cce8a1ee101e812547",
+        "warmup_time": -1
+    },
+    "microbenchmarks.OpCreation.time_operation_constant_create": {
+        "code": "class OpCreation:\n    def time_operation_constant_create(self) -> None:\n        \"\"\"Time creating a constant integer.\"\"\"\n        int_attr = IntAttr.__new__(IntAttr)\n        object.__setattr__(int_attr, \"data\", 100)\n        integer_attr = IntegerAttr.__new__(IntegerAttr)\n        object.__setattr__(integer_attr, \"value\", int_attr)\n        object.__setattr__(integer_attr, \"type\", i32)\n        constant_op = ConstantOp.__new__(ConstantOp)\n        constant_op._operands = ()  # pyright: ignore[reportPrivateUsage]\n        constant_op.results = (OpResult(i32, constant_op, 0),)\n        constant_op.properties = {\"value\": integer_attr}\n        constant_op.attributes = {}\n        constant_op._successors = ()  # pyright: ignore[reportPrivateUsage]\n        constant_op.regions = ()",
+        "min_run_count": 2,
+        "name": "microbenchmarks.OpCreation.time_operation_constant_create",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "24c77b41c65b7f7880915cd59b8b3e9319ddeef16c5a6b01422f4695d25e37f1",
+        "warmup_time": -1
+    },
+    "microbenchmarks.OpCreation.time_operation_constant_init": {
+        "code": "class OpCreation:\n    def time_operation_constant_init(self) -> None:\n        \"\"\"Time instantiating a constant integer.\"\"\"\n        ConstantOp(IntegerAttr(100, i32))",
+        "min_run_count": 2,
+        "name": "microbenchmarks.OpCreation.time_operation_constant_init",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "8058997f724f5fed006882db1cc30fe21339ae6a21032b36591194764d50fe1e",
         "warmup_time": -1
     },
     "microbenchmarks.OpCreation.time_operation_create": {
-        "code": "class OpCreation:\n    def time_operation_create(self) -> None:\n        \"\"\"Time creating an empty operation.\n    \n        For comparison with the \"How Slow is MLIR\" testbench\n        `CreateOps/hoistedOpState`, implemented as:\n    \n        ```\n        OperationState opState(unknownLoc, \"testbench.empty\");\n        for (auto _ : state) {\n            for (int j = 0; j < state.range(0); ++j)\n                Operation::create(opState);\n        }\n        ```\n        \"\"\"\n        EmptyOp.create()",
+        "code": "class OpCreation:\n    def time_operation_create(self) -> None:\n        \"\"\"Time creating an empty operation.\n    \n        For comparison with the \"How Slow is MLIR\" testbench\n        `CreateOps/simple`, implemented as:\n    \n        ```\n        for (auto _ : state) {\n            for (int j = 0; j < state.range(0); ++j) {\n                OperationState opState(unknownLoc, \"testbench.empty\");\n                Operation::create(opState);\n            }\n        }\n        ```\n        \"\"\"\n        EmptyOp.create()",
         "min_run_count": 2,
         "name": "microbenchmarks.OpCreation.time_operation_create",
         "number": 0,
@@ -266,7 +311,22 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "e1c5e84cc87bfc0a600448e0cc502de88f5789969bb4558148765ef343993c31",
+        "version": "f796822d701945a47f40cb61c2f3a37a2236340e0d61ad14d45dfc81d3b05099",
+        "warmup_time": -1
+    },
+    "microbenchmarks.OpCreation.time_operation_create_optimised": {
+        "code": "class OpCreation:\n    def time_operation_create_optimised(self) -> None:\n        \"\"\"Time creating an empty operation directly.\"\"\"\n        empty_op = EmptyOp.__new__(EmptyOp)\n        empty_op._operands = ()  # pyright: ignore[reportPrivateUsage]\n        empty_op.results = ()\n        empty_op.properties = {}\n        empty_op.attributes = {}\n        empty_op._successors = ()  # pyright: ignore[reportPrivateUsage]\n        empty_op.regions = ()",
+        "min_run_count": 2,
+        "name": "microbenchmarks.OpCreation.time_operation_create_optimised",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7de16903cb442dda02fe572a3346d40df4971c6116584166b0d3d5bcc4c5bb40",
         "warmup_time": -1
     },
     "parser.Parser.time_constant_100": {
@@ -299,8 +359,23 @@
         "version": "e981290337e7100fb20e65262fd4b90f2a56fed382af9876682e173cc289b911",
         "warmup_time": -1
     },
+    "printer.Printer.time_constant_0": {
+        "code": "class Printer:\n    def time_constant_0(self) -> None:\n        \"\"\"Time printing a constant folded workload.\"\"\"\n        MODULE_PRINTER.print_op(Printer.WORKLOAD_CONSTANT_0)",
+        "min_run_count": 2,
+        "name": "printer.Printer.time_constant_0",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "6ec8e7ad467e37fd838cfe7bb1f07386e9062cd7ac04f1e8a733fb06fe6cd476",
+        "warmup_time": -1
+    },
     "printer.Printer.time_constant_100": {
-        "code": "class Printer:\n    def time_constant_100(self) -> None:\n        \"\"\"Time lexing constant folding for 100 items.\"\"\"\n        MODULE_PRINTER.print_op(Printer.WORKLOAD_CONSTANT_100)",
+        "code": "class Printer:\n    def time_constant_100(self) -> None:\n        \"\"\"Time printing constant folding for 100 items.\"\"\"\n        MODULE_PRINTER.print_op(Printer.WORKLOAD_CONSTANT_100)",
         "min_run_count": 2,
         "name": "printer.Printer.time_constant_100",
         "number": 0,
@@ -311,11 +386,11 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "3a22134ad96f5282a00f92dab22c7108366ccb666115d841286a3ae5d774db12",
+        "version": "d4cef5e46bdeb2ea31b7770c81566e363903cec9f48b3e0d87d6239e7e21664b",
         "warmup_time": -1
     },
     "printer.Printer.time_constant_1000": {
-        "code": "class Printer:\n    def time_constant_1000(self) -> None:\n        \"\"\"Time lexing constant folding for 1000 items.\"\"\"\n        MODULE_PRINTER.print_op(Printer.WORKLOAD_CONSTANT_1000)",
+        "code": "class Printer:\n    def time_constant_1000(self) -> None:\n        \"\"\"Time printing constant folding for 1000 items.\"\"\"\n        MODULE_PRINTER.print_op(Printer.WORKLOAD_CONSTANT_1000)",
         "min_run_count": 2,
         "name": "printer.Printer.time_constant_1000",
         "number": 0,
@@ -326,11 +401,11 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "9a77e77f13fce1435784948ba6bcbdc58e8cf01bc786a5edc28c67520c2d03fd",
+        "version": "0d84d8a61f73b23b57bdcd96e533d548c201f7a3983f346eed248cc56d4e2a33",
         "warmup_time": -1
     },
     "printer.Printer.time_dense_attr": {
-        "code": "class Printer:\n    def time_dense_attr(self) -> None:\n        \"\"\"Time lexing a 1024x1024xi8 dense attribute given as a hex string.\"\"\"\n        MODULE_PRINTER.print_op(Printer.WORKLOAD_LARGE_DENSE_ATTR)",
+        "code": "class Printer:\n    def time_dense_attr(self) -> None:\n        \"\"\"Time printing a 1024x1024xi8 dense attribute given as a hex string.\"\"\"\n        MODULE_PRINTER.print_op(Printer.WORKLOAD_LARGE_DENSE_ATTR)",
         "min_run_count": 2,
         "name": "printer.Printer.time_dense_attr",
         "number": 0,
@@ -341,7 +416,7 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "ae0d32017ffbba35923a7042d1a1a50f3e327ff1468e5915560ca12d88ae08b7",
+        "version": "45dc7d485b4ef6c6df8aeb8305654d3ac7ddd616076429c3ba89effbb5c746c8",
         "warmup_time": -1
     },
     "rewriting.Canonicalization.time_const_evaluate_operand": {
@@ -537,6 +612,36 @@
         "type": "time",
         "unit": "seconds",
         "version": "6437a6ba8d3f761b318d1d2ef014c6a0ed94449b8348653073fa2def66116e83",
+        "warmup_time": -1
+    },
+    "rewriting.ConstantFolding.time_constant_folding_simple_20": {
+        "code": "class ConstantFolding:\n    def time_constant_folding_simple_20(self) -> None:\n        \"\"\"Time simple constant folding for 20 items.\"\"\"\n        CONSTANT_FOLDING_SIMPLE_PASS.apply(CTX, self.workload_constant_20)\n\n    def setup(self) -> None:\n        \"\"\"Setup the benchmarks.\"\"\"\n        self.setup_constant_folding_20()\n        self.setup_constant_folding_100()\n        self.setup_constant_folding_1000()",
+        "min_run_count": 2,
+        "name": "rewriting.ConstantFolding.time_constant_folding_simple_20",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "2909657a8acf7b79382e2856ec4bee3f47b636ace376e378405157f5e82c9ab5",
+        "warmup_time": -1
+    },
+    "rewriting.ConstantFolding.time_constant_folding_specialised_20": {
+        "code": "class ConstantFolding:\n    def time_constant_folding_specialised_20(self) -> None:\n        \"\"\"Time simple constant folding for 20 items.\"\"\"\n        CONSTANT_FOLDING_SPECIALISED_PASS.apply(CTX, self.workload_constant_20)\n\n    def setup(self) -> None:\n        \"\"\"Setup the benchmarks.\"\"\"\n        self.setup_constant_folding_20()\n        self.setup_constant_folding_100()\n        self.setup_constant_folding_1000()",
+        "min_run_count": 2,
+        "name": "rewriting.ConstantFolding.time_constant_folding_specialised_20",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "fceea33c86c7e29316318109bfbc4e5cfea247b6d6735a81f528d5e796100918",
         "warmup_time": -1
     },
     "rewriting.PatternRewriting.time_get_trait": {
