@@ -330,7 +330,7 @@
         "warmup_time": -1
     },
     "parser.Parser.time_constant_100": {
-        "code": "class Parser:\n    def time_constant_100(self) -> None:\n        \"\"\"Time lexing constant folding for 100 items.\"\"\"\n        XdslParser(CTX, Parser.WORKLOAD_CONSTANT_100).parse_module()",
+        "code": "class Parser:\n    def time_constant_100(self) -> None:\n        \"\"\"Time parsing constant folding for 100 items.\"\"\"\n        XdslParser(CTX, Parser.WORKLOAD_CONSTANT_100).parse_module()",
         "min_run_count": 2,
         "name": "parser.Parser.time_constant_100",
         "number": 0,
@@ -341,11 +341,11 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "24d60aa40953a8d64d411eb8df210c3a4388e4096a726021353934f487b52955",
+        "version": "968a17676681ec798326d4706de1dc67ff4666cf562122e161252287e9b2884c",
         "warmup_time": -1
     },
     "parser.Parser.time_constant_1000": {
-        "code": "class Parser:\n    def time_constant_1000(self) -> None:\n        \"\"\"Time lexing constant folding for 1000 items.\"\"\"\n        XdslParser(CTX, Parser.WORKLOAD_CONSTANT_1000).parse_module()",
+        "code": "class Parser:\n    def time_constant_1000(self) -> None:\n        \"\"\"Time parsing constant folding for 1000 items.\"\"\"\n        XdslParser(CTX, Parser.WORKLOAD_CONSTANT_1000).parse_module()",
         "min_run_count": 2,
         "name": "parser.Parser.time_constant_1000",
         "number": 0,
@@ -356,7 +356,7 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "e981290337e7100fb20e65262fd4b90f2a56fed382af9876682e173cc289b911",
+        "version": "065d586e306065b614e3b74b075452382c8f59177a31c9a188ec086f41e750a4",
         "warmup_time": -1
     },
     "printer.Printer.time_constant_0": {
