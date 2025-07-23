@@ -359,6 +359,21 @@
         "version": "065d586e306065b614e3b74b075452382c8f59177a31c9a188ec086f41e750a4",
         "warmup_time": -1
     },
+    "parser.Parser.time_large_constant_tensor": {
+        "code": "class Parser:\n    def time_large_constant_tensor(self) -> None:\n        \"\"\"Time parsing a large constant tensor.\"\"\"\n        XdslParser(CTX, Parser.WORKLOAD_LARGE_CONSTANT_TENSOR).parse_module()",
+        "min_run_count": 2,
+        "name": "parser.Parser.time_large_constant_tensor",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3eb723f65512f810e0256b85ac1bf6e14f9213964fe5b1da040fe3310036cf52",
+        "warmup_time": -1
+    },
     "printer.Printer.time_constant_0": {
         "code": "class Printer:\n    def time_constant_0(self) -> None:\n        \"\"\"Time printing a constant folded workload.\"\"\"\n        MODULE_PRINTER.print_op(Printer.WORKLOAD_CONSTANT_0)",
         "min_run_count": 2,
