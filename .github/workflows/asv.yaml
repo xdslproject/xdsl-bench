@@ -116,3 +116,22 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  notify-on-failure:
+    needs: build
+    if: ${{ failure() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Zulip notification
+        uses: zulip/github-actions-zulip/send-message@v1
+        with:
+          api-key: ${{ secrets.ZULIP_FAILURE_BOT_API_KEY }}
+          email: ${{ secrets.ZULIP_FAILURE_BOT_EMAIL }}
+          organization-url: "https://xdslproject.zulipchat.com"
+          to: "Framework"
+          type: "stream"
+          topic: "xdsl-bench Failure"
+          content: |
+            ❗ Workflow [${{ github.workflow }}](${{
+              github.server_url }}/${{ github.repository }}/actions/runs/${{
+              github.run_id }}) failed!
