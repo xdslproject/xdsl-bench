@@ -127,7 +127,7 @@ jobs:
         with:
           api-key: ${{ secrets.ZULIP_FAILURE_BOT_API_KEY }}
           email: ${{ secrets.ZULIP_FAILURE_BOT_EMAIL }}
-          organization-url: "https://xdslproject.zulipchat.com"
+          organization-url: "https://xdsl.zulipchat.com"
           to: "Framework"
           type: "stream"
           topic: "xdsl-bench Failure"
