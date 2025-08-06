@@ -118,7 +118,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
   notify-on-failure:
-    needs: build
+    needs: asv
     if: ${{ failure() }}
     runs-on: ubuntu-latest
     steps:
