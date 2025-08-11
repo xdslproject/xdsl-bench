@@ -149,21 +149,6 @@
         "version": "2352b72260c631751f885341ac44b94feb375a48fda3a934037ab02b86d64760",
         "warmup_time": -1
     },
-    "microbenchmarks.Extensibility.time_trait_check_optimised": {
-        "code": "class Extensibility:\n    def time_trait_check_optimised(self) -> None:\n        \"\"\"Time checking the trait of an operation using optimised code.\"\"\"\n        OP = Extensibility.OP_WITH_REGION\n        TRAIT = Extensibility.TRAIT_4\n    \n        has_trait = False\n        for t in OP.traits._traits:  # pyright: ignore[reportUnknownVariableType, reportGeneralTypeIssues, reportPrivateUsage]\n            if isinstance(t, TRAIT):\n                has_trait = True\n                break\n        assert has_trait",
-        "min_run_count": 2,
-        "name": "microbenchmarks.Extensibility.time_trait_check_optimised",
-        "number": 0,
-        "param_names": [],
-        "params": [],
-        "repeat": 0,
-        "rounds": 2,
-        "sample_time": 0.01,
-        "type": "time",
-        "unit": "seconds",
-        "version": "374ac8a16f4fcb416b10927602cfffacd21ed7a943fa42044ecfa94dc2fa2b60",
-        "warmup_time": -1
-    },
     "microbenchmarks.Extensibility.time_trait_check_single": {
         "code": "class Extensibility:\n    def time_trait_check_single(self) -> None:\n        \"\"\"Time checking the trait of an operation with one trait.\"\"\"\n        Extensibility.HAS_TRAIT_A_OP.has_trait(TraitA)",
         "min_run_count": 2,
@@ -270,7 +255,7 @@
         "warmup_time": -1
     },
     "microbenchmarks.OpCreation.time_operation_constant_create": {
-        "code": "class OpCreation:\n    def time_operation_constant_create(self) -> None:\n        \"\"\"Time creating a constant integer.\"\"\"\n        int_attr = IntAttr.__new__(IntAttr)\n        object.__setattr__(int_attr, \"data\", 100)\n        integer_attr = IntegerAttr.__new__(IntegerAttr)\n        object.__setattr__(integer_attr, \"value\", int_attr)\n        object.__setattr__(integer_attr, \"type\", i32)\n        constant_op = ConstantOp.__new__(ConstantOp)\n        constant_op._operands = ()  # pyright: ignore[reportPrivateUsage]\n        constant_op.results = (OpResult(i32, constant_op, 0),)\n        constant_op.properties = {\"value\": integer_attr}\n        constant_op.attributes = {}\n        constant_op._successors = ()  # pyright: ignore[reportPrivateUsage]\n        constant_op.regions = ()",
+        "code": "class OpCreation:\n    def time_operation_constant_create(self) -> None:\n        \"\"\"Time creating a constant integer.\"\"\"\n        int_attr = IntAttr.__new__(IntAttr)\n        object.__setattr__(int_attr, \"data\", 100)\n        integer_attr = IntegerAttr.__new__(IntegerAttr)\n        object.__setattr__(integer_attr, \"value\", int_attr)\n        object.__setattr__(integer_attr, \"type\", i32)\n        constant_op = ConstantOp.__new__(ConstantOp)\n        constant_op._operands = SSAValues()  # pyright: ignore[reportPrivateUsage]\n        constant_op.results = SSAValues((OpResult(i32, constant_op, 0),))\n        constant_op.properties = {\"value\": integer_attr}\n        constant_op.attributes = {}\n        constant_op._successors = ()  # pyright: ignore[reportPrivateUsage]\n        constant_op.regions = ()",
         "min_run_count": 2,
         "name": "microbenchmarks.OpCreation.time_operation_constant_create",
         "number": 0,
@@ -281,7 +266,7 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "24c77b41c65b7f7880915cd59b8b3e9319ddeef16c5a6b01422f4695d25e37f1",
+        "version": "98c90bb4282c9e78c77f3df7681f49d48b3f3e76d5802c7945c9ea5e0bded7ad",
         "warmup_time": -1
     },
     "microbenchmarks.OpCreation.time_operation_constant_init": {
@@ -315,7 +300,7 @@
         "warmup_time": -1
     },
     "microbenchmarks.OpCreation.time_operation_create_optimised": {
-        "code": "class OpCreation:\n    def time_operation_create_optimised(self) -> None:\n        \"\"\"Time creating an empty operation directly.\"\"\"\n        empty_op = EmptyOp.__new__(EmptyOp)\n        empty_op._operands = ()  # pyright: ignore[reportPrivateUsage]\n        empty_op.results = ()\n        empty_op.properties = {}\n        empty_op.attributes = {}\n        empty_op._successors = ()  # pyright: ignore[reportPrivateUsage]\n        empty_op.regions = ()",
+        "code": "class OpCreation:\n    def time_operation_create_optimised(self) -> None:\n        \"\"\"Time creating an empty operation directly.\"\"\"\n        empty_op = EmptyOp.__new__(EmptyOp)\n        empty_op._operands = SSAValues()  # pyright: ignore[reportPrivateUsage]\n        empty_op.results = SSAValues()\n        empty_op.properties = {}\n        empty_op.attributes = {}\n        empty_op._successors = ()  # pyright: ignore[reportPrivateUsage]\n        empty_op.regions = ()",
         "min_run_count": 2,
         "name": "microbenchmarks.OpCreation.time_operation_create_optimised",
         "number": 0,
@@ -326,7 +311,7 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "7de16903cb442dda02fe572a3346d40df4971c6116584166b0d3d5bcc4c5bb40",
+        "version": "6c781403016bc726c1640238c8969e92076004cf5f2e9655398639964fe83838",
         "warmup_time": -1
     },
     "parser.Parser.time_constant_100": {
