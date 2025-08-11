@@ -11,7 +11,7 @@ jobs:
   asv-dev:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         # NOTE: This only grabs the HEAD commit of the main branch, so we can't
         #       use it for retrospective benchmarking. Instead, we manually
         #       pull the submodule in the next step
