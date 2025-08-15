@@ -51,7 +51,7 @@ jobs:
 
       - name: Install the project
         working-directory: ./xdsl
-        run: uv sync --extra bench
+        run: uv sync --group bench
 
       - name: Fingerprint the machine
         working-directory: ./xdsl
