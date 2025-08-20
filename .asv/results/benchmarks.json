@@ -659,21 +659,6 @@
         "version": "f4066d4fc8e72116df314a8b080d96e494acb18805948a49ce202be89f5ca9c9",
         "warmup_time": -1
     },
-    "rewriting.PatternRewriting.time_get_variadic_sizes": {
-        "code": "class PatternRewriting:\n    def time_get_variadic_sizes(self) -> None:\n        \"\"\"Time `get_variadic_sizes`.\n    \n        Exercise getting the variadic size of an operation, including a\n        significant amount of logic to check lengths and types. This is invoked\n        whenever an operation argument is defined with `irdl_op_arg_definition`.\n        \"\"\"\n        get_variadic_sizes(self.add_op, self.add_op_def, self.add_op_construct)\n\nclass RewritingMicrobenchmarks:\n    def setup(self) -> None:\n        \"\"\"Setup the benchmarks.\"\"\"\n        self.region = ConstantFolding.WORKLOAD_CONSTANT_20.clone().body\n        self.first_block = self.region.block\n        ops = self.region.walk()\n        self.const_0 = cast(ConstantOp, next(ops))\n        self.const_1 = cast(ConstantOp, next(ops))\n        self.add_op = cast(AddiOp, next(ops))\n        self.add_op_def = AddiOp.get_irdl_definition()\n        self.add_op_construct = VarIRConstruct.OPERAND\n        self.add_op_result = self.add_op.result\n        self.add_op_result_use = list(self.add_op_result.uses)[0]\n        self.sub_op = SubiOp(self.const_1, self.const_0)\n        self.sub_op_result = self.sub_op.result\n        self.insert_point = InsertPoint.before(self.add_op)\n        self.worklist = Worklist()\n        self.worklist.push(self.sub_op)\n        self.integer_type = IntegerType(64)\n        self.integer_attr = IntegerAttr(0, 64)\n        self.live_set = LiveSet()\n        self.pattern_rewriter = PatternRewriter(self.add_op)",
-        "min_run_count": 2,
-        "name": "rewriting.PatternRewriting.time_get_variadic_sizes",
-        "number": 0,
-        "param_names": [],
-        "params": [],
-        "repeat": 0,
-        "rounds": 2,
-        "sample_time": 0.01,
-        "type": "time",
-        "unit": "seconds",
-        "version": "f190fc4a4e37e1bf706250cfeae2993a9f48222dd942af4876e9efd6bc9c33d6",
-        "warmup_time": -1
-    },
     "rewriting.PatternRewriting.time_insert_point_before": {
         "code": "class PatternRewriting:\n    def time_insert_point_before(self) -> None:\n        \"\"\"Time `InsertPoint.before`.\n    \n        Measure time to create an `InsertPoint` from the block's parent block.\n        \"\"\"\n        InsertPoint.before(self.add_op)\n\nclass RewritingMicrobenchmarks:\n    def setup(self) -> None:\n        \"\"\"Setup the benchmarks.\"\"\"\n        self.region = ConstantFolding.WORKLOAD_CONSTANT_20.clone().body\n        self.first_block = self.region.block\n        ops = self.region.walk()\n        self.const_0 = cast(ConstantOp, next(ops))\n        self.const_1 = cast(ConstantOp, next(ops))\n        self.add_op = cast(AddiOp, next(ops))\n        self.add_op_def = AddiOp.get_irdl_definition()\n        self.add_op_construct = VarIRConstruct.OPERAND\n        self.add_op_result = self.add_op.result\n        self.add_op_result_use = list(self.add_op_result.uses)[0]\n        self.sub_op = SubiOp(self.const_1, self.const_0)\n        self.sub_op_result = self.sub_op.result\n        self.insert_point = InsertPoint.before(self.add_op)\n        self.worklist = Worklist()\n        self.worklist.push(self.sub_op)\n        self.integer_type = IntegerType(64)\n        self.integer_attr = IntegerAttr(0, 64)\n        self.live_set = LiveSet()\n        self.pattern_rewriter = PatternRewriter(self.add_op)",
         "min_run_count": 2,
@@ -702,6 +687,21 @@
         "type": "time",
         "unit": "seconds",
         "version": "367d7e23727588b4e048b4575d65a2da434517e80045e3c68c023548c8884556",
+        "warmup_time": -1
+    },
+    "rewriting.PatternRewriting.time_verify_variadic_size": {
+        "code": "class PatternRewriting:\n    def time_verify_variadic_size(self) -> None:\n        \"\"\"Time `verify_variadic_size`.\n    \n        Exercise verifying the variadic size of an operation, including a\n        significant amount of logic to check lengths and types. This is invoked\n        4 times whenever an operation is verified.\n        \"\"\"\n        verify_variadic_size(self.add_op, self.add_op_def, self.add_op_construct)\n\nclass RewritingMicrobenchmarks:\n    def setup(self) -> None:\n        \"\"\"Setup the benchmarks.\"\"\"\n        self.region = ConstantFolding.WORKLOAD_CONSTANT_20.clone().body\n        self.first_block = self.region.block\n        ops = self.region.walk()\n        self.const_0 = cast(ConstantOp, next(ops))\n        self.const_1 = cast(ConstantOp, next(ops))\n        self.add_op = cast(AddiOp, next(ops))\n        self.add_op_def = AddiOp.get_irdl_definition()\n        self.add_op_construct = VarIRConstruct.OPERAND\n        self.add_op_result = self.add_op.result\n        self.add_op_result_use = list(self.add_op_result.uses)[0]\n        self.sub_op = SubiOp(self.const_1, self.const_0)\n        self.sub_op_result = self.sub_op.result\n        self.insert_point = InsertPoint.before(self.add_op)\n        self.worklist = Worklist()\n        self.worklist.push(self.sub_op)\n        self.integer_type = IntegerType(64)\n        self.integer_attr = IntegerAttr(0, 64)\n        self.live_set = LiveSet()\n        self.pattern_rewriter = PatternRewriter(self.add_op)",
+        "min_run_count": 2,
+        "name": "rewriting.PatternRewriting.time_verify_variadic_size",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "10741f1aa9c2152143a4979b93ee3942395d695688ad6a5921e5705263f39859",
         "warmup_time": -1
     },
     "rewriting.PatternRewriting.time_worklist_pop": {
