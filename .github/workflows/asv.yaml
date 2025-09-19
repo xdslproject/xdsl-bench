@@ -50,7 +50,7 @@ jobs:
             cache-dependency-glob: "uv.lock"
       # Use `actions/setup-python@v5` rather than `uv python install 3.x` to
       # ensure that it is correctly in the $PATH for `asv`
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: |
               3.11
