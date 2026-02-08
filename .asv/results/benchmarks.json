@@ -555,7 +555,7 @@
         "warmup_time": -1
     },
     "rewriting.Canonicalization.time_ssavalue_replace_by": {
-        "code": "class Canonicalization:\n    def time_ssavalue_replace_by(self) -> None:\n        \"\"\"Time `SSAValue.replace_by`.\n    \n        Exercise replacing an `SSAValue` and all its uses with another\n        SSAValue. This is used when removing unused operations.\n        \"\"\"\n        self.add_op_result.replace_by(self.sub_op_result)\n\nclass RewritingMicrobenchmarks:\n    def setup(self) -> None:\n        \"\"\"Setup the benchmarks.\"\"\"\n        self.region = ConstantFolding.WORKLOAD_CONSTANT_20.clone().body\n        self.first_block = self.region.block\n        ops = self.region.walk()\n        self.const_0 = cast(ConstantOp, next(ops))\n        self.const_1 = cast(ConstantOp, next(ops))\n        self.add_op = cast(AddiOp, next(ops))\n        self.add_op_def = AddiOp.get_irdl_definition()\n        self.add_op_construct = VarIRConstruct.OPERAND\n        self.add_op_result = self.add_op.result\n        self.add_op_result_use = list(self.add_op_result.uses)[0]\n        self.sub_op = SubiOp(self.const_1, self.const_0)\n        self.sub_op_result = self.sub_op.result\n        self.insert_point = InsertPoint.before(self.add_op)\n        self.worklist = Worklist()\n        self.worklist.push(self.sub_op)\n        self.integer_type = IntegerType(64)\n        self.integer_attr = IntegerAttr(0, 64)\n        self.live_set = LiveSet()\n        self.pattern_rewriter = PatternRewriter(self.add_op)",
+        "code": "class Canonicalization:\n    def time_ssavalue_replace_by(self) -> None:\n        \"\"\"Time `SSAValue.replace_by`.\n    \n        Exercise replacing an `SSAValue` and all its uses with another\n        SSAValue. This is used when removing unused operations.\n        \"\"\"\n        self.add_op_result.replace_all_uses_with(self.sub_op_result)\n\nclass RewritingMicrobenchmarks:\n    def setup(self) -> None:\n        \"\"\"Setup the benchmarks.\"\"\"\n        self.region = ConstantFolding.WORKLOAD_CONSTANT_20.clone().body\n        self.first_block = self.region.block\n        ops = self.region.walk()\n        self.const_0 = cast(ConstantOp, next(ops))\n        self.const_1 = cast(ConstantOp, next(ops))\n        self.add_op = cast(AddiOp, next(ops))\n        self.add_op_def = AddiOp.get_irdl_definition()\n        self.add_op_construct = VarIRConstruct.OPERAND\n        self.add_op_result = self.add_op.result\n        self.add_op_result_use = list(self.add_op_result.uses)[0]\n        self.sub_op = SubiOp(self.const_1, self.const_0)\n        self.sub_op_result = self.sub_op.result\n        self.insert_point = InsertPoint.before(self.add_op)\n        self.worklist = Worklist()\n        self.worklist.push(self.sub_op)\n        self.integer_type = IntegerType(64)\n        self.integer_attr = IntegerAttr(0, 64)\n        self.live_set = LiveSet()\n        self.pattern_rewriter = PatternRewriter(self.add_op)",
         "min_run_count": 2,
         "name": "rewriting.Canonicalization.time_ssavalue_replace_by",
         "number": 0,
@@ -566,7 +566,7 @@
         "sample_time": 0.01,
         "type": "time",
         "unit": "seconds",
-        "version": "9eae72fbe0816dfd84d4e9fbd6f76784d5912152f21bec8898694653df50197c",
+        "version": "77c0e87e187f5191d8af4424c7f7db1e133b898604eca35d521b937770b2d2ea",
         "warmup_time": -1
     },
     "rewriting.ConstantFolding.time_constant_folding_100": {
