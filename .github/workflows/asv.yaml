@@ -28,7 +28,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         # NOTE: This only grabs the HEAD commit of the main branch, so we can't
         #       use it for retrospective benchmarking. Instead, we manually
         #       pull the submodule in the next step
