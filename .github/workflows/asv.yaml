@@ -106,7 +106,7 @@ jobs:
           commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
