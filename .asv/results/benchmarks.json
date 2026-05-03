@@ -89,6 +89,21 @@
         "version": "1a4aa7fe0d4cd80b6ffbc432742c1ec28119509b65f04ba3f163c99c7b44ebbc",
         "warmup_time": -1
     },
+    "llvm_backend.LLVMBackend.time_convert_module": {
+        "code": "class LLVMBackend:\n    def time_convert_module(self) -> None:\n        from xdsl.backend.llvm.convert import convert_module\n    \n        convert_module(LLVMBackend.MODULE)",
+        "min_run_count": 2,
+        "name": "llvm_backend.LLVMBackend.time_convert_module",
+        "number": 0,
+        "param_names": [],
+        "params": [],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "type": "time",
+        "unit": "seconds",
+        "version": "92aab11aa0ad5ae8aaef81c56d9d79137dc1265fe4d9f3dca2dda5cf5a68f4e6",
+        "warmup_time": -1
+    },
     "microbenchmarks.Extensibility.time_interface_check": {
         "code": "class Extensibility:\n    def time_interface_check(self) -> None:\n        \"\"\"Time checking the class hierarchy of an operation.\n    \n        For comparison with the \"How Slow is MLIR\" testbench\n        `IRWalk/vectorTraveralOpCastSuccess`, implemented as:\n    \n        ```\n        ctx->loadDialect<TestBenchDialect>();\n        OpBuilder b = OpBuilder::atBlockBegin(moduleOp->getBody());\n        SmallVector<Operation *> ops;\n        for (int j = 0; j < state.range(0); ++j) {\n            ops.push_back(b.create<EmptyOp>(unknownLoc));\n        }\n        for (auto _ : state) {\n            for (Operation *op : ops) {\n                auto casted = dyn_cast<EmptyOp>(op);\n                benchmark::DoNotOptimize(&casted);\n            };\n        }\n        ```\n        \"\"\"\n        isinstance(Extensibility.EMPTY_OP, EmptyOp)  # pyright: ignore[reportUnnecessaryIsInstance]",
         "min_run_count": 2,
