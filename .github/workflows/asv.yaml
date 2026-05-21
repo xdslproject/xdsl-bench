@@ -123,7 +123,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send Zulip notification
-        uses: zulip/github-actions-zulip/send-message@v1
+        uses: zulip/github-actions-zulip/send-message@v2
         with:
           api-key: ${{ secrets.ZULIP_FAILURE_BOT_API_KEY }}
           email: ${{ secrets.ZULIP_FAILURE_BOT_EMAIL }}
