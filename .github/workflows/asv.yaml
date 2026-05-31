@@ -92,9 +92,9 @@ jobs:
         continue-on-error: true
         working-directory: ./xdsl
         run: |
-          mkdir -p ../.asv-logs
+          mkdir -p ../asv-logs
           set -o pipefail
-          uv run asv run $BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH 2>&1 | tee ../.asv-logs/asv-run.log
+          uv run asv run $BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH 2>&1 | tee ../asv-logs/asv-run.log
 
       - name: Rerun failed benchmarks with stderr
         if: steps.asv_run.outcome == 'failure'
@@ -104,8 +104,8 @@ jobs:
           import pathlib
           import re
 
-          log_path = pathlib.Path("../.asv-logs/asv-run.log")
-          bench_path = pathlib.Path("../.asv-logs/asv-failed-benches.txt")
+          log_path = pathlib.Path("../asv-logs/asv-run.log")
+          bench_path = pathlib.Path("../asv-logs/asv-failed-benches.txt")
           failed = []
           for line in log_path.read_text().splitlines():
               match = re.search(r"([A-Za-z0-9_.]+)\s+failed$", line)
@@ -116,18 +116,18 @@ jobs:
           print(f"Found {len(unique_failed)} failed benchmarks.")
           PY
 
-          if [ -s ../.asv-logs/asv-failed-benches.txt ]; then
+          if [ -s ../asv-logs/asv-failed-benches.txt ]; then
             while IFS= read -r bench; do
-              echo "=== Rerun for $bench ===" | tee -a ../.asv-logs/asv-rerun.log
+              echo "=== Rerun for $bench ===" | tee -a ../asv-logs/asv-rerun.log
               uv run asv run "$BRANCH~$NUM_BENCHMARK_COMMITS..$BRANCH" \
                 --bench "$bench" \
                 --quick \
                 --show-stderr \
                 --dry-run \
-                -v 2>&1 | tee -a ../.asv-logs/asv-rerun.log
-            done < ../.asv-logs/asv-failed-benches.txt
+                -v 2>&1 | tee -a ../asv-logs/asv-rerun.log
+            done < ../asv-logs/asv-failed-benches.txt
           else
-            echo "No failed benchmark names were parsed from asv-run.log" | tee -a ../.asv-logs/asv-rerun.log
+            echo "No failed benchmark names were parsed from asv-run.log" | tee -a ../asv-logs/asv-rerun.log
           fi
 
       - name: Upload ASV debug logs
@@ -135,7 +135,7 @@ jobs:
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
           name: asv-debug-logs
-          path: .asv-logs/
+          path: asv-logs/
 
       - name: Fail job if ASV run failed
         if: steps.asv_run.outcome == 'failure'
