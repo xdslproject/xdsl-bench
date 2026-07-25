@@ -1,4 +1,5 @@
 {
     "machine": "github-action",
+    "ram": "16373460",
     "version": 1
 }
